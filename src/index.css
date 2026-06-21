@@ -12,7 +12,6 @@ html {
 }
 
 body {
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -103,7 +102,7 @@ body {
 }
 
 /* Smooth transitions for all interactive elements */
-button, a, .card, .hover\:scale-105:hover {
+button, a, .card {
   transition: all 0.2s ease-in-out;
 }
 

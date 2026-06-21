@@ -73,3 +73,19 @@ The admin dashboard is protected with authentication:
 ## License
 
 © 2024 Kawerify Tech. All rights reserved.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request. Follow the coding standards and run tests before submitting.
+
+## Contact
+
+- **Website**: https://kawerify.tech
+- **Email**: info@kawerifytech.com
+- **Twitter**: @KawerifyTech
+
+## Acknowledgements
+
+Thanks to the open source community for the tools and libraries used in this project.

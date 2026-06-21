@@ -72,6 +72,8 @@ The admin dashboard is protected with authentication:
 
 ## License
 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 © 2024 Kawerify Tech. All rights reserved.
 
 ---

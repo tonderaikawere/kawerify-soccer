@@ -82,8 +82,8 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 
 ## Contact
 
-- **Website**: https://kawerify.tech
-- **Email**: info@kawerifytech.com
+- **Website**: https://kawerifytech.com/
+- **Email**: contact@kawerifytech.com
 - **Twitter**: @KawerifyTech
 
 ## Acknowledgements

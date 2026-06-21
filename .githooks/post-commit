@@ -1,0 +1,13 @@
+#!/bin/sh
+# Post-commit hook to automatically push changes to remote
+# This hook will run after every successful commit
+# It pushes the current branch to its upstream (origin)
+
+# Determine current branch
+branch=$(git rev-parse --abbrev-ref HEAD)
+if [ -z "$branch" ]; then
+  echo "Unable to determine current branch. Skipping push."
+  exit 0
+fi
+
+git push origin "$branch"

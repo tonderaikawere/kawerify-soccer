@@ -8,7 +8,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
   
   return (
-    <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+    <nav className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-xl border-b border-border sticky top-0 z-50" style={{ backdropFilter: 'blur(12px)' }}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
@@ -64,6 +64,11 @@ const Navbar = () => {
               </Link>
             </Button>
           </div>
+          {/* Theme toggle button */}
+          <button onClick={useTheme().toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            {useTheme().dark ? "🌙" : "☀️"}
+          </button>
+        </div>
         </div>
       </div>
     </nav>

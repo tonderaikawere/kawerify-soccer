@@ -12,7 +12,7 @@ export default {
         "2xl": "1400px",
       },
     },
-    extend: {
+    extend: {\n    fontFamily: {\n      sans: ['Inter', 'system-ui', 'sans-serif'],\n      mono: ['ui-mono', 'SFMono-Regular', 'monospace'],\n    },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

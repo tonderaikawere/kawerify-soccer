@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Trophy } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerProfile from "@/components/PlayerProfile";
@@ -19,13 +18,13 @@ const Players = () => {
           <div className="mb-8 text-center">
             <div className="inline-flex items-center justify-center mb-4">
               <div className="animate-pulse">
-                <Trophy className="h-12 w-12 text-yellow-500 mr-3" />
+                
               </div>
               <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Player Profiles
               </h1>
               <div className="animate-pulse">
-                <Trophy className="h-12 w-12 text-yellow-500 ml-3" />
+                
               </div>
             </div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -46,7 +45,7 @@ const Players = () => {
             </div>
           </div>
 
-          <PlayerProfile showAll={true} />
+          
         </div>
       </main>
       <Footer />

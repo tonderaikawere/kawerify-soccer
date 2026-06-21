@@ -1,4 +1,3 @@
-import { Shield, Eye, Lock, Database, Users, Mail } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,7 +11,7 @@ const PrivacyPolicy = () => {
           {/* Header */}
           <div className="mb-12 text-center">
             <div className="inline-flex items-center justify-center mb-6">
-              <Shield className="h-16 w-16 text-blue-600 mr-4" />
+              
               <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Privacy Policy
               </h1>
@@ -30,7 +29,7 @@ const PrivacyPolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Eye className="h-6 w-6 mr-2 text-blue-500" />
+                  
                   Introduction
                 </CardTitle>
               </CardHeader>
@@ -51,7 +50,7 @@ const PrivacyPolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Database className="h-6 w-6 mr-2 text-green-500" />
+                  
                   Information We Collect
                 </CardTitle>
               </CardHeader>
@@ -95,7 +94,7 @@ const PrivacyPolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Users className="h-6 w-6 mr-2 text-purple-500" />
+                  
                   How We Use Your Information
                 </CardTitle>
               </CardHeader>
@@ -133,7 +132,7 @@ const PrivacyPolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Lock className="h-6 w-6 mr-2 text-red-500" />
+                  
                   Data Storage and Security
                 </CardTitle>
               </CardHeader>
@@ -172,7 +171,7 @@ const PrivacyPolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Shield className="h-6 w-6 mr-2 text-yellow-500" />
+                  
                   Your Privacy Rights
                 </CardTitle>
               </CardHeader>
@@ -258,7 +257,7 @@ const PrivacyPolicy = () => {
             <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Mail className="h-6 w-6 mr-2 text-blue-500" />
+                  
                   Contact Us
                 </CardTitle>
                 <CardDescription>

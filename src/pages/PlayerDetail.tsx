@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Camera, Video, Upload, Download } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,11 +16,11 @@ import { loadPlayers, loadMatches, updatePlayer, type Player, type Match } from 
 
 const PlayerDetail = () => {
   const { playerId } = useParams<{ playerId: string }>();
-  const [player, setPlayer] = useState<Player | null>(null);
+  const [player, setPlayer] = useState(null);
   const [matches, setMatches] = useState<Match[]>([]);
-  const [allPlayers, setAllPlayers] = useState<Player[]>([]);
+  const [allPlayers, setAllPlayers] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState<Partial<Player>>({});
+  const [editForm, setEditForm] = useState<Partial>({});
   const [mediaFiles, setMediaFiles] = useState<string[]>([]);
   const { toast } = useToast();
 
@@ -139,7 +138,7 @@ const PlayerDetail = () => {
           <div className="mb-6">
             <Link to="/players">
               <Button variant="outline" className="mb-4">
-                <ArrowLeft className="h-4 w-4 mr-2" />
+                
                 Back to Players
               </Button>
             </Link>
@@ -168,12 +167,12 @@ const PlayerDetail = () => {
                     <p className="text-2xl text-blue-100 font-semibold mb-2">{player.currentTeam}</p>
                     <div className="flex items-center space-x-4">
                       <Badge className="bg-white/20 text-white border-white/30">
-                        <Calendar className="h-4 w-4 mr-1" />
+                        
                         Joined {new Date(player.joinDate).getFullYear()}
                       </Badge>
                       {player.stats.cupsWon > 0 && (
                         <Badge className="bg-yellow-500 text-black">
-                          <Trophy className="h-4 w-4 mr-1" />
+                          
                           {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                         </Badge>
                       )}
@@ -261,7 +260,7 @@ const PlayerDetail = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
               <CardContent className="p-6 text-center">
-                <Trophy className="h-12 w-12 mx-auto mb-3 text-green-200" />
+                
                 <p className="text-3xl font-bold">{player.stats.wins}</p>
                 <p className="text-green-100">Wins</p>
               </CardContent>
@@ -269,7 +268,7 @@ const PlayerDetail = () => {
             
             <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
               <CardContent className="p-6 text-center">
-                <Target className="h-12 w-12 mx-auto mb-3 text-blue-200" />
+                
                 <p className="text-3xl font-bold">{player.stats.points}</p>
                 <p className="text-blue-100">Points</p>
               </CardContent>
@@ -277,7 +276,7 @@ const PlayerDetail = () => {
             
             <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
               <CardContent className="p-6 text-center">
-                <TrendingUp className="h-12 w-12 mx-auto mb-3 text-purple-200" />
+                
                 <p className="text-3xl font-bold">{winRate}%</p>
                 <p className="text-purple-100">Win Rate</p>
               </CardContent>
@@ -285,7 +284,7 @@ const PlayerDetail = () => {
             
             <Card className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
               <CardContent className="p-6 text-center">
-                <Award className="h-12 w-12 mx-auto mb-3 text-yellow-200" />
+                
                 <p className={`text-3xl font-bold ${goalDiff >= 0 ? 'text-white' : 'text-yellow-200'}`}>
                   {goalDiff >= 0 ? '+' : ''}{goalDiff}
                 </p>
@@ -441,7 +440,7 @@ const PlayerDetail = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <History className="h-5 w-5 mr-2" />
+                    
                     Team History
                   </CardTitle>
                 </CardHeader>
@@ -473,7 +472,7 @@ const PlayerDetail = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <Camera className="h-5 w-5 mr-2" />
+                    
                     Media Gallery
                   </CardTitle>
                 </CardHeader>
@@ -528,7 +527,7 @@ const PlayerDetail = () => {
                   
                   {mediaFiles.length === 0 && (
                     <div className="text-center py-12">
-                      <Camera className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+                      
                       <p className="text-muted-foreground">No media files uploaded yet</p>
                     </div>
                   )}

@@ -1,4 +1,3 @@
-import { Trophy, Users, Calendar, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
@@ -27,7 +26,7 @@ const Navbar = () => {
               asChild
             >
               <Link to="/">
-                <Trophy className="h-4 w-4 mr-2" />
+                
                 Leaderboard
               </Link>
             </Button>
@@ -38,7 +37,7 @@ const Navbar = () => {
               asChild
             >
               <Link to="/fixtures">
-                <Calendar className="h-4 w-4 mr-2" />
+                
                 Fixtures
               </Link>
             </Button>
@@ -49,7 +48,7 @@ const Navbar = () => {
               asChild
             >
               <Link to="/players">
-                <Users className="h-4 w-4 mr-2" />
+                
                 Players
               </Link>
             </Button>
@@ -60,7 +59,7 @@ const Navbar = () => {
               asChild
             >
               <Link to="/admin">
-                <Settings className="h-4 w-4 mr-2" />
+                
                 Admin
               </Link>
             </Button>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { ChevronUp, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ScrollToTop = () => {
@@ -72,7 +71,7 @@ const ScrollToTop = () => {
           className="absolute inset-2 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-110"
           size="sm"
         >
-          <ChevronUp className="h-6 w-6 text-white animate-bounce" />
+          
         </Button>
         
         {/* Pulse Effect */}
@@ -80,7 +79,7 @@ const ScrollToTop = () => {
         
         {/* Lightning Effect */}
         <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Zap className="h-4 w-4 text-yellow-400 animate-pulse" />
+          
         </div>
       </div>
       

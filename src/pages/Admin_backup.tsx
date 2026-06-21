@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Settings, UserPlus, Calendar, Lock, Trophy, Users, Edit, Trash2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,11 +35,11 @@ const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [tournament, setTournament] = useState<Tournament>(loadTournament());
   const [cups, setCups] = useState<any[]>([]);
-  const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
+  const [editingPlayer, setEditingPlayer] = useState(null);
   const { toast } = useToast();
 
   // New player form state
@@ -213,7 +212,7 @@ const Admin = () => {
           <Card className="w-full max-w-md">
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center">
-                <Lock className="mr-2" />
+                
                 Admin Login
               </CardTitle>
               <CardDescription>
@@ -261,7 +260,7 @@ const Admin = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg shadow-lg mb-8">
             <h1 className="text-3xl font-bold mb-2 flex items-center">
-              <Lock className="mr-3" />
+              
               🔥 Admin Control Center
             </h1>
             <p className="text-blue-100">Complete tournament management system</p>
@@ -344,7 +343,7 @@ const Admin = () => {
               {/* Add Player Form */}
               <div className="bg-white p-6 rounded-lg shadow">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <UserPlus className="mr-2" />
+                  
                   Add New Player
                 </h2>
                 <form onSubmit={handleAddPlayer} className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -381,7 +380,7 @@ const Admin = () => {
                 <h2 className="text-xl font-semibold mb-4">All Players ({players.length})</h2>
                 {players.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">
-                    <Users className="mx-auto h-12 w-12 mb-4" />
+                    
                     <p>No players yet. Add your first player above!</p>
                   </div>
                 ) : (
@@ -430,7 +429,7 @@ const Admin = () => {
               {/* Add Match Form */}
               <div className="bg-white p-6 rounded-lg shadow">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <Calendar className="mr-2" />
+                  
                   Schedule New Match
                 </h2>
                 <form onSubmit={handleAddMatch} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -487,7 +486,7 @@ const Admin = () => {
                 <h2 className="text-xl font-semibold mb-4">All Matches ({matches.length})</h2>
                 {matches.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">
-                    <Calendar className="mx-auto h-12 w-12 mb-4" />
+                    
                     <p>No matches scheduled. Add your first match above!</p>
                   </div>
                 ) : (
@@ -543,7 +542,7 @@ const Admin = () => {
             <TabsContent value="tournament" className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <Trophy className="mr-2" />
+                  
                   Tournament Settings
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -584,7 +583,7 @@ const Admin = () => {
             <TabsContent value="settings" className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <Settings className="mr-2" />
+                  
                   Danger Zone
                 </h2>
                 <div className="space-y-4">

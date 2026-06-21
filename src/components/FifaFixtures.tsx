@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, Trophy, Play, Pause } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { loadMatches, loadPlayers, loadTournament, type Match, type Player } fro
 
 const FifaFixtures = () => {
   const [matches, setMatches] = useState<Match[]>([]);
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState([]);
   const [tournament, setTournament] = useState(loadTournament());
   const [selectedWeek, setSelectedWeek] = useState(1);
 
@@ -45,7 +44,7 @@ const FifaFixtures = () => {
         <div className="relative z-10 text-center">
           <div className="mb-4 flex justify-center">
             <div className="animate-bounce">
-              <Trophy className="h-16 w-16 text-yellow-400" />
+              
             </div>
           </div>
           <h1 className="mb-2 text-4xl font-bold">Kawerify Tech World Cup</h1>
@@ -89,7 +88,7 @@ const FifaFixtures = () => {
         {weeklyMatches.length === 0 ? (
           <Card className="text-center p-8">
             <CardContent>
-              <Trophy className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+              
               <h3 className="text-xl font-semibold mb-2">No Matches Scheduled</h3>
               <p className="text-muted-foreground">
                 Week {selectedWeek} fixtures will be available soon
@@ -118,15 +117,15 @@ const FifaFixtures = () => {
                       </CardTitle>
                       <CardDescription className="text-white/90 flex items-center gap-4 mt-2">
                         <span className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-1" />
+                          
                           {new Date(match.date).toLocaleDateString()} ({getMatchDay(match.matchType)})
                         </span>
                         <span className="flex items-center">
-                          <Clock className="h-4 w-4 mr-1" />
+                          
                           {match.time}
                         </span>
                         <span className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-1" />
+                          
                           Kawerify Arena
                         </span>
                       </CardDescription>
@@ -136,7 +135,7 @@ const FifaFixtures = () => {
                         variant={match.status === 'completed' ? 'default' : match.status === 'live' ? 'destructive' : 'secondary'}
                         className="font-bold"
                       >
-                        {match.status === 'live' && <Play className="h-3 w-3 mr-1" />}
+                        {match.status === 'live' && }
                         {match.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -252,11 +251,11 @@ const FifaFixtures = () => {
             <h3 className="text-lg font-semibold mb-2">Tournament Schedule</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center justify-center space-x-2">
-                <Calendar className="h-4 w-4 text-green-500" />
+                
                 <span><strong>Saturdays:</strong> Regular Season Matches</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <Trophy className="h-4 w-4 text-yellow-500" />
+                
                 <span><strong>Sundays:</strong> Knockout Stage (QF, SF, Final)</span>
               </div>
             </div>

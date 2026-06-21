@@ -1,4 +1,3 @@
-import { FileText, Scale, AlertTriangle, Users, Trophy, Shield } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Navbar from "@/components/Navbar";
@@ -13,7 +12,7 @@ const TermsConditions = () => {
           {/* Header */}
           <div className="mb-12 text-center">
             <div className="inline-flex items-center justify-center mb-6">
-              <Scale className="h-16 w-16 text-green-600 mr-4" />
+              
               <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Terms & Conditions
               </h1>
@@ -29,7 +28,7 @@ const TermsConditions = () => {
           <div className="max-w-4xl mx-auto space-y-8">
             {/* Important Notice */}
             <Alert>
-              <AlertTriangle className="h-4 w-4" />
+              
               <AlertDescription>
                 By accessing and using this service, you accept and agree to be bound by the terms and provision of this agreement.
               </AlertDescription>
@@ -39,7 +38,7 @@ const TermsConditions = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <FileText className="h-6 w-6 mr-2 text-blue-500" />
+                  
                   Acceptance of Terms
                 </CardTitle>
               </CardHeader>
@@ -63,7 +62,7 @@ const TermsConditions = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Trophy className="h-6 w-6 mr-2 text-yellow-500" />
+                  
                   Tournament Rules and Conduct
                 </CardTitle>
               </CardHeader>
@@ -107,7 +106,7 @@ const TermsConditions = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Users className="h-6 w-6 mr-2 text-purple-500" />
+                  
                   User Accounts and Responsibilities
                 </CardTitle>
               </CardHeader>
@@ -149,7 +148,7 @@ const TermsConditions = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Shield className="h-6 w-6 mr-2 text-red-500" />
+                  
                   Intellectual Property Rights
                 </CardTitle>
               </CardHeader>
@@ -279,7 +278,7 @@ const TermsConditions = () => {
             <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950 dark:to-blue-950">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <FileText className="h-6 w-6 mr-2 text-green-500" />
+                  
                   Contact Information
                 </CardTitle>
                 <CardDescription>

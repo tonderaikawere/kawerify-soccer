@@ -1,4 +1,3 @@
-import { Cookie, Settings, Shield, Eye, Database } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Navbar from "@/components/Navbar";
@@ -39,7 +38,7 @@ const CookiePolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Eye className="h-6 w-6 mr-2 text-blue-500" />
+                  
                   What Are Cookies?
                 </CardTitle>
               </CardHeader>
@@ -60,7 +59,7 @@ const CookiePolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Database className="h-6 w-6 mr-2 text-green-500" />
+                  
                   Types of Cookies We Use
                 </CardTitle>
               </CardHeader>
@@ -123,7 +122,7 @@ const CookiePolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Settings className="h-6 w-6 mr-2 text-purple-500" />
+                  
                   How We Use Cookies
                 </CardTitle>
               </CardHeader>
@@ -157,7 +156,7 @@ const CookiePolicy = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Shield className="h-6 w-6 mr-2 text-red-500" />
+                  
                   Managing Your Cookie Preferences
                 </CardTitle>
               </CardHeader>

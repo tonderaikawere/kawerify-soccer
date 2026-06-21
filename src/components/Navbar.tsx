@@ -1,6 +1,7 @@
 import { Trophy, Users, Calendar, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -12,7 +13,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <Trophy className="h-8 w-8 text-primary" />
+            <img src={logo} alt="Kawerify Logo" className="h-8 w-8" />
             <div>
               <h1 className="text-xl font-bold text-foreground">Kawerify Tech Tournaments</h1>
               <p className="text-xs text-muted-foreground">Professional Gaming Platform</p>

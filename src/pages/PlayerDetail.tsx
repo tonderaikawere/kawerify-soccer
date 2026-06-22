@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Camera, Eye, Trash2, Edit2, Shield, Flame, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -140,9 +139,8 @@ const PlayerDetail = () => {
           {/* Back Action */}
           <div className="mb-6">
             <Link to="/players">
-              <Button variant="ghost" className="rounded-full text-xs font-bold pl-2.5 pr-4 border border-border bg-background hover:bg-muted transition-colors">
-                <ArrowLeft className="h-4 w-4 mr-1.5" />
-                Back to Players
+              <Button variant="ghost" className="rounded-full text-xs font-bold pl-3 pr-4 border border-border bg-background hover:bg-muted transition-colors">
+                ← Back to Players
               </Button>
             </Link>
           </div>
@@ -168,19 +166,16 @@ const PlayerDetail = () => {
                 
                 <div className="space-y-1.5">
                   <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{player.name}</h1>
-                  <p className="text-lg text-primary font-bold flex items-center justify-center md:justify-start">
-                    <Shield className="h-4 w-4 text-emerald-500 mr-1.5" />
+                  <p className="text-lg text-primary font-bold">
                     {player.currentTeam}
                   </p>
                   <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1.5">
                     <Badge variant="outline" className="text-xs bg-background/50 border-border text-muted-foreground">
-                      <Calendar className="h-3.5 w-3.5 mr-1" />
                       Joined {new Date(player.joinDate).getFullYear()}
                     </Badge>
                     {player.stats.cupsWon > 0 && (
                       <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-xs font-black border-0">
-                        <Trophy className="h-3.5 w-3.5 mr-1" />
-                        {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
+                        🏆 {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                       </Badge>
                     )}
                   </div>
@@ -193,7 +188,6 @@ const PlayerDetail = () => {
                   variant="outline"
                   className="rounded-xl font-bold text-xs"
                 >
-                  <Edit2 className="h-3.5 w-3.5 mr-1.5" />
                   {isEditing ? 'Cancel' : 'Edit Profile'}
                 </Button>
               </div>
@@ -240,7 +234,6 @@ const PlayerDetail = () => {
                 </div>
                 <div className="flex space-x-2 pt-2">
                   <Button onClick={handleSaveProfile} className="rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600">
-                    <Check className="h-4 w-4 mr-1.5" />
                     Save Settings
                   </Button>
                   <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl font-bold">
@@ -255,7 +248,6 @@ const PlayerDetail = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
               <CardContent className="p-5 space-y-1">
-                <Trophy className="h-8 w-8 text-emerald-500 mx-auto" />
                 <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.wins}</p>
                 <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Wins</p>
               </CardContent>
@@ -263,7 +255,6 @@ const PlayerDetail = () => {
             
             <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
               <CardContent className="p-5 space-y-1">
-                <Target className="h-8 w-8 text-blue-500 mx-auto" />
                 <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.points}</p>
                 <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Points</p>
               </CardContent>
@@ -271,7 +262,6 @@ const PlayerDetail = () => {
             
             <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
               <CardContent className="p-5 space-y-1">
-                <TrendingUp className="h-8 w-8 text-indigo-500 mx-auto" />
                 <p className="text-3xl font-black text-slate-900 dark:text-white">{winRate}%</p>
                 <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Win Rate</p>
               </CardContent>
@@ -279,7 +269,6 @@ const PlayerDetail = () => {
             
             <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
               <CardContent className="p-5 space-y-1">
-                <Award className="h-8 w-8 text-amber-500 mx-auto" />
                 <p className={`text-3xl font-black ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                   {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                 </p>
@@ -442,8 +431,7 @@ const PlayerDetail = () => {
             <TabsContent value="history" className="space-y-6">
               <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                    <History className="h-5 w-5 mr-2 text-indigo-400" />
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                     FIFA Club History
                   </CardTitle>
                 </CardHeader>
@@ -475,8 +463,7 @@ const PlayerDetail = () => {
             <TabsContent value="media" className="space-y-6">
               <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                    <Camera className="h-5 w-5 mr-2 text-indigo-400" />
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                     Gamer Media Showcase
                   </CardTitle>
                 </CardHeader>
@@ -506,15 +493,15 @@ const PlayerDetail = () => {
                       <div key={index} className="relative group overflow-hidden rounded-xl border bg-slate-950/80 shadow-md aspect-video flex items-center justify-center">
                         {file.startsWith('data:video') ? (
                           <video
-                            src={file}
-                            controls
-                            className="w-full h-full object-cover"
+                              src={file}
+                              controls
+                              className="w-full h-full object-cover"
                           />
                         ) : (
                           <img
-                            src={file}
-                            alt={`Media highlight #${index + 1}`}
-                            className="w-full h-full object-cover"
+                              src={file}
+                              alt={`Media highlight #${index + 1}`}
+                              className="w-full h-full object-cover"
                           />
                         )}
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -532,7 +519,6 @@ const PlayerDetail = () => {
                             }}
                             className="rounded-xl font-bold text-xs"
                           >
-                            <Trash2 className="h-3.5 w-3.5 mr-1" />
                             Delete
                           </Button>
                         </div>
@@ -542,7 +528,6 @@ const PlayerDetail = () => {
                   
                   {mediaFiles.length === 0 && (
                     <div className="text-center py-12">
-                      <Camera className="h-12 w-12 mx-auto mb-3 text-muted-foreground animate-float" />
                       <p className="text-slate-500 text-sm">No highlights uploaded for this gamer yet.</p>
                     </div>
                   )}

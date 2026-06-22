@@ -16,8 +16,24 @@ interface AdminDashboardProps {
   tournament: Tournament;
   newPlayer: { name: string; currentTeam: string; image: string };
   setNewPlayer: (player: { name: string; currentTeam: string; image: string }) => void;
-  newMatch: any;
-  setNewMatch: (match: any) => void;
+  newMatch: {
+    player1Id: string;
+    player2Id: string;
+    date: string;
+    time: string;
+    matchType: Match['matchType'];
+    round: string;
+    week: number;
+  };
+  setNewMatch: React.Dispatch<React.SetStateAction<{
+    player1Id: string;
+    player2Id: string;
+    date: string;
+    time: string;
+    matchType: Match['matchType'];
+    round: string;
+    week: number;
+  }>>;
   editingPlayer: Player | null;
   setEditingPlayer: (player: Player | null) => void;
   editingMatch: Match | null;
@@ -353,7 +369,7 @@ const AdminDashboard = ({
 
                     <div className="space-y-1.5">
                       <Label>Stage / Match Type</Label>
-                      <Select value={newMatch.matchType} onValueChange={(value: any) => setNewMatch({...newMatch, matchType: value})}>
+                      <Select value={newMatch.matchType} onValueChange={(value: Match['matchType']) => setNewMatch({...newMatch, matchType: value})}>
                         <SelectTrigger className="rounded-xl">
                           <SelectValue />
                         </SelectTrigger>

@@ -1,4 +1,3 @@
-import { Trophy, Users, Calendar, Settings, Info, Award } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
@@ -11,11 +10,11 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
   
   const navItems = [
-    { path: "/", label: "Leaderboard", icon: Trophy },
-    { path: "/fixtures", label: "Fixtures", icon: Calendar },
-    { path: "/players", label: "Players", icon: Users },
-    { path: "/hall-of-fame", label: "Hall of Fame", icon: Award },
-    { path: "/about", label: "About", icon: Info },
+    { path: "/", label: "Leaderboard" },
+    { path: "/fixtures", label: "Fixtures" },
+    { path: "/players", label: "Players" },
+    { path: "/hall-of-fame", label: "Hall of Fame" },
+    { path: "/about", label: "About" },
   ];
 
   return (
@@ -38,9 +37,8 @@ const Navbar = () => {
           </Link>
           
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-1.5">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const active = isActive(item.path);
               return (
                 <Button
@@ -48,14 +46,13 @@ const Navbar = () => {
                   variant="ghost"
                   size="sm"
                   asChild
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                  className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${
                     active 
                       ? "text-primary bg-primary/10 dark:bg-primary/20 hover:bg-primary/20" 
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
                   }`}
                 >
-                  <Link to={item.path} className="flex items-center space-x-1.5">
-                    <Icon className={`h-4 w-4 transition-transform duration-300 ${active ? "scale-110" : "group-hover:scale-110"}`} />
+                  <Link to={item.path}>
                     <span>{item.label}</span>
                   </Link>
                 </Button>
@@ -75,8 +72,7 @@ const Navbar = () => {
                   : "hover:bg-muted"
               }`}
             >
-              <Link to="/admin" className="flex items-center space-x-1.5">
-                <Settings className="h-4 w-4" />
+              <Link to="/admin">
                 <span className="hidden xs:inline">Admin</span>
               </Link>
             </Button>
@@ -94,21 +90,19 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation (shows icons only for super compact layouts) */}
+        {/* Mobile Navigation (shows compact text buttons) */}
         <div className="flex md:hidden justify-around border-t border-border/40 mt-2.5 pt-2">
           {navItems.map((item) => {
-            const Icon = item.icon;
             const active = isActive(item.path);
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`p-2 rounded-full transition-all duration-200 ${
+                className={`text-[11px] font-bold px-2.5 py-1.5 rounded-full transition-all duration-200 ${
                   active ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground"
                 }`}
-                title={item.label}
               >
-                <Icon className="h-5 w-5" />
+                {item.label}
               </Link>
             );
           })}

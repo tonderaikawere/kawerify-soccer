@@ -1,4 +1,3 @@
-import { Mail, MapPin, Phone, Shield, FileText, Trophy, Users, Calendar, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -12,9 +11,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
           {/* Brand Column */}
           <div className="space-y-4">
-            <h3 className="flex items-center text-xl font-black tracking-tight text-white">
-              <Trophy className="mr-2 h-6 w-6 text-amber-400 animate-float" />
-              <span>Kawerify Tournaments</span>
+            <h3 className="text-lg font-black tracking-tight text-white uppercase">
+              Kawerify Tournaments
             </h3>
             <p className="text-sm leading-relaxed text-slate-400">
               An elite gaming hub hosting premier, real-time FIFA & soccer tournaments. Join the community, follow match fixtures, and track the elite leaderboard.
@@ -34,27 +32,21 @@ const Footer = () => {
           
           {/* Contact Column */}
           <div className="space-y-4">
-            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
-              <Phone className="mr-2 h-4 w-4 text-emerald-400" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
               Contact Us
             </h3>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-start">
-                <MapPin className="mr-2.5 h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
-                <span>
-                  KoMthombeni, Plot 2 Grampsway<br />
-                  Rangemore, Bulawayo<br />
-                  Zimbabwe
-                </span>
+              <li className="leading-relaxed">
+                KoMthombeni, Plot 2 Grampsway<br />
+                Rangemore, Bulawayo<br />
+                Zimbabwe
               </li>
-              <li className="flex items-center">
-                <Phone className="mr-2.5 h-4 w-4 text-slate-500" />
+              <li>
                 <a href="tel:+263716264988" className="hover:text-white transition-colors duration-200">
                   +263 71 626 4988
                 </a>
               </li>
-              <li className="flex items-center">
-                <Mail className="mr-2.5 h-4 w-4 text-slate-500" />
+              <li>
                 <a href="mailto:info@kawerifytech.com" className="hover:text-white transition-colors duration-200">
                   info@kawerifytech.com
                 </a>
@@ -64,38 +56,32 @@ const Footer = () => {
           
           {/* Quick Links Column */}
           <div className="space-y-4">
-            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
-              <Users className="mr-2 h-4 w-4 text-blue-400" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
               Navigation
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link to="/" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <Trophy className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-amber-400 transition-colors" />
+                <Link to="/" className="hover:text-white transition-colors duration-200">
                   Leaderboard
                 </Link>
               </li>
               <li>
-                <Link to="/fixtures" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <Calendar className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-blue-400 transition-colors" />
+                <Link to="/fixtures" className="hover:text-white transition-colors duration-200">
                   Fixtures
                 </Link>
               </li>
               <li>
-                <Link to="/players" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <Users className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-emerald-400 transition-colors" />
+                <Link to="/players" className="hover:text-white transition-colors duration-200">
                   Players
                 </Link>
               </li>
               <li>
-                <Link to="/hall-of-fame" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <Award className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-amber-400 transition-colors" />
+                <Link to="/hall-of-fame" className="hover:text-white transition-colors duration-200">
                   Hall of Fame
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                <Link to="/about" className="hover:text-white transition-colors duration-200">
                   About Us
                 </Link>
               </li>
@@ -104,32 +90,27 @@ const Footer = () => {
           
           {/* Legal Column */}
           <div className="space-y-4">
-            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
-              <Shield className="mr-2 h-4 w-4 text-indigo-400" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
               Legal Policies
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link to="/privacy-policy" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <Shield className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                <Link to="/privacy-policy" className="hover:text-white transition-colors duration-200">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms-conditions" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                <Link to="/terms-conditions" className="hover:text-white transition-colors duration-200">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/cookie-policy" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                <Link to="/cookie-policy" className="hover:text-white transition-colors duration-200">
                   Cookie Policy
                 </Link>
               </li>
               <li>
-                <Link to="/disclaimer" className="group flex items-center hover:text-white transition-colors duration-200">
-                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                <Link to="/disclaimer" className="hover:text-white transition-colors duration-200">
                   Disclaimer
                 </Link>
               </li>
@@ -147,9 +128,9 @@ const Footer = () => {
           <div className="mt-4 sm:mt-0 flex items-center space-x-3">
             <span>Made with ❤️ in Zimbabwe</span>
             <div className="flex space-x-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse-glow" />
-              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse-glow" style={{ animationDelay: '0.4s' }} />
-              <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse-glow" style={{ animationDelay: '0.8s' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" style={{ animationDelay: '0.4s' }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" style={{ animationDelay: '0.8s' }} />
             </div>
           </div>
         </div>

@@ -291,7 +291,7 @@ export class TournamentScheduler {
         player2Score: 0,
         date: matchDate.toISOString().split('T')[0],
         time: this.getMatchTime(),
-        matchType: roundType as any,
+        matchType: roundType as Match['matchType'],
         status: 'scheduled',
         round: this.capitalizeFirst(roundType),
         week: this.tournament.currentWeek

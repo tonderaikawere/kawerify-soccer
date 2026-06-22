@@ -29,7 +29,8 @@ import {
   clearAllCups,
   Player,
   Match,
-  Tournament
+  Tournament,
+  Cup
 } from "@/lib/storage";
 
 const Admin = () => {
@@ -39,7 +40,7 @@ const Admin = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [tournament, setTournament] = useState<Tournament>(loadTournament());
-  const [cups, setCups] = useState<any[]>([]);
+  const [cups, setCups] = useState<Cup[]>([]);
   const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
   const { toast } = useToast();
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Settings, UserPlus, Calendar, BarChart, Trophy, Users, Edit, Trash2, Plus, Save, Upload, Download, LogOut, Shield, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,13 +78,12 @@ const AdminDashboard = ({
     <div className="min-h-screen bg-slate-50 dark:bg-[#070b13] pb-16 transition-colors duration-300">
       <main className="container mx-auto px-6 py-10 max-w-6xl">
         
-        {/* FIFA-style Control Banner */}
+        {/* Control Banner (clean text-only) */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 text-white border border-white/10 shadow-xl mb-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-60" />
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
-              <h1 className="text-3xl font-black uppercase tracking-tight flex items-center">
-                <Shield className="h-6.5 w-6.5 mr-2 text-emerald-400" />
+              <h1 className="text-3xl font-black uppercase tracking-tight">
                 Tournament Control Room
               </h1>
               <p className="text-slate-400 font-medium text-sm">Kawerify Tech Cup Live Operations & Statistics Editor</p>
@@ -101,15 +99,12 @@ const AdminDashboard = ({
 
             <div className="flex flex-wrap items-center gap-3">
               <Button onClick={onAutoSchedule} className="rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:opacity-95 text-white font-black text-xs shadow-md shadow-primary/20">
-                <Calendar className="h-4 w-4 mr-1.5" />
                 Auto-Schedule
               </Button>
               <Button onClick={onExportData} variant="outline" className="rounded-xl border-white/10 bg-slate-900/60 hover:bg-slate-800 text-slate-200 font-bold text-xs">
-                <Download className="h-4 w-4 mr-1.5" />
                 Export Data
               </Button>
               <Button onClick={onLogout} variant="destructive" className="rounded-xl font-bold text-xs">
-                <LogOut className="h-4 w-4 mr-1.5" />
                 Logout
               </Button>
             </div>
@@ -120,19 +115,19 @@ const AdminDashboard = ({
         <Tabs defaultValue="overview" className="space-y-8">
           <TabsList className="flex flex-wrap md:grid w-full grid-cols-5 bg-muted/60 p-1 rounded-2xl h-auto gap-1">
             <TabsTrigger value="overview" className="rounded-xl text-xs font-black flex-1 py-2.5">
-              <BarChart className="h-3.5 w-3.5 mr-1.5" />Overview
+              Overview
             </TabsTrigger>
             <TabsTrigger value="players" className="rounded-xl text-xs font-black flex-1 py-2.5">
-              <Users className="h-3.5 w-3.5 mr-1.5" />Players
+              Players
             </TabsTrigger>
             <TabsTrigger value="fixtures" className="rounded-xl text-xs font-black flex-1 py-2.5">
-              <Calendar className="h-3.5 w-3.5 mr-1.5" />Schedule
+              Schedule
             </TabsTrigger>
             <TabsTrigger value="results" className="rounded-xl text-xs font-black flex-1 py-2.5">
-              <Trophy className="h-3.5 w-3.5 mr-1.5" />Scoring
+              Scoring
             </TabsTrigger>
             <TabsTrigger value="settings" className="rounded-xl text-xs font-black flex-1 py-2.5">
-              <Settings className="h-3.5 w-3.5 mr-1.5" />Config
+              Config
             </TabsTrigger>
           </TabsList>
 
@@ -141,7 +136,6 @@ const AdminDashboard = ({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Card className="glass-card text-center">
                 <CardContent className="p-5 space-y-1">
-                  <Users className="h-8 w-8 text-primary mx-auto" />
                   <p className="text-3xl font-black text-slate-900 dark:text-white">{players.length}</p>
                   <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Players</p>
                 </CardContent>
@@ -149,7 +143,6 @@ const AdminDashboard = ({
               
               <Card className="glass-card text-center">
                 <CardContent className="p-5 space-y-1">
-                  <Trophy className="h-8 w-8 text-emerald-500 mx-auto animate-float" />
                   <p className="text-3xl font-black text-slate-900 dark:text-white">{completedMatches}</p>
                   <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Completed</p>
                 </CardContent>
@@ -157,7 +150,6 @@ const AdminDashboard = ({
               
               <Card className="glass-card text-center">
                 <CardContent className="p-5 space-y-1">
-                  <Calendar className="h-8 w-8 text-blue-500 mx-auto" />
                   <p className="text-3xl font-black text-slate-900 dark:text-white">{upcomingMatches}</p>
                   <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Upcoming</p>
                 </CardContent>
@@ -165,7 +157,6 @@ const AdminDashboard = ({
               
               <Card className="glass-card text-center">
                 <CardContent className="p-5 space-y-1">
-                  <Zap className="h-8 w-8 text-indigo-500 mx-auto" />
                   <p className="text-xl font-black text-slate-900 dark:text-white truncate pt-1">{tournament.currentRound}</p>
                   <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Current Round</p>
                 </CardContent>
@@ -175,8 +166,7 @@ const AdminDashboard = ({
             {/* Top Performers Table */}
             <Card className="glass-panel border-white/10 shadow-md">
               <CardHeader>
-                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                  <Trophy className="h-5 w-5 text-amber-500 mr-2" />
+                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                   Top Performers
                 </CardTitle>
                 <CardDescription>Live standings overview based on points</CardDescription>
@@ -212,8 +202,7 @@ const AdminDashboard = ({
           <TabsContent value="players" className="space-y-6">
             <Card className="glass-panel border-white/10 shadow-md">
               <CardHeader>
-                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                  <UserPlus className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                   Register Gamer
                 </CardTitle>
                 <CardDescription>Add a new competitor into the Kawerify Tech tournament registry.</CardDescription>
@@ -253,7 +242,6 @@ const AdminDashboard = ({
                     </div>
                   </div>
                   <Button type="submit" className="rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600">
-                    <Plus className="h-4 w-4 mr-1.5" />
                     Register Gamer
                   </Button>
                 </form>
@@ -276,9 +264,9 @@ const AdminDashboard = ({
                             size="sm"
                             variant="ghost"
                             onClick={() => setEditingPlayer(player)}
-                            className="h-8 w-8 p-0 rounded-full hover:bg-muted"
+                            className="rounded-xl font-bold text-xs"
                           >
-                            <Edit className="h-3.5 w-3.5 text-slate-600" />
+                            Edit
                           </Button>
                         </div>
                         <p className="text-xs text-primary font-bold">{player.currentTeam}</p>
@@ -299,7 +287,6 @@ const AdminDashboard = ({
             <Card className="glass-panel border-white/10 shadow-md">
               <CardHeader>
                 <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                  <Plus className="h-5 w-5 mr-2 text-primary" />
                   Schedule Custom Match
                 </CardTitle>
                 <CardDescription>Manually configure and add a matchday fixture to the calendar.</CardDescription>
@@ -397,7 +384,6 @@ const AdminDashboard = ({
                   </div>
 
                   <Button type="submit" className="rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600">
-                    <Calendar className="h-4 w-4 mr-1.5" />
                     Publish Fixture
                   </Button>
                 </form>
@@ -409,8 +395,7 @@ const AdminDashboard = ({
           <TabsContent value="results" className="space-y-6">
             <Card className="glass-panel border-white/10 shadow-md">
               <CardHeader>
-                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                  <Trophy className="h-5 w-5 mr-2 text-primary animate-float" />
+                <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                   Scoreboard Scorer Manager
                 </CardTitle>
                 <CardDescription>Input and finalize matchday scores for scheduled games.</CardDescription>
@@ -475,7 +460,6 @@ const AdminDashboard = ({
                                 onClick={() => onCompleteMatch(match.id, scores.p1, scores.p2)}
                                 className="rounded-xl font-black text-xs bg-gradient-to-r from-primary to-emerald-600 text-white hover:opacity-95"
                               >
-                                <Save className="h-4 w-4 mr-1.5" />
                                 Save Score & Complete Match
                               </Button>
                             </div>
@@ -493,7 +477,6 @@ const AdminDashboard = ({
             <Card className="glass-panel border-white/10 shadow-md">
               <CardHeader>
                 <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                  <Settings className="h-5 w-5 mr-2 text-primary" />
                   Tournament Configurations
                 </CardTitle>
               </CardHeader>
@@ -529,11 +512,9 @@ const AdminDashboard = ({
                   <h3 className="font-extrabold text-sm text-slate-900 dark:text-white uppercase tracking-wider mb-4">Operations Backup</h3>
                   <div className="flex flex-wrap gap-3">
                     <Button onClick={onExportData} variant="outline" className="rounded-xl text-xs font-bold">
-                      <Download className="h-4 w-4 mr-1.5" />
                       Backup Database (Export JSON)
                     </Button>
                     <Button variant="outline" className="rounded-xl text-xs font-bold border-dashed hover:bg-muted">
-                      <Upload className="h-4 w-4 mr-1.5" />
                       Restore Database (Import JSON)
                     </Button>
                   </div>

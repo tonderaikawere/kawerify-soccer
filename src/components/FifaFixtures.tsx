@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar as CalendarIcon, Clock, MapPin, Trophy, Play, CheckCircle, AlertCircle, Shield, Award, Flame } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { loadMatches, loadPlayers, loadTournament, type Match, type Player } from "@/lib/storage";
+import PageHeader from "@/components/PageHeader";
 
 const FifaFixtures = () => {
   const [matches, setMatches] = useState<Match[]>([]);
@@ -64,25 +65,15 @@ const FifaFixtures = () => {
 
   return (
     <div className="space-y-8">
-      {/* FIFA World Cup Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 text-white border border-white/10 shadow-xl">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-60" />
-        <div className="relative z-10 text-center">
-          <div className="mb-4 flex justify-center">
-            <Trophy className="h-10 w-10 text-amber-400 animate-float" />
-          </div>
-          <h1 className="mb-2 text-3xl md:text-4xl font-black tracking-tight uppercase">Kawerify Fixtures Schedule</h1>
-          <p className="text-sm md:text-base text-slate-400 font-medium">Tournament Season {tournament.season} Matchdays</p>
-          <div className="mt-4 flex justify-center space-x-3">
-            <Badge className="bg-gradient-to-r from-primary to-emerald-600 text-white font-extrabold px-4 py-1.5 shadow-md border-0">
-              Week {tournament.currentWeek}
-            </Badge>
-            <Badge className="bg-slate-900 text-amber-400 font-extrabold px-4 py-1.5 border border-amber-500/20 shadow-md">
-              {tournament.currentRound}
-            </Badge>
-          </div>
-        </div>
-      </div>
+      {/* Page Header */}
+      <PageHeader
+        title="Kawerify Fixtures"
+        highlightedTitle="Schedule"
+        subtitle="Tournament Matchdays, scores, and round scheduling."
+        season={tournament.season}
+        week={tournament.currentWeek}
+        round={tournament.currentRound}
+      />
 
       {/* Week Selector */}
       <div className="flex justify-center space-x-1.5 overflow-x-auto pb-3 pt-1 px-2 border-b border-border/40">
@@ -147,12 +138,10 @@ const FifaFixtures = () => {
                       </span>
                       <span className="text-white/60">•</span>
                       <span className="flex items-center text-white/90 font-medium">
-                        <CalendarIcon className="mr-1.5 h-3.5 w-3.5 opacity-80" />
                         {new Date(match.date).toLocaleDateString()} ({getMatchDay(match.matchType)})
                       </span>
                       <span className="text-white/60">•</span>
                       <span className="flex items-center text-white/90 font-medium">
-                        <Clock className="mr-1.5 h-3.5 w-3.5 opacity-80" />
                         {match.time}
                       </span>
                     </div>
@@ -182,8 +171,7 @@ const FifaFixtures = () => {
                         <h3 className="text-lg md:text-xl font-black text-slate-900 dark:text-white truncate">
                           {player1?.name || 'TBD'}
                         </h3>
-                        <p className="text-sm text-primary font-bold flex items-center justify-end truncate mt-0.5">
-                          <Shield className="h-3.5 w-3.5 text-slate-400 mr-1" />
+                        <p className="text-sm text-primary font-bold truncate mt-0.5">
                           {match.player1Team}
                         </p>
                       </div>
@@ -224,8 +212,7 @@ const FifaFixtures = () => {
                         <h3 className="text-lg md:text-xl font-black text-slate-900 dark:text-white truncate">
                           {player2?.name || 'TBD'}
                         </h3>
-                        <p className="text-sm text-primary font-bold flex items-center justify-start truncate mt-0.5">
-                          <Shield className="h-3.5 w-3.5 text-slate-400 mr-1" />
+                        <p className="text-sm text-primary font-bold truncate mt-0.5">
                           {match.player2Team}
                         </p>
                       </div>
@@ -237,7 +224,6 @@ const FifaFixtures = () => {
                   {match.status === 'completed' && (
                     <div className="mt-6 pt-4 border-t border-border/50 flex justify-center">
                       <div className="flex items-center space-x-2 text-xs font-bold text-slate-500">
-                        <Award className="h-4 w-4 text-amber-500" />
                         <span>Winner:</span>
                         <span className="text-primary font-extrabold">
                           {match.player1Score > match.player2Score ? player1?.name :
@@ -258,7 +244,6 @@ const FifaFixtures = () => {
         <CardContent className="p-6">
           <div className="text-center space-y-3">
             <h3 className="text-base font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center justify-center">
-              <MapPin className="mr-1.5 h-4 w-4 text-emerald-400" />
               Tournament Schedule Rules
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-500">

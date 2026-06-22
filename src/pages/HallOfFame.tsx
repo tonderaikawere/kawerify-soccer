@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Trophy, Medal, Award, Star, Crown, Calendar, Users, Target, Shield, Flame, Activity } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { loadCups, loadPlayers, type Cup, type Player } from "@/lib/storage";
+import PageHeader from "@/components/PageHeader";
 
 const HallOfFame = () => {
   const [cups, setCups] = useState<Cup[]>([]);
@@ -32,10 +32,10 @@ const HallOfFame = () => {
     .slice(0, 10);
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Crown className="h-8 w-8 text-amber-400 animate-float" />;
-    if (rank === 2) return <Trophy className="h-8 w-8 text-slate-300" />;
-    if (rank === 3) return <Medal className="h-8 w-8 text-amber-700" />;
-    return <Award className="h-6 w-6 text-blue-500" />;
+    if (rank === 1) return <span className="text-xl">🥇</span>;
+    if (rank === 2) return <span className="text-xl">🥈</span>;
+    if (rank === 3) return <span className="text-xl">🥉</span>;
+    return <span className="text-sm font-bold text-slate-400">#{rank}</span>;
   };
 
   return (
@@ -45,41 +45,24 @@ const HallOfFame = () => {
         <div className="container mx-auto px-6 py-12 max-w-6xl">
           
           {/* Page Hero Header */}
-          <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
-            <div className="inline-flex items-center justify-center p-3 bg-amber-500/10 rounded-2xl mb-2 animate-float">
-              <Crown className="h-8 w-8 text-amber-500" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-              Hall of <span className="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 bg-clip-text text-transparent">Fame</span>
-            </h1>
-            <p className="text-base md:text-lg text-slate-500 font-medium">
-              Celebrating the legends, cup winners, and tournament record-holders of Kawerify Tech World Cup.
-            </p>
-            
-            {/* Golden divider */}
-            <div className="flex justify-center items-center space-x-2 pt-2">
-              <div className="h-0.5 w-10 bg-amber-500/20" />
-              <Trophy className="h-4 w-4 text-amber-400 opacity-60" />
-              <div className="h-0.5 w-10 bg-amber-500/20" />
-            </div>
-          </div>
+          <PageHeader
+            title="Hall of"
+            highlightedTitle="Fame"
+            subtitle="Celebrating the legends, cup winners, and tournament record-holders of Kawerify Tech World Cup."
+          />
 
           <Tabs defaultValue="champions" className="space-y-8">
             <TabsList className="flex flex-wrap md:grid w-full grid-cols-4 bg-muted/60 p-1 rounded-2xl h-auto gap-1">
               <TabsTrigger value="champions" className="rounded-xl text-xs font-black flex-1 py-2.5 data-[state=active]:bg-amber-500 data-[state=active]:text-slate-950">
-                <Crown className="h-3.5 w-3.5 mr-1.5" />
                 Champions
               </TabsTrigger>
               <TabsTrigger value="cups" className="rounded-xl text-xs font-black flex-1 py-2.5 data-[state=active]:bg-amber-500 data-[state=active]:text-slate-950">
-                <Trophy className="h-3.5 w-3.5 mr-1.5" />
                 Cup History
               </TabsTrigger>
               <TabsTrigger value="records" className="rounded-xl text-xs font-black flex-1 py-2.5 data-[state=active]:bg-amber-500 data-[state=active]:text-slate-950">
-                <Target className="h-3.5 w-3.5 mr-1.5" />
                 Records
               </TabsTrigger>
               <TabsTrigger value="legends" className="rounded-xl text-xs font-black flex-1 py-2.5 data-[state=active]:bg-amber-500 data-[state=active]:text-slate-950">
-                <Star className="h-3.5 w-3.5 mr-1.5" />
                 Legends
               </TabsTrigger>
             </TabsList>
@@ -89,7 +72,6 @@ const HallOfFame = () => {
               <Card className="glass-panel border-white/20 dark:border-white/5 overflow-hidden shadow-2xl rounded-2xl">
                 <CardHeader className="bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-slate-950">
                   <CardTitle className="text-2xl font-black flex items-center">
-                    <Crown className="h-6 w-6 mr-2" />
                     World Cup Winners
                   </CardTitle>
                   <CardDescription className="text-amber-950/80 text-sm font-semibold">
@@ -126,8 +108,7 @@ const HallOfFame = () => {
                                   <p className="text-xs text-primary font-bold">{player.currentTeam}</p>
                                   <div className="flex items-center space-x-2 mt-2">
                                     <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-[10px] font-black border-0">
-                                      <Trophy className="h-3 w-3 mr-1" />
-                                      {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
+                                      🏆 {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                                     </Badge>
                                     <Badge variant="outline" className="text-[10px] font-bold border-border/80 text-muted-foreground bg-background/50">
                                       {player.stats.wins} Wins
@@ -149,7 +130,6 @@ const HallOfFame = () => {
                     </div>
                   ) : (
                     <div className="text-center py-16 space-y-4">
-                      <Crown className="h-16 w-16 mx-auto text-slate-400 dark:text-slate-600 animate-float" />
                       <h3 className="text-lg font-black text-slate-800 dark:text-slate-200">No Champions Crowned</h3>
                       <p className="text-slate-500 text-sm max-w-xs mx-auto">
                         The first tournament champions will be celebrated here once logged.
@@ -165,7 +145,6 @@ const HallOfFame = () => {
               <Card className="glass-panel border-white/20 dark:border-white/5 shadow-md">
                 <CardHeader>
                   <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                    <Trophy className="h-5 w-5 mr-2 text-amber-500" />
                     Tournament Cup History
                   </CardTitle>
                   <CardDescription>Complete archive of all completed Kawerify Tech tournaments</CardDescription>
@@ -180,8 +159,8 @@ const HallOfFame = () => {
                           return (
                             <div key={cup.id} className="flex items-center justify-between p-4 bg-muted/40 rounded-xl border border-border/40 text-sm">
                               <div className="flex items-center space-x-4">
-                                <div className="h-11 w-11 bg-gradient-to-br from-yellow-400 to-amber-500 text-slate-950 rounded-xl flex items-center justify-center shadow-sm">
-                                  <Trophy className="h-5 w-5" />
+                                <div className="h-11 w-11 bg-gradient-to-br from-yellow-400 to-amber-500 text-slate-950 rounded-xl flex items-center justify-center shadow-sm font-bold">
+                                  🏆
                                 </div>
                                 <div>
                                   <h3 className="font-extrabold text-slate-900 dark:text-white text-base">{cup.name}</h3>
@@ -194,7 +173,6 @@ const HallOfFame = () => {
                               <div className="text-right">
                                 <p className="font-black text-slate-800 dark:text-slate-200">{winner?.name || 'TBD Winner'}</p>
                                 <p className="text-xs text-muted-foreground flex items-center justify-end mt-0.5 font-medium">
-                                  <Calendar className="h-3 w-3 mr-1" />
                                   {new Date(cup.finalDate).toLocaleDateString()}
                                 </p>
                               </div>
@@ -204,7 +182,6 @@ const HallOfFame = () => {
                     </div>
                   ) : (
                     <div className="text-center py-12 space-y-3">
-                      <Trophy className="h-12 w-12 mx-auto text-slate-400 dark:text-slate-600 animate-float" />
                       <h3 className="text-base font-black text-slate-800 dark:text-slate-200">No Tournaments Logged</h3>
                       <p className="text-slate-500 text-xs">
                         Tournament history will appear here once competitions are finalized.
@@ -256,7 +233,6 @@ const HallOfFame = () => {
                 <Card className="glass-panel border-white/20 dark:border-white/5 shadow-md">
                   <CardHeader>
                     <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                      <Trophy className="h-5 w-5 mr-2 text-blue-500" />
                       Most Wins
                     </CardTitle>
                   </CardHeader>
@@ -290,14 +266,12 @@ const HallOfFame = () => {
               <Card className="glass-panel border-white/20 dark:border-white/5 shadow-md">
                 <CardHeader>
                   <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                    <Activity className="h-5 w-5 mr-2 text-purple-500" />
                     All‑Time Season Records
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="text-center p-4 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
-                      <Target className="h-10 w-10 mx-auto mb-2 text-emerald-500" />
                       <p className="text-3xl font-black text-emerald-600 dark:text-emerald-400">
                         {Math.max(...players.map(p => p.stats.goalsFor), 0)}
                       </p>
@@ -305,7 +279,6 @@ const HallOfFame = () => {
                     </div>
                     
                     <div className="text-center p-4 bg-blue-500/5 rounded-xl border border-blue-500/10">
-                      <Trophy className="h-10 w-10 mx-auto mb-2 text-blue-500" />
                       <p className="text-3xl font-black text-blue-600 dark:text-blue-400">
                         {Math.max(...players.map(p => p.stats.wins), 0)}
                       </p>
@@ -313,7 +286,6 @@ const HallOfFame = () => {
                     </div>
                     
                     <div className="text-center p-4 bg-purple-500/5 rounded-xl border border-purple-500/10">
-                      <Star className="h-10 w-10 mx-auto mb-2 text-purple-500" />
                       <p className="text-3xl font-black text-purple-600 dark:text-purple-400">
                         {Math.max(...players.map(p => p.stats.points), 0)}
                       </p>
@@ -329,7 +301,6 @@ const HallOfFame = () => {
               <Card className="glass-panel border-white/20 dark:border-white/5 shadow-md">
                 <CardHeader>
                   <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
-                    <Star className="h-5 w-5 mr-2 text-amber-500 animate-float" />
                     Tournament Legends Catalogue
                   </CardTitle>
                   <CardDescription>
@@ -415,7 +386,6 @@ const HallOfFame = () => {
                   
                   {players.filter(p => p.stats.matchesPlayed >= 10 || p.stats.cupsWon > 0 || p.stats.wins >= 10).length === 0 && (
                     <div className="text-center py-12 space-y-2">
-                      <Star className="h-12 w-12 mx-auto text-slate-400 dark:text-slate-600 animate-float" />
                       <h3 className="text-base font-black text-slate-800 dark:text-slate-200">No Legends Catalogued</h3>
                       <p className="text-slate-500 text-xs">Competitors will earn legends status through consistent performances.</p>
                     </div>

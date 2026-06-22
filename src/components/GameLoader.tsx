@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Trophy, Zap, Target, Star } from "lucide-react";
+
 const GameLoader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
   const [currentTip, setCurrentTip] = useState(0);
@@ -65,15 +67,15 @@ const GameLoader = ({ onComplete }: { onComplete: () => void }) => {
         {/* Logo Animation */}
         <div className={`mb-8 transition-all duration-500 ${showLogo ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}`}>
           <div className="relative inline-block">
-            
+            <Trophy className="h-24 w-24 text-yellow-400 animate-pulse mx-auto" />
             <div className="absolute -top-2 -right-2 animate-spin">
-              
+              <Star className="h-8 w-8 text-yellow-300" />
             </div>
             <div className="absolute -bottom-2 -left-2 animate-bounce">
-              
+              <Zap className="h-6 w-6 text-blue-300" />
             </div>
             <div className="absolute top-1/2 -right-4 animate-pulse">
-              
+              <Target className="h-6 w-6 text-green-300" />
             </div>
           </div>
         </div>
@@ -132,11 +134,11 @@ const GameLoader = ({ onComplete }: { onComplete: () => void }) => {
 
         {/* Power Level Indicator */}
         <div className="mt-6 flex items-center justify-center space-x-2">
-          
+          <Zap className="h-4 w-4 text-yellow-400 animate-pulse" />
           <span className="text-sm text-yellow-300 font-bold animate-pulse">
             POWER LEVEL: {Math.round(progress)}%
           </span>
-          
+          <Zap className="h-4 w-4 text-yellow-400 animate-pulse" />
         </div>
       </div>
 

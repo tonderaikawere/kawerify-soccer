@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { User, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Eye } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ interface PlayerProfileProps {
 }
 
 const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
 
   useEffect(() => {
@@ -72,7 +73,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
   if (displayPlayers.length === 0) {
     return (
       <div className="text-center p-8">
-        
+        <User className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-xl font-semibold mb-2">No Players Found</h3>
         <p className="text-muted-foreground">Players will appear here once they're added to the tournament.</p>
       </div>
@@ -122,12 +123,12 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   </CardDescription>
                   <div className="flex items-center space-x-2 mt-2">
                     <Badge variant="secondary" className="text-xs">
-                      
+                      <Calendar className="h-3 w-3 mr-1" />
                       Joined {new Date(player.joinDate).getFullYear()}
                     </Badge>
                     {player.stats.cupsWon > 0 && (
                       <Badge className="bg-yellow-500 text-black text-xs">
-                        
+                        <Trophy className="h-3 w-3 mr-1" />
                         {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                       </Badge>
                     )}
@@ -148,13 +149,13 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   {/* Key Stats */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900 rounded-lg">
-                      
+                      <Trophy className="h-6 w-6 mx-auto mb-1 text-green-600" />
                       <p className="text-2xl font-bold text-green-700 dark:text-green-400">{player.stats.wins}</p>
                       <p className="text-xs text-green-600 dark:text-green-500">Wins</p>
                     </div>
                     
                     <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-lg">
-                      
+                      <Target className="h-6 w-6 mx-auto mb-1 text-blue-600" />
                       <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">{player.stats.points}</p>
                       <p className="text-xs text-blue-600 dark:text-blue-500">Points</p>
                     </div>
@@ -222,7 +223,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm flex items-center">
-                        
+                        <TrendingUp className="h-4 w-4 mr-1 text-blue-500" />
                         Average Goals/Match
                       </span>
                       <span className="font-bold">
@@ -233,7 +234,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     
                     <div className="flex items-center justify-between">
                       <span className="text-sm flex items-center">
-                        
+                        <Award className="h-4 w-4 mr-1 text-yellow-500" />
                         Points/Match
                       </span>
                       <span className="font-bold">
@@ -247,7 +248,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                 <TabsContent value="history" className="space-y-4 mt-4">
                   <div>
                     <h4 className="font-semibold mb-3 flex items-center">
-                      
+                      <History className="h-4 w-4 mr-2" />
                       Team History
                     </h4>
                     <div className="space-y-2">
@@ -274,31 +275,31 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   {/* Achievements */}
                   <div>
                     <h4 className="font-semibold mb-3 flex items-center">
-                      
+                      <Star className="h-4 w-4 mr-2 text-yellow-500" />
                       Achievements
                     </h4>
                     <div className="space-y-2">
                       {player.stats.cupsWon > 0 && (
                         <Badge className="bg-yellow-500 text-black mr-2 mb-2">
-                          
+                          <Trophy className="h-3 w-3 mr-1" />
                           {player.stats.cupsWon} Tournament Winner{player.stats.cupsWon > 1 ? 's' : ''}
                         </Badge>
                       )}
                       {winRate >= 70 && (
                         <Badge className="bg-green-500 text-white mr-2 mb-2">
-                          
+                          <TrendingUp className="h-3 w-3 mr-1" />
                           High Win Rate ({winRate}%)
                         </Badge>
                       )}
                       {goalDiff >= 20 && (
                         <Badge className="bg-blue-500 text-white mr-2 mb-2">
-                          
+                          <Target className="h-3 w-3 mr-1" />
                           Goal Machine (+{goalDiff})
                         </Badge>
                       )}
                       {player.stats.matchesPlayed >= 50 && (
                         <Badge className="bg-purple-500 text-white mr-2 mb-2">
-                          
+                          <Award className="h-3 w-3 mr-1" />
                           Veteran Player
                         </Badge>
                       )}
@@ -309,7 +310,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   <div className="mt-6 pt-4 border-t border-border">
                     <Link to={`/player/${player.id}`}>
                       <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
-                        
+                        <Eye className="h-4 w-4 mr-2" />
                         View Full Profile
                       </Button>
                     </Link>

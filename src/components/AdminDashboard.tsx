@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Settings, UserPlus, Calendar, BarChart, Trophy, Users, Edit, Trash2, Plus, Save, Upload, Download } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -82,11 +83,11 @@ const AdminDashboard = ({
               </div>
               <div className="flex items-center space-x-4">
                 <Button onClick={onAutoSchedule} className="bg-green-500 hover:bg-green-600 text-white font-bold animate-pulse">
-                  
+                  <Calendar className="h-4 w-4 mr-2" />
                   Auto Schedule
                 </Button>
                 <Button onClick={onExportData} variant="secondary" className="bg-white/20 hover:bg-white/30">
-                  
+                  <Download className="h-4 w-4 mr-2" />
                   Export Data
                 </Button>
                 <Button onClick={onLogout} variant="outline" className="bg-white/20 hover:bg-white/30 border-white/30">
@@ -107,16 +108,16 @@ const AdminDashboard = ({
                 <BarChart className="h-4 w-4 mr-2" />Overview
               </TabsTrigger>
               <TabsTrigger value="players" className="text-sm font-semibold">
-                Players
+                <Users className="h-4 w-4 mr-2" />Players
               </TabsTrigger>
               <TabsTrigger value="fixtures" className="text-sm font-semibold">
-                Fixtures
+                <Calendar className="h-4 w-4 mr-2" />Fixtures
               </TabsTrigger>
               <TabsTrigger value="results" className="text-sm font-semibold">
-                Results
+                <Trophy className="h-4 w-4 mr-2" />Results
               </TabsTrigger>
               <TabsTrigger value="settings" className="text-sm font-semibold">
-                Settings
+                <Settings className="h-4 w-4 mr-2" />Settings
               </TabsTrigger>
             </TabsList>
 
@@ -130,7 +131,7 @@ const AdminDashboard = ({
                         <p className="text-blue-100">Total Players</p>
                         <p className="text-3xl font-bold">{players.length}</p>
                       </div>
-                      
+                      <Users className="h-12 w-12 text-blue-200" />
                     </div>
                   </CardContent>
                 </Card>
@@ -142,7 +143,7 @@ const AdminDashboard = ({
                         <p className="text-green-100">Completed Matches</p>
                         <p className="text-3xl font-bold">{completedMatches}</p>
                       </div>
-                      
+                      <Trophy className="h-12 w-12 text-green-200" />
                     </div>
                   </CardContent>
                 </Card>
@@ -154,7 +155,7 @@ const AdminDashboard = ({
                         <p className="text-yellow-100">Upcoming Matches</p>
                         <p className="text-3xl font-bold">{upcomingMatches}</p>
                       </div>
-                      
+                      <Calendar className="h-12 w-12 text-yellow-200" />
                     </div>
                   </CardContent>
                 </Card>
@@ -166,7 +167,7 @@ const AdminDashboard = ({
                         <p className="text-purple-100">Current Round</p>
                         <p className="text-xl font-bold">{tournament.currentRound}</p>
                       </div>
-                      
+                      <Settings className="h-12 w-12 text-purple-200" />
                     </div>
                   </CardContent>
                 </Card>
@@ -176,7 +177,7 @@ const AdminDashboard = ({
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    
+                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" />
                     Top Performers
                   </CardTitle>
                 </CardHeader>
@@ -214,7 +215,7 @@ const AdminDashboard = ({
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    
+                    <UserPlus className="h-5 w-5 mr-2" />
                     Add New Player
                   </CardTitle>
                 </CardHeader>
@@ -378,7 +379,7 @@ const AdminDashboard = ({
                       </div>
                     </div>
                     <Button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-600">
-                      
+                      <Calendar className="h-4 w-4 mr-2" />
                       Schedule Match
                     </Button>
                   </form>
@@ -391,7 +392,7 @@ const AdminDashboard = ({
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    
+                    <Trophy className="h-5 w-5 mr-2" />
                     Match Results Management
                   </CardTitle>
                 </CardHeader>
@@ -469,7 +470,7 @@ const AdminDashboard = ({
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    
+                    <Settings className="h-5 w-5 mr-2" />
                     Tournament Settings
                   </CardTitle>
                 </CardHeader>
@@ -506,11 +507,11 @@ const AdminDashboard = ({
                       <h3 className="font-semibold mb-4">Data Management</h3>
                       <div className="flex space-x-4">
                         <Button onClick={onExportData} variant="outline">
-                          
+                          <Download className="h-4 w-4 mr-2" />
                           Export Tournament Data
                         </Button>
                         <Button variant="outline">
-                          
+                          <Upload className="h-4 w-4 mr-2" />
                           Import Data
                         </Button>
                       </div>

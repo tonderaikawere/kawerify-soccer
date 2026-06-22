@@ -1,3 +1,4 @@
+import { AlertTriangle, Shield, Info, Scale, FileText, Mail } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Navbar from "@/components/Navbar";
@@ -12,7 +13,7 @@ const Disclaimer = () => {
           {/* Header */}
           <div className="mb-12 text-center">
             <div className="inline-flex items-center justify-center mb-6">
-              
+              <AlertTriangle className="h-16 w-16 text-red-600 mr-4" />
               <h1 className="text-5xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
                 Disclaimer
               </h1>
@@ -28,7 +29,7 @@ const Disclaimer = () => {
           <div className="max-w-4xl mx-auto space-y-8">
             {/* Important Notice */}
             <Alert className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950">
-              
+              <AlertTriangle className="h-4 w-4 text-red-600" />
               <AlertDescription className="text-red-800 dark:text-red-200">
                 Please read this disclaimer carefully before using our services. Your use of the platform constitutes acceptance of these terms.
               </AlertDescription>
@@ -38,7 +39,7 @@ const Disclaimer = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  
+                  <Info className="h-6 w-6 mr-2 text-blue-500" />
                   General Disclaimer
                 </CardTitle>
               </CardHeader>
@@ -63,7 +64,7 @@ const Disclaimer = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  
+                  <Shield className="h-6 w-6 mr-2 text-green-500" />
                   Tournament and Gaming Disclaimer
                 </CardTitle>
               </CardHeader>
@@ -107,7 +108,7 @@ const Disclaimer = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  
+                  <FileText className="h-6 w-6 mr-2 text-purple-500" />
                   Data and Privacy Disclaimer
                 </CardTitle>
               </CardHeader>
@@ -171,7 +172,7 @@ const Disclaimer = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  
+                  <Scale className="h-6 w-6 mr-2 text-yellow-500" />
                   Legal Disclaimer
                 </CardTitle>
               </CardHeader>
@@ -242,7 +243,7 @@ const Disclaimer = () => {
             <Card className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950 dark:to-orange-950">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  
+                  <Mail className="h-6 w-6 mr-2 text-red-500" />
                   Questions or Concerns?
                 </CardTitle>
                 <CardDescription>

@@ -1,3 +1,4 @@
+import { Trophy, Users, Target, Heart, MapPin, Phone, Mail, Award, Star, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -54,13 +55,13 @@ const About = () => {
           <div className="mb-16 text-center">
             <div className="inline-flex items-center justify-center mb-6">
               <div className="animate-bounce mr-4">
-                
+                <Trophy className="h-16 w-16 text-yellow-500" />
               </div>
               <h1 className="text-6xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 About Kawerify Tech
               </h1>
               <div className="animate-bounce ml-4">
-                
+                <Trophy className="h-16 w-16 text-yellow-500" />
               </div>
             </div>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
@@ -125,7 +126,7 @@ const About = () => {
             <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900">
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl">
-                  
+                  <Target className="h-8 w-8 mr-3 text-green-600" />
                   Our Mission
                 </CardTitle>
               </CardHeader>
@@ -141,7 +142,7 @@ const About = () => {
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900">
               <CardHeader>
                 <CardTitle className="flex items-center text-2xl">
-                  
+                  <Star className="h-8 w-8 mr-3 text-blue-600" />
                   Our Vision
                 </CardTitle>
               </CardHeader>
@@ -259,7 +260,7 @@ const About = () => {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                   <div className="flex flex-col items-center">
-                    
+                    <MapPin className="h-12 w-12 mb-4 text-green-200" />
                     <h3 className="text-xl font-semibold mb-2">Location</h3>
                     <p className="text-green-100">
                       KoMthombeni, Plot 2 Grampsway<br />
@@ -269,7 +270,7 @@ const About = () => {
                   </div>
                   
                   <div className="flex flex-col items-center">
-                    
+                    <Phone className="h-12 w-12 mb-4 text-blue-200" />
                     <h3 className="text-xl font-semibold mb-2">Phone</h3>
                     <p className="text-blue-100">
                       <a href="tel:+263716264988" className="hover:text-white transition-colors">
@@ -279,7 +280,7 @@ const About = () => {
                   </div>
                   
                   <div className="flex flex-col items-center">
-                    
+                    <Mail className="h-12 w-12 mb-4 text-purple-200" />
                     <h3 className="text-xl font-semibold mb-2">Email</h3>
                     <p className="text-purple-100">
                       <a href="mailto:info@kawerifytech.com" className="hover:text-white transition-colors">
@@ -296,7 +297,7 @@ const About = () => {
           <div className="text-center">
             <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-950 dark:to-orange-950">
               <CardContent className="p-12">
-                
+                <Trophy className="h-20 w-20 mx-auto mb-6 text-yellow-500 animate-bounce" />
                 <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                   Ready to Compete?
                 </h2>

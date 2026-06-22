@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Trophy, Medal, Award, Star, TrendingUp, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,7 +8,7 @@ import { loadPlayers, loadTournament, initializeDefaultData, type Player } from 
 import heroImage from "@/assets/soccer-hero.jpg";
 
 const Leaderboard = () => {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [tournament, setTournament] = useState(loadTournament());
 
   useEffect(() => {
@@ -22,9 +23,9 @@ const Leaderboard = () => {
   });
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return ;
-    if (rank === 2) return ;
-    if (rank === 3) return ;
+    if (rank === 1) return <Trophy className="h-8 w-8 text-yellow-500 animate-pulse" />;
+    if (rank === 2) return <Medal className="h-8 w-8 text-gray-400" />;
+    if (rank === 3) return <Award className="h-8 w-8 text-amber-700" />;
     return <span className="text-2xl font-bold text-muted-foreground">{rank}</span>;
   };
 
@@ -42,7 +43,7 @@ const Leaderboard = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 to-background" />
           <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
             <div className="animate-bounce mb-4">
-              
+              <Trophy className="h-24 w-24 text-yellow-500" />
             </div>
             <h1 className="text-6xl font-bold text-foreground mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Kawerify Tech World Cup
@@ -81,7 +82,7 @@ const Leaderboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-3xl font-bold flex items-center">
-                    
+                    <Trophy className="h-8 w-8 mr-3 text-yellow-400" />
                     World Cup Leaderboard
                   </CardTitle>
                   <CardDescription className="text-blue-100 text-lg mt-2">
@@ -131,7 +132,7 @@ const Leaderboard = () => {
                               </Badge>
                               {player.stats.cupsWon > 0 && (
                                 <Badge className="bg-yellow-500 text-black text-xs">
-                                  
+                                  <Trophy className="h-3 w-3 mr-1" />
                                   {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                                 </Badge>
                               )}
@@ -178,7 +179,7 @@ const Leaderboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900">
               <CardContent className="p-6 text-center">
-                
+                <Star className="h-12 w-12 mx-auto mb-3 text-blue-600" />
                 <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                   {sortedPlayers.length > 0 ? sortedPlayers[0]?.name : 'TBD'}
                 </h3>
@@ -188,7 +189,7 @@ const Leaderboard = () => {
             
             <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900">
               <CardContent className="p-6 text-center">
-                
+                <Target className="h-12 w-12 mx-auto mb-3 text-green-600" />
                 <h3 className="text-2xl font-bold text-green-700 dark:text-green-400">
                   {Math.max(...sortedPlayers.map(p => p.stats.goalsFor), 0)}
                 </h3>
@@ -198,7 +199,7 @@ const Leaderboard = () => {
             
             <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950 dark:to-purple-900">
               <CardContent className="p-6 text-center">
-                
+                <TrendingUp className="h-12 w-12 mx-auto mb-3 text-purple-600" />
                 <h3 className="text-2xl font-bold text-purple-700 dark:text-purple-400">
                   {sortedPlayers.reduce((sum, p) => sum + p.stats.matchesPlayed, 0)}
                 </h3>

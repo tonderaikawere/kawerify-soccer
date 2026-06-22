@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { Trophy, Medal, Award, Star, TrendingUp, Target, Shield, ArrowUp, Flame, Play } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { loadPlayers, loadTournament, initializeDefaultData, type Player } from "@/lib/storage";
-import heroImage from "@/assets/soccer-hero.jpg";
 import { Link } from "react-router-dom";
+import PageHeader from "@/components/PageHeader";
 
 const Leaderboard = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -34,10 +33,10 @@ const Leaderboard = () => {
   };
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="h-6 w-6 text-amber-400 animate-float" />;
-    if (rank === 2) return <Medal className="h-6 w-6 text-slate-400" />;
-    if (rank === 3) return <Award className="h-6 w-6 text-amber-600" />;
-    return <span className="text-lg font-bold text-slate-400 dark:text-slate-600">{rank}</span>;
+    if (rank === 1) return <span className="text-lg font-black text-amber-500">1</span>;
+    if (rank === 2) return <span className="text-lg font-black text-slate-400">2</span>;
+    if (rank === 3) return <span className="text-lg font-black text-amber-700">3</span>;
+    return <span className="text-sm font-bold text-slate-400 dark:text-slate-600">{rank}</span>;
   };
 
   const getWinRate = (player: Player) => {
@@ -50,136 +49,123 @@ const Leaderboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#070b13] pb-16">
-      {/* Hero Section */}
-      <div 
-        className="relative h-[360px] md:h-[420px] bg-cover bg-center overflow-hidden flex items-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/80 to-[#070b13]" />
-        
-        <div className="relative z-10 container mx-auto px-6 text-center">
-          <div className="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-md rounded-full px-4 py-1.5 border border-primary/30 mb-6 animate-fade-in">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">Kawerify Soccer Live</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
-            Kawerify Tech <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-blue-400 bg-clip-text text-transparent">World Cup</span>
-          </h1>
-          <p className="text-base md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 font-medium leading-relaxed">
-            Real‑time rankings, match fixture results, and elite gaming stats for our professional FIFA tournament.
-          </p>
-
-          <div className="flex items-center justify-center space-x-3">
-            <Badge className="text-sm px-5 py-1.5 bg-slate-900/80 border border-slate-700 text-white font-extrabold shadow-md">
-              Season {tournament.season}
-            </Badge>
-            <Badge className="text-sm px-5 py-1.5 bg-gradient-to-r from-primary to-emerald-600 text-white font-extrabold shadow-md border-0">
-              Week {tournament.currentWeek}
-            </Badge>
-            <Badge className="text-sm px-5 py-1.5 bg-slate-950 text-amber-400 border border-amber-500/30 font-extrabold shadow-md">
-              {tournament.currentRound}
-            </Badge>
-          </div>
-        </div>
+      {/* Page Header */}
+      <div className="container mx-auto px-4 pt-8">
+        <PageHeader
+          title="Kawerify Tech"
+          highlightedTitle="World Cup"
+          subtitle="Real‑time rankings, match fixture results, and elite gaming stats for our professional FIFA tournament."
+          season={tournament.season}
+          week={tournament.currentWeek}
+          round={tournament.currentRound}
+        />
       </div>
 
       {/* Main Container */}
-      <div className="container mx-auto px-4 -mt-10 relative z-20">
+      <div className="container mx-auto px-4 relative z-20">
         
         {/* Visual Podium for Top 3 */}
         {topThree.length > 0 && (
           <div className="mb-12">
-            <h2 className="text-center text-sm font-black uppercase tracking-widest text-muted-foreground mb-6">
+            <h2 className="text-center text-xs font-black uppercase tracking-widest text-muted-foreground mb-6">
               Championship Podium
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-end pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-stretch pt-2">
               
               {/* 2nd Place */}
               {topThree[1] && (
-                <div className="order-2 md:order-1 flex flex-col items-center">
-                  <div className="relative group w-44 rounded-2xl glass-card border-slate-300/40 p-5 text-center transition-all duration-300 hover:-translate-y-2">
-                    <div className="absolute top-3 right-3">{getRankIcon(2)}</div>
-                    <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-slate-400 shadow-md">
-                      <AvatarImage src={topThree[1].image} />
-                      <AvatarFallback className="bg-slate-500 text-white font-bold">{topThree[1].name[0]}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="font-extrabold text-slate-900 dark:text-white truncate">{topThree[1].name}</h3>
-                    <p className="text-xs text-primary font-semibold truncate mb-2">{topThree[1].currentTeam}</p>
-                    {getRankBadge(2)}
-                    <div className="mt-3 pt-2.5 border-t border-border flex justify-around text-xs">
-                      <div>
-                        <span className="block font-black text-slate-800 dark:text-slate-200">{topThree[1].stats.points}</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
-                      </div>
-                      <div>
-                        <span className="block font-black text-emerald-500">{getWinRate(topThree[1])}%</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
+                <div className="flex flex-col">
+                  <div className="relative group flex-1 rounded-2xl glass-card border border-slate-300/40 dark:border-white/5 p-6 text-center transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div className="absolute top-4 right-4">{getRankIcon(2)}</div>
+                    <div>
+                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-slate-400 shadow-md">
+                        <AvatarImage src={topThree[1].image} />
+                        <AvatarFallback className="bg-slate-500 text-white font-bold">{topThree[1].name[0]}</AvatarFallback>
+                      </Avatar>
+                      <h3 className="font-extrabold text-slate-900 dark:text-white truncate">{topThree[1].name}</h3>
+                      <p className="text-xs text-primary font-semibold truncate mb-3">{topThree[1].currentTeam}</p>
+                    </div>
+                    <div>
+                      {getRankBadge(2)}
+                      <div className="mt-4 pt-3 border-t border-border flex justify-around text-xs">
+                        <div>
+                          <span className="block font-black text-slate-800 dark:text-slate-200">{topThree[1].stats.points}</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
+                        </div>
+                        <div>
+                          <span className="block font-black text-emerald-500">{getWinRate(topThree[1])}%</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
+                        </div>
                       </div>
                     </div>
                     <Link to={`/player/${topThree[1].id}`} className="absolute inset-0 rounded-2xl" />
                   </div>
-                  <div className="hidden md:block w-full h-10 bg-gradient-to-b from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 rounded-t-xl shadow-inner text-center pt-1 font-black text-slate-600 dark:text-slate-400">2</div>
                 </div>
               )}
 
               {/* 1st Place */}
               {topThree[0] && (
-                <div className="order-1 md:order-2 flex flex-col items-center">
-                  <div className="relative group w-52 rounded-2xl bg-gradient-to-b from-amber-500/20 to-amber-600/5 dark:from-amber-500/10 dark:to-amber-900/10 border-2 border-amber-500/40 p-6 text-center shadow-xl shadow-amber-500/5 transition-all duration-300 hover:-translate-y-3">
-                    <div className="absolute top-3.5 right-3.5">{getRankIcon(1)}</div>
-                    <Avatar className="h-20 w-20 mx-auto mb-4 border-4 border-amber-400 shadow-lg animate-float">
-                      <AvatarImage src={topThree[0].image} />
-                      <AvatarFallback className="bg-amber-500 text-slate-950 font-bold">{topThree[0].name[0]}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="font-black text-lg text-slate-950 dark:text-white truncate">{topThree[0].name}</h3>
-                    <p className="text-xs text-primary font-bold truncate mb-2">{topThree[0].currentTeam}</p>
-                    {getRankBadge(1)}
-                    <div className="mt-4 pt-3 border-t border-amber-500/20 flex justify-around text-xs">
-                      <div>
-                        <span className="block font-black text-slate-950 dark:text-slate-100">{topThree[0].stats.points}</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
-                      </div>
-                      <div>
-                        <span className="block font-black text-emerald-500">{getWinRate(topThree[0])}%</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
-                      </div>
-                      <div>
-                        <span className="block font-black text-amber-500">{topThree[0].stats.goalsFor}</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">G</span>
+                <div className="flex flex-col">
+                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-amber-500/20 to-amber-600/5 dark:from-amber-500/10 dark:to-amber-900/10 border-2 border-amber-500/40 p-6 text-center shadow-xl shadow-amber-500/5 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div className="absolute top-4 right-4">{getRankIcon(1)}</div>
+                    <div>
+                      <Avatar className="h-20 w-20 mx-auto mb-4 border-4 border-amber-400 shadow-lg">
+                        <AvatarImage src={topThree[0].image} />
+                        <AvatarFallback className="bg-amber-500 text-slate-950 font-bold">{topThree[0].name[0]}</AvatarFallback>
+                      </Avatar>
+                      <h3 className="font-black text-lg text-slate-950 dark:text-white truncate">{topThree[0].name}</h3>
+                      <p className="text-xs text-primary font-bold truncate mb-3">{topThree[0].currentTeam}</p>
+                    </div>
+                    <div>
+                      {getRankBadge(1)}
+                      <div className="mt-4 pt-3 border-t border-amber-500/20 flex justify-around text-xs">
+                        <div>
+                          <span className="block font-black text-slate-950 dark:text-slate-100">{topThree[0].stats.points}</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
+                        </div>
+                        <div>
+                          <span className="block font-black text-emerald-500">{getWinRate(topThree[0])}%</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
+                        </div>
+                        <div>
+                          <span className="block font-black text-amber-500">{topThree[0].stats.goalsFor}</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">G</span>
+                        </div>
                       </div>
                     </div>
                     <Link to={`/player/${topThree[0].id}`} className="absolute inset-0 rounded-2xl" />
                   </div>
-                  <div className="hidden md:block w-full h-16 bg-gradient-to-b from-amber-400 to-amber-500 dark:from-amber-500 dark:to-amber-600 rounded-t-xl shadow-md text-center pt-2 font-black text-amber-950 text-lg">1</div>
                 </div>
               )}
 
               {/* 3rd Place */}
               {topThree[2] && (
-                <div className="order-3 md:order-3 flex flex-col items-center">
-                  <div className="relative group w-44 rounded-2xl glass-card border-amber-700/30 p-5 text-center transition-all duration-300 hover:-translate-y-2">
-                    <div className="absolute top-3 right-3">{getRankIcon(3)}</div>
-                    <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-amber-700 shadow-md">
-                      <AvatarImage src={topThree[2].image} />
-                      <AvatarFallback className="bg-amber-700 text-white font-bold">{topThree[2].name[0]}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="font-extrabold text-slate-900 dark:text-white truncate">{topThree[2].name}</h3>
-                    <p className="text-xs text-primary font-semibold truncate mb-2">{topThree[2].currentTeam}</p>
-                    {getRankBadge(3)}
-                    <div className="mt-3 pt-2.5 border-t border-border flex justify-around text-xs">
-                      <div>
-                        <span className="block font-black text-slate-800 dark:text-slate-200">{topThree[2].stats.points}</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
-                      </div>
-                      <div>
-                        <span className="block font-black text-emerald-500">{getWinRate(topThree[2])}%</span>
-                        <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
+                <div className="flex flex-col">
+                  <div className="relative group flex-1 rounded-2xl glass-card border border-amber-700/30 dark:border-white/5 p-6 text-center transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                    <div className="absolute top-4 right-4">{getRankIcon(3)}</div>
+                    <div>
+                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-amber-700 shadow-md">
+                        <AvatarImage src={topThree[2].image} />
+                        <AvatarFallback className="bg-amber-700 text-white font-bold">{topThree[2].name[0]}</AvatarFallback>
+                      </Avatar>
+                      <h3 className="font-extrabold text-slate-900 dark:text-white truncate">{topThree[2].name}</h3>
+                      <p className="text-xs text-primary font-semibold truncate mb-3">{topThree[2].currentTeam}</p>
+                    </div>
+                    <div>
+                      {getRankBadge(3)}
+                      <div className="mt-4 pt-3 border-t border-border flex justify-around text-xs">
+                        <div>
+                          <span className="block font-black text-slate-800 dark:text-slate-200">{topThree[2].stats.points}</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">PTS</span>
+                        </div>
+                        <div>
+                          <span className="block font-black text-emerald-500">{getWinRate(topThree[2])}%</span>
+                          <span className="text-[10px] text-muted-foreground uppercase font-bold">WIN</span>
+                        </div>
                       </div>
                     </div>
                     <Link to={`/player/${topThree[2].id}`} className="absolute inset-0 rounded-2xl" />
                   </div>
-                  <div className="hidden md:block w-full h-8 bg-gradient-to-b from-amber-700/25 to-amber-700/40 dark:from-amber-900/30 dark:to-amber-950/40 rounded-t-xl shadow-inner text-center pt-0.5 font-black text-amber-800 dark:text-amber-500">3</div>
                 </div>
               )}
             </div>
@@ -191,9 +177,8 @@ const Leaderboard = () => {
           <CardHeader className="bg-gradient-to-r from-slate-900 to-slate-950 p-6 md:p-8 text-white border-b border-slate-800/80">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <CardTitle className="text-2xl font-black flex items-center">
-                  <Shield className="h-6 w-6 text-emerald-400 mr-2" />
-                  Kawerify Leaderboard Rankings
+                <CardTitle className="text-2xl font-black">
+                  Leaderboard Rankings
                 </CardTitle>
                 <CardDescription className="text-slate-400 mt-1">
                   Live scores and game points updated dynamically • {sortedPlayers.length} elite gamers
@@ -251,8 +236,7 @@ const Leaderboard = () => {
                         <h4 className="font-extrabold text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors text-base truncate">
                           {player.name}
                         </h4>
-                        <p className="text-xs text-muted-foreground font-semibold flex items-center mt-0.5 truncate">
-                          <Flame className="h-3.5 w-3.5 text-orange-500 mr-1 flex-shrink-0" />
+                        <p className="text-xs text-muted-foreground font-semibold mt-0.5 truncate">
                           {player.currentTeam}
                         </p>
                       </div>
@@ -321,7 +305,6 @@ const Leaderboard = () => {
                 </h3>
                 <p className="text-xs text-primary font-bold mt-0.5">{sortedPlayers[0]?.currentTeam}</p>
               </div>
-              <Trophy className="h-10 w-10 text-amber-500/30 group-hover:scale-110 transition-transform duration-200" />
             </CardContent>
           </Card>
           
@@ -335,7 +318,6 @@ const Leaderboard = () => {
                 </h3>
                 <p className="text-xs text-muted-foreground mt-0.5">Highest individual score</p>
               </div>
-              <Target className="h-10 w-10 text-emerald-500/30 group-hover:scale-110 transition-transform duration-200" />
             </CardContent>
           </Card>
           
@@ -349,7 +331,6 @@ const Leaderboard = () => {
                 </h3>
                 <p className="text-xs text-muted-foreground mt-0.5">Across all tournament rounds</p>
               </div>
-              <TrendingUp className="h-10 w-10 text-blue-500/30 group-hover:scale-110 transition-transform duration-200" />
             </CardContent>
           </Card>
         </div>

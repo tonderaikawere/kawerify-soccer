@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { User, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Eye, Shield, Flame } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -76,7 +75,6 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
   if (displayPlayers.length === 0) {
     return (
       <div className="text-center py-16 px-4 glass-panel rounded-2xl max-w-md mx-auto">
-        <User className="h-14 w-14 mx-auto mb-4 text-slate-400 dark:text-slate-600 animate-float" />
         <h3 className="text-lg font-black text-slate-800 dark:text-slate-200">No Players Registered</h3>
         <p className="text-slate-500 text-sm mt-1">Players will appear here once registered in the Admin Dashboard.</p>
       </div>
@@ -138,10 +136,9 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                 
                 <div className="flex-1 min-w-0">
                   <CardTitle className="text-lg font-black truncate">{player.name}</CardTitle>
-                  <CardDescription className={`text-sm font-bold flex items-center mt-0.5 truncate ${
+                  <CardDescription className={`text-sm font-bold mt-0.5 truncate ${
                     isPodium ? 'text-white/90' : 'text-primary'
                   }`}>
-                    <Shield className="h-3.5 w-3.5 mr-1 text-emerald-400 flex-shrink-0" />
                     {player.currentTeam}
                   </CardDescription>
                   <div className="flex items-center space-x-2 mt-2 flex-wrap gap-y-1">
@@ -150,8 +147,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     </Badge>
                     {player.stats.cupsWon > 0 && (
                       <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-[10px] font-black border-0 shadow-sm">
-                        <Trophy className="h-3 w-3 mr-1" />
-                        {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
+                        🏆 {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                       </Badge>
                     )}
                   </div>
@@ -171,13 +167,11 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                 <TabsContent value="stats" className="space-y-4 mt-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/10 rounded-xl">
-                      <Trophy className="h-5 w-5 mx-auto mb-1 text-emerald-500" />
                       <p className="text-xl font-black text-emerald-600 dark:text-emerald-400">{player.stats.wins}</p>
                       <p className="text-[10px] text-emerald-600/80 font-bold uppercase tracking-wider">Wins</p>
                     </div>
                     
                     <div className="text-center p-3 bg-blue-500/5 dark:bg-blue-500/10 border border-blue-500/10 rounded-xl">
-                      <Target className="h-5 w-5 mx-auto mb-1 text-blue-500" />
                       <p className="text-xl font-black text-blue-600 dark:text-blue-400">{player.stats.points}</p>
                       <p className="text-[10px] text-blue-600/80 font-bold uppercase tracking-wider">Points</p>
                     </div>
@@ -244,7 +238,6 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center justify-between py-1 border-b border-border/30">
                       <span className="flex items-center text-muted-foreground">
-                        <TrendingUp className="h-3.5 w-3.5 mr-1 text-slate-400" />
                         Avg Goals / Match
                       </span>
                       <span className="font-bold text-slate-800 dark:text-slate-200">
@@ -255,7 +248,6 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     
                     <div className="flex items-center justify-between py-1">
                       <span className="flex items-center text-muted-foreground">
-                        <Award className="h-3.5 w-3.5 mr-1 text-slate-400" />
                         Avg Points / Match
                       </span>
                       <span className="font-bold text-slate-800 dark:text-slate-200">
@@ -270,8 +262,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                 <TabsContent value="history" className="space-y-4 mt-4">
                   <div className="space-y-3">
                     <div>
-                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center">
-                        <History className="h-3.5 w-3.5 mr-1.5" />
+                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2">
                         Clubs
                       </h4>
                       <div className="space-y-1.5">
@@ -289,8 +280,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     </div>
 
                     <div>
-                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center">
-                        <Star className="h-3.5 w-3.5 mr-1.5 text-amber-500" />
+                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2">
                         Badges
                       </h4>
                       <div className="flex flex-wrap gap-1.5">
@@ -321,7 +311,6 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   <div className="mt-4 pt-3 border-t border-border/40">
                     <Link to={`/player/${player.id}`} className="block">
                       <Button className="w-full rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:opacity-95 text-white font-extrabold text-xs">
-                        <Eye className="h-3.5 w-3.5 mr-1.5" />
                         Open Gamer Profile
                       </Button>
                     </Link>

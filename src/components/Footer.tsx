@@ -3,146 +3,153 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-900 to-blue-900 text-white mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4 flex items-center">
-              <Trophy className="h-6 w-6 mr-2 text-yellow-400" />
-              Kawerify Tech Tournaments
+    <footer className="relative mt-auto overflow-hidden bg-slate-950 border-t border-slate-900 text-slate-200">
+      {/* Decorative backdrop glow */}
+      <div className="absolute -top-40 -left-40 h-80 w-80 rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-secondary/10 blur-[120px]" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
+          {/* Brand Column */}
+          <div className="space-y-4">
+            <h3 className="flex items-center text-xl font-black tracking-tight text-white">
+              <Trophy className="mr-2 h-6 w-6 text-amber-400 animate-float" />
+              <span>Kawerify Tournaments</span>
             </h3>
-            <p className="text-gray-300 mb-4">
-              Professional FIFA-style gaming tournament platform for soccer enthusiasts worldwide. 
-              Experience the thrill of competitive gaming with our advanced tournament management system.
+            <p className="text-sm leading-relaxed text-slate-400">
+              An elite gaming hub hosting premier, real-time FIFA & soccer tournaments. Join the community, follow match fixtures, and track the elite leaderboard.
             </p>
-            <div className="flex space-x-4">
-              <div className="animate-bounce">
-                <div className="h-6 w-6 rounded-full bg-white border border-black relative">
-                  <div className="absolute inset-1 rounded-full border border-black"></div>
-                </div>
+            <div className="flex space-x-3 pt-2">
+              <div className="h-6 w-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center hover:border-primary transition-all duration-300">
+                <span className="text-[10px] font-bold text-slate-300 hover:text-white">🎮</span>
               </div>
-              <div className="animate-bounce" style={{ animationDelay: '0.2s' }}>
-                <div className="h-6 w-6 rounded-full bg-white border border-black relative">
-                  <div className="absolute inset-1 rounded-full border border-black"></div>
-                </div>
+              <div className="h-6 w-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center hover:border-primary transition-all duration-300">
+                <span className="text-[10px] font-bold text-slate-300 hover:text-white">⚽</span>
               </div>
-              <div className="animate-bounce" style={{ animationDelay: '0.4s' }}>
-                <div className="h-6 w-6 rounded-full bg-white border border-black relative">
-                  <div className="absolute inset-1 rounded-full border border-black"></div>
-                </div>
+              <div className="h-6 w-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center hover:border-primary transition-all duration-300">
+                <span className="text-[10px] font-bold text-slate-300 hover:text-white">✨</span>
               </div>
             </div>
           </div>
           
-          {/* Contact Information */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 flex items-center">
-              <Phone className="h-5 w-5 mr-2 text-green-400" />
-              Contact Information
+          {/* Contact Column */}
+          <div className="space-y-4">
+            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
+              <Phone className="mr-2 h-4 w-4 text-emerald-400" />
+              Contact Us
             </h3>
-            <div className="space-y-3">
-              <div className="flex items-start text-sm text-gray-300">
-                <MapPin className="h-4 w-4 mr-2 text-blue-400 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p>KoMthombeni, Plot 2 Grampsway</p>
-                  <p>Rangemore, Bulawayo</p>
-                  <p>Zimbabwe</p>
-                </div>
-              </div>
-              <div className="flex items-center text-sm text-gray-300">
-                <Phone className="h-4 w-4 mr-2 text-green-400" />
-                <a href="tel:+263716264988" className="hover:text-white transition-colors">
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li className="flex items-start">
+                <MapPin className="mr-2.5 h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                <span>
+                  KoMthombeni, Plot 2 Grampsway<br />
+                  Rangemore, Bulawayo<br />
+                  Zimbabwe
+                </span>
+              </li>
+              <li className="flex items-center">
+                <Phone className="mr-2.5 h-4 w-4 text-slate-500" />
+                <a href="tel:+263716264988" className="hover:text-white transition-colors duration-200">
                   +263 71 626 4988
                 </a>
-              </div>
-              <div className="flex items-center text-sm text-gray-300">
-                <Mail className="h-4 w-4 mr-2 text-red-400" />
-                <a href="mailto:info@kawerifytech.com" className="hover:text-white transition-colors">
+              </li>
+              <li className="flex items-center">
+                <Mail className="mr-2.5 h-4 w-4 text-slate-500" />
+                <a href="mailto:info@kawerifytech.com" className="hover:text-white transition-colors duration-200">
                   info@kawerifytech.com
                 </a>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
           
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 flex items-center">
-              <Users className="h-5 w-5 mr-2 text-purple-400" />
-              Quick Links
+          {/* Quick Links Column */}
+          <div className="space-y-4">
+            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
+              <Users className="mr-2 h-4 w-4 text-blue-400" />
+              Navigation
             </h3>
-            <div className="space-y-2">
-              <Link to="/" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <Trophy className="h-3 w-3 mr-2 inline" />
-                Leaderboard
-              </Link>
-              <Link to="/fixtures" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <Calendar className="h-3 w-3 mr-2 inline" />
-                Fixtures
-              </Link>
-              <Link to="/players" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <Users className="h-3 w-3 mr-2 inline" />
-                Players
-              </Link>
-              <Link to="/hall-of-fame" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <Award className="h-3 w-3 mr-2 inline" />
-                Hall of Fame
-              </Link>
-              <Link to="/about" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <FileText className="h-3 w-3 mr-2 inline" />
-                About Us
-              </Link>
-            </div>
+            <ul className="space-y-2.5 text-sm text-slate-400">
+              <li>
+                <Link to="/" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <Trophy className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-amber-400 transition-colors" />
+                  Leaderboard
+                </Link>
+              </li>
+              <li>
+                <Link to="/fixtures" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <Calendar className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-blue-400 transition-colors" />
+                  Fixtures
+                </Link>
+              </li>
+              <li>
+                <Link to="/players" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <Users className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-emerald-400 transition-colors" />
+                  Players
+                </Link>
+              </li>
+              <li>
+                <Link to="/hall-of-fame" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <Award className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-amber-400 transition-colors" />
+                  Hall of Fame
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                  About Us
+                </Link>
+              </li>
+            </ul>
           </div>
           
-          {/* Legal & Policies */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 flex items-center">
-              <Shield className="h-5 w-5 mr-2 text-yellow-400" />
-              Legal & Policies
+          {/* Legal Column */}
+          <div className="space-y-4">
+            <h3 className="flex items-center text-base font-bold text-white uppercase tracking-wider">
+              <Shield className="mr-2 h-4 w-4 text-indigo-400" />
+              Legal Policies
             </h3>
-            <div className="space-y-2">
-              <Link to="/privacy-policy" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <Shield className="h-3 w-3 mr-2 inline" />
-                Privacy Policy
-              </Link>
-              <Link to="/terms-conditions" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <FileText className="h-3 w-3 mr-2 inline" />
-                Terms & Conditions
-              </Link>
-              <Link to="/cookie-policy" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <FileText className="h-3 w-3 mr-2 inline" />
-                Cookie Policy
-              </Link>
-              <Link to="/disclaimer" className="block text-sm text-gray-300 hover:text-white transition-colors">
-                <FileText className="h-3 w-3 mr-2 inline" />
-                Disclaimer
-              </Link>
-            </div>
+            <ul className="space-y-2.5 text-sm text-slate-400">
+              <li>
+                <Link to="/privacy-policy" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <Shield className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms-conditions" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/cookie-policy" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/disclaimer" className="group flex items-center hover:text-white transition-colors duration-200">
+                  <FileText className="mr-2 h-3.5 w-3.5 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                  Disclaimer
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         
-        {/* Bottom Section */}
-        <div className="border-t border-gray-700 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-center md:text-left mb-4 md:mb-0">
-              <p className="text-sm text-gray-400">
-                &copy; {new Date().getFullYear()} Kawerify Tech Tournaments. All rights reserved.
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Professional FIFA-style tournament management platform • Powered by Kawerify Tech
-              </p>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="text-xs text-gray-500">
-                Made with ❤️ in Zimbabwe
-              </div>
-              <div className="flex space-x-2">
-                <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
-                <div className="h-2 w-2 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <div className="h-2 w-2 bg-red-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-              </div>
+        {/* Bottom Bar */}
+        <div className="mt-12 border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+          <div className="text-center sm:text-left space-y-1">
+            <p>&copy; {new Date().getFullYear()} Kawerify Tournaments. All rights reserved.</p>
+            <p>Made with passion for competitive soccer gaming.</p>
+          </div>
+          
+          <div className="mt-4 sm:mt-0 flex items-center space-x-3">
+            <span>Made with ❤️ in Zimbabwe</span>
+            <div className="flex space-x-1.5">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse-glow" />
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse-glow" style={{ animationDelay: '0.4s' }} />
+              <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse-glow" style={{ animationDelay: '0.8s' }} />
             </div>
           </div>
         </div>

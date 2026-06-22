@@ -16,8 +16,8 @@ body {
 
 /* Custom modern scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -26,7 +26,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.01);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -44,18 +44,18 @@ body {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px) rotate(2deg);
+    transform: translateY(-6px) rotate(1deg);
   }
 }
 
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 0.6;
-    box-shadow: 0 0 15px 2px hsla(var(--primary) / 0.2);
+    box-shadow: 0 0 15px 2px hsla(var(--primary) / 0.15);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 25px 5px hsla(var(--primary) / 0.4);
+    box-shadow: 0 0 25px 6px hsla(var(--primary) / 0.3);
   }
 }
 
@@ -68,60 +68,75 @@ body {
   }
 }
 
+@keyframes radial-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.35;
+  }
+}
+
 /* Animation utilities */
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s infinite ease-in-out;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+.animate-radial-pulse {
+  animation: radial-pulse 6s infinite ease-in-out;
 }
 
 /* Card glassmorphism & gradients */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .dark .glass-panel {
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  background: rgba(10, 15, 30, 0.7);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .glass-card {
-  background: rgba(30, 41, 59, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.15);
-  border-color: hsla(var(--primary) / 0.4);
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+  border-color: hsla(var(--primary) / 0.5);
 }
 
 .dark .glass-card:hover {
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
-  border-color: hsla(var(--primary) / 0.3);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+  border-color: hsla(var(--primary) / 0.4);
 }
 
 /* Theme Definition */
 @layer base {
   :root {
-    --background: 210 20% 98%;
+    --background: 210 25% 97%;
     --foreground: 224 71% 4%;
 
     --card: 0 0% 100%;
@@ -131,7 +146,7 @@ body {
     --popover-foreground: 224 71% 4%;
 
     /* Vivid emerald green for primary branding (soccer thematic) */
-    --primary: 142 72% 29%;
+    --primary: 142 76% 36%;
     --primary-foreground: 0 0% 98%;
 
     /* Rich deep violet/blue for contrast/secondary branding */
@@ -141,7 +156,7 @@ body {
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 142 72% 29%;
+    --accent: 142 76% 36%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -149,59 +164,42 @@ body {
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 142 72% 29%;
+    --ring: 142 76% 36%;
 
-    --radius: 1rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 1.25rem;
   }
 
   .dark {
-    --background: 222 47% 7%;
+    /* Immersive PlayStation Dark Navy/Obsidian base background */
+    --background: 222 47% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 10%;
+    --card: 222 47% 7%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 8%;
+    --popover: 222 47% 5%;
     --popover-foreground: 210 40% 98%;
 
     /* Electric emerald green for dark mode primary */
-    --primary: 142 76% 40%;
+    --primary: 142 78% 45%;
     --primary-foreground: 0 0% 98%;
 
     /* Neon royal blue/purple for secondary */
-    --secondary: 224 89% 60%;
+    --secondary: 224 95% 62%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 217 33% 16%;
+    --muted: 217 33% 12%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 142 76% 40%;
+    --accent: 142 78% 45%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 16%;
-    --input: 217 33% 16%;
-    --ring: 142 76% 40%;
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 217 33% 12%;
+    --input: 217 33% 12%;
+    --ring: 142 78% 45%;
   }
 }
 
@@ -215,32 +213,104 @@ body {
   }
 }
 
-/* FIFA FUT Card Layouts */
-.fut-card {
+/* Premium FUT Card Overhaul Styles */
+.fut-card-wrapper {
   position: relative;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 100%;
+  aspect-ratio: 1 / 1.45;
+  perspective: 1000px;
 }
 
-.dark .fut-card {
-  border-color: #334155;
+.fut-card-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0f1626;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.15, 0.85, 0.33, 1.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.fut-card-gold {
-  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
-  border-color: #f59e0b;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+.fut-card-body:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.fut-card-silver {
-  background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
-  border-color: #94a3b8;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+/* Gold FUT Card details */
+.fut-gold-card {
+  background: linear-gradient(135deg, #181c25 0%, #1e1e1e 100%);
+  border: 2px solid #dfac3d;
 }
 
-.fut-card-bronze {
-  background: linear-gradient(135deg, #b45309 0%, #78350f 100%);
-  border-color: #b45309;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+.fut-gold-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(223, 172, 61, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Silver FUT Card details */
+.fut-silver-card {
+  background: linear-gradient(135deg, #181c25 0%, #1c202a 100%);
+  border: 2px solid #a1a5b5;
+}
+
+.fut-silver-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(161, 165, 181, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Bronze FUT Card details */
+.fut-bronze-card {
+  background: linear-gradient(135deg, #181c25 0%, #1e1e1e 100%);
+  border: 2px solid #b7764d;
+}
+
+.fut-bronze-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(183, 118, 77, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* FUT Shine shine effect */
+.fut-shine-overlay {
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 60%
+  );
+  transform: rotate(-10deg);
+  transition: all 0.6s ease;
+  pointer-events: none;
+}
+
+.fut-card-body:hover .fut-shine-overlay {
+  top: -50%;
+  left: -50%;
 }

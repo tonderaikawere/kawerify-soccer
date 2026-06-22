@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { User, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Eye } from "lucide-react";
+import { User, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Eye, Shield, Flame } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,10 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
   };
 
   const getPlayerRank = (player: Player) => {
-    const sortedPlayers = [...players].sort((a, b) => b.stats.points - a.stats.points);
+    const sortedPlayers = [...players].sort((a, b) => {
+      if (b.stats.points !== a.stats.points) return b.stats.points - a.stats.points;
+      return (b.stats.goalsFor - b.stats.goalsAgainst) - (a.stats.goalsFor - a.stats.goalsAgainst);
+    });
     return sortedPlayers.findIndex(p => p.id === player.id) + 1;
   };
 
@@ -61,10 +64,10 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
   const getFormColor = (result: string) => {
     switch (result) {
-      case 'W': return 'bg-green-500';
-      case 'L': return 'bg-red-500';
-      case 'D': return 'bg-yellow-500';
-      default: return 'bg-gray-500';
+      case 'W': return 'bg-emerald-500 text-white';
+      case 'L': return 'bg-rose-500 text-white';
+      case 'D': return 'bg-amber-500 text-slate-950';
+      default: return 'bg-slate-500 text-white';
     }
   };
 
@@ -72,62 +75,81 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
   if (displayPlayers.length === 0) {
     return (
-      <div className="text-center p-8">
-        <User className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-        <h3 className="text-xl font-semibold mb-2">No Players Found</h3>
-        <p className="text-muted-foreground">Players will appear here once they're added to the tournament.</p>
+      <div className="text-center py-16 px-4 glass-panel rounded-2xl max-w-md mx-auto">
+        <User className="h-14 w-14 mx-auto mb-4 text-slate-400 dark:text-slate-600 animate-float" />
+        <h3 className="text-lg font-black text-slate-800 dark:text-slate-200">No Players Registered</h3>
+        <p className="text-slate-500 text-sm mt-1">Players will appear here once registered in the Admin Dashboard.</p>
       </div>
     );
   }
 
+  // Get FUT card gradient theme based on rank
+  const getFUTTheme = (rank: number) => {
+    if (rank === 1) return "from-amber-400/90 to-yellow-600/90 border-amber-400 shadow-amber-500/10";
+    if (rank === 2) return "from-slate-300 to-slate-500 border-slate-300 shadow-slate-400/10";
+    if (rank === 3) return "from-amber-600 to-amber-800 border-amber-700 shadow-amber-800/10";
+    return "from-slate-900 to-slate-950 border-slate-800 shadow-black/40";
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {displayPlayers.map((player) => {
         const winRate = getWinRate(player);
         const goalDiff = getGoalDifference(player);
         const rank = getPlayerRank(player);
         const recentForm = getRecentForm(player.id);
+        const futTheme = getFUTTheme(rank);
+        const isPodium = rank <= 3;
 
         return (
-          <Card key={player.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-2 hover:border-primary/50">
-            <CardHeader className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 relative overflow-hidden">
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+          <Card 
+            key={player.id} 
+            className="overflow-hidden glass-card rounded-2xl border border-white/20 dark:border-white/5 transition-all duration-300 hover:-translate-y-2 group"
+          >
+            {/* FUT-style header with background gradient */}
+            <CardHeader className={`relative overflow-hidden p-6 text-white bg-gradient-to-br ${
+              isPodium ? futTheme : "from-slate-900 via-slate-950 to-slate-900 border-b border-slate-800"
+            }`}>
+              {/* Overlay pattern */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 to-transparent opacity-60" />
               
               <div className="relative z-10 flex items-center space-x-4">
                 <div className="relative">
-                  <Avatar className="h-20 w-20 border-4 border-white shadow-lg">
+                  <Avatar className={`h-20 w-20 border-4 shadow-xl ${
+                    rank === 1 ? 'border-amber-400' :
+                    rank === 2 ? 'border-slate-300' :
+                    rank === 3 ? 'border-amber-700' : 'border-slate-800'
+                  }`}>
                     <AvatarImage src={player.image} alt={player.name} />
-                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl font-bold">
+                    <AvatarFallback className="bg-gradient-to-br from-primary to-emerald-600 text-white text-2xl font-black">
                       {player.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   
-                  {/* Rank badge */}
-                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full h-8 w-8 flex items-center justify-center text-sm font-bold shadow-lg">
+                  {/* Rank bubble */}
+                  <div className={`absolute -top-2.5 -right-2.5 rounded-full h-8 w-8 flex items-center justify-center text-xs font-black shadow-lg border ${
+                    rank === 1 ? 'bg-amber-400 text-amber-950 border-amber-500' :
+                    rank === 2 ? 'bg-slate-300 text-slate-950 border-slate-400' :
+                    rank === 3 ? 'bg-amber-800 text-white border-amber-900' : 'bg-slate-900 text-slate-200 border-slate-800'
+                  }`}>
                     #{rank}
-                  </div>
-                  
-                  {/* Animated soccer ball */}
-                  <div className="absolute -bottom-1 -left-1 animate-bounce">
-                    <div className="h-4 w-4 rounded-full bg-white border border-black">
-                      <div className="absolute inset-0.5 rounded-full border border-black"></div>
-                    </div>
                   </div>
                 </div>
                 
-                <div className="flex-1">
-                  <CardTitle className="text-xl font-bold text-foreground">{player.name}</CardTitle>
-                  <CardDescription className="text-lg font-medium text-primary">
+                <div className="flex-1 min-w-0">
+                  <CardTitle className="text-lg font-black truncate">{player.name}</CardTitle>
+                  <CardDescription className={`text-sm font-bold flex items-center mt-0.5 truncate ${
+                    isPodium ? 'text-white/90' : 'text-primary'
+                  }`}>
+                    <Shield className="h-3.5 w-3.5 mr-1 text-emerald-400 flex-shrink-0" />
                     {player.currentTeam}
                   </CardDescription>
-                  <div className="flex items-center space-x-2 mt-2">
-                    <Badge variant="secondary" className="text-xs">
-                      <Calendar className="h-3 w-3 mr-1" />
+                  <div className="flex items-center space-x-2 mt-2 flex-wrap gap-y-1">
+                    <Badge variant="secondary" className="text-[10px] font-bold bg-white/20 border-0 text-white">
                       Joined {new Date(player.joinDate).getFullYear()}
                     </Badge>
                     {player.stats.cupsWon > 0 && (
-                      <Badge className="bg-yellow-500 text-black text-xs">
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-[10px] font-black border-0 shadow-sm">
                         <Trophy className="h-3 w-3 mr-1" />
                         {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                       </Badge>
@@ -139,105 +161,104 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
             <CardContent className="p-6">
               <Tabs defaultValue="stats" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="stats">Stats</TabsTrigger>
-                  <TabsTrigger value="form">Form</TabsTrigger>
-                  <TabsTrigger value="history">History</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-muted/60 p-1 rounded-xl">
+                  <TabsTrigger value="stats" className="rounded-lg text-xs font-bold">Stats</TabsTrigger>
+                  <TabsTrigger value="form" className="rounded-lg text-xs font-bold">Form</TabsTrigger>
+                  <TabsTrigger value="history" className="rounded-lg text-xs font-bold">Career</TabsTrigger>
                 </TabsList>
 
+                {/* Statistics Tab */}
                 <TabsContent value="stats" className="space-y-4 mt-4">
-                  {/* Key Stats */}
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900 rounded-lg">
-                      <Trophy className="h-6 w-6 mx-auto mb-1 text-green-600" />
-                      <p className="text-2xl font-bold text-green-700 dark:text-green-400">{player.stats.wins}</p>
-                      <p className="text-xs text-green-600 dark:text-green-500">Wins</p>
+                    <div className="text-center p-3 bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/10 rounded-xl">
+                      <Trophy className="h-5 w-5 mx-auto mb-1 text-emerald-500" />
+                      <p className="text-xl font-black text-emerald-600 dark:text-emerald-400">{player.stats.wins}</p>
+                      <p className="text-[10px] text-emerald-600/80 font-bold uppercase tracking-wider">Wins</p>
                     </div>
                     
-                    <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-lg">
-                      <Target className="h-6 w-6 mx-auto mb-1 text-blue-600" />
-                      <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">{player.stats.points}</p>
-                      <p className="text-xs text-blue-600 dark:text-blue-500">Points</p>
+                    <div className="text-center p-3 bg-blue-500/5 dark:bg-blue-500/10 border border-blue-500/10 rounded-xl">
+                      <Target className="h-5 w-5 mx-auto mb-1 text-blue-500" />
+                      <p className="text-xl font-black text-blue-600 dark:text-blue-400">{player.stats.points}</p>
+                      <p className="text-[10px] text-blue-600/80 font-bold uppercase tracking-wider">Points</p>
                     </div>
                   </div>
 
-                  {/* Win Rate Progress */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="font-medium">Win Rate</span>
-                      <span className="font-bold text-primary">{winRate}%</span>
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between text-xs font-semibold">
+                      <span className="text-muted-foreground">Win Rate</span>
+                      <span className="text-primary font-black">{winRate}%</span>
                     </div>
-                    <Progress value={winRate} className="h-2" />
+                    <Progress value={winRate} className="h-1.5 bg-muted" />
                   </div>
 
-                  {/* Detailed Stats */}
-                  <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs border-t border-border/40 pt-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Matches:</span>
-                      <span className="font-medium">{player.stats.matchesPlayed}</span>
+                      <span className="font-extrabold text-slate-800 dark:text-slate-200">{player.stats.matchesPlayed}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Losses:</span>
-                      <span className="font-medium">{player.stats.losses}</span>
+                      <span className="font-extrabold text-slate-800 dark:text-slate-200">{player.stats.losses}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Goals For:</span>
-                      <span className="font-medium text-green-600">{player.stats.goalsFor}</span>
+                      <span className="font-extrabold text-emerald-500">{player.stats.goalsFor}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Goals Against:</span>
-                      <span className="font-medium text-red-600">{player.stats.goalsAgainst}</span>
+                      <span className="font-extrabold text-rose-500">{player.stats.goalsAgainst}</span>
                     </div>
-                    <div className="flex justify-between col-span-2 pt-2 border-t">
-                      <span className="font-medium">Goal Difference:</span>
-                      <span className={`font-bold ${goalDiff >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {goalDiff >= 0 ? '+' : ''}{goalDiff}
+                    <div className="flex justify-between col-span-2 pt-2 border-t border-border/40 mt-1">
+                      <span className="font-extrabold text-slate-700 dark:text-slate-300">Goal Diff:</span>
+                      <span className={`font-black ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                        {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                       </span>
                     </div>
                   </div>
                 </TabsContent>
 
+                {/* Form Tab */}
                 <TabsContent value="form" className="space-y-4 mt-4">
-                  <div className="text-center">
-                    <h4 className="font-semibold mb-3">Recent Form (Last 5 matches)</h4>
-                    <div className="flex justify-center space-x-1">
+                  <div className="text-center bg-muted/20 p-4 rounded-xl border border-border/30">
+                    <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-3">Recent Matches</h4>
+                    <div className="flex justify-center space-x-1.5">
                       {recentForm.length > 0 ? recentForm.map((result, index) => (
                         <div
                           key={index}
-                          className={`h-8 w-8 rounded-full ${getFormColor(result)} flex items-center justify-center text-white font-bold text-sm`}
+                          className={`h-7 w-7 rounded-lg ${getFormColor(result)} flex items-center justify-center font-extrabold text-xs shadow-sm`}
+                          title={result === 'W' ? 'Win' : result === 'L' ? 'Loss' : 'Draw'}
                         >
                           {result}
                         </div>
                       )) : (
-                        <p className="text-muted-foreground text-sm">No recent matches</p>
+                        <p className="text-muted-foreground text-xs py-2">No matches logged yet</p>
                       )}
                     </div>
                     {recentForm.length > 0 && (
-                      <p className="text-xs text-muted-foreground mt-2">
-                        Most recent on the right
+                      <p className="text-[10px] text-muted-foreground mt-2.5">
+                        Latest games on the right
                       </p>
                     )}
                   </div>
 
-                  {/* Performance Metrics */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm flex items-center">
-                        <TrendingUp className="h-4 w-4 mr-1 text-blue-500" />
-                        Average Goals/Match
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center justify-between py-1 border-b border-border/30">
+                      <span className="flex items-center text-muted-foreground">
+                        <TrendingUp className="h-3.5 w-3.5 mr-1 text-slate-400" />
+                        Avg Goals / Match
                       </span>
-                      <span className="font-bold">
+                      <span className="font-bold text-slate-800 dark:text-slate-200">
                         {player.stats.matchesPlayed > 0 ? 
                           (player.stats.goalsFor / player.stats.matchesPlayed).toFixed(1) : '0.0'}
                       </span>
                     </div>
                     
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm flex items-center">
-                        <Award className="h-4 w-4 mr-1 text-yellow-500" />
-                        Points/Match
+                    <div className="flex items-center justify-between py-1">
+                      <span className="flex items-center text-muted-foreground">
+                        <Award className="h-3.5 w-3.5 mr-1 text-slate-400" />
+                        Avg Points / Match
                       </span>
-                      <span className="font-bold">
+                      <span className="font-bold text-slate-800 dark:text-slate-200">
                         {player.stats.matchesPlayed > 0 ? 
                           (player.stats.points / player.stats.matchesPlayed).toFixed(1) : '0.0'}
                       </span>
@@ -245,73 +266,63 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   </div>
                 </TabsContent>
 
+                {/* Career history & Achievements Tab */}
                 <TabsContent value="history" className="space-y-4 mt-4">
-                  <div>
-                    <h4 className="font-semibold mb-3 flex items-center">
-                      <History className="h-4 w-4 mr-2" />
-                      Team History
-                    </h4>
-                    <div className="space-y-2">
-                      {player.teamHistory.map((team, index) => (
-                        <div key={index} className="flex items-center justify-between p-2 bg-muted/50 rounded">
-                          <span className="text-sm font-medium">{team}</span>
-                          <div className="flex items-center">
+                  <div className="space-y-3">
+                    <div>
+                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center">
+                        <History className="h-3.5 w-3.5 mr-1.5" />
+                        Clubs
+                      </h4>
+                      <div className="space-y-1.5">
+                        {player.teamHistory.slice(0, 2).map((team, index) => (
+                          <div key={index} className="flex items-center justify-between p-2 bg-muted/40 rounded-xl text-xs">
+                            <span className="font-bold truncate text-slate-800 dark:text-slate-200">{team}</span>
                             {index === 0 && (
-                              <Badge variant="default" className="text-xs">
+                              <Badge className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/10 border-0 text-[10px] font-bold px-1.5 py-0">
                                 Current
                               </Badge>
                             )}
-                            {index === player.teamHistory.length - 1 && index > 0 && (
-                              <Badge variant="outline" className="text-xs">
-                                First Team
-                              </Badge>
-                            )}
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-2 flex items-center">
+                        <Star className="h-3.5 w-3.5 mr-1.5 text-amber-500" />
+                        Badges
+                      </h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {player.stats.cupsWon > 0 && (
+                          <Badge className="bg-amber-500/10 text-amber-500 hover:bg-amber-500/10 border-0 text-[9px] font-black uppercase">
+                            🏆 Champ
+                          </Badge>
+                        )}
+                        {winRate >= 65 && (
+                          <Badge className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/10 border-0 text-[9px] font-black uppercase">
+                            🔥 Elite
+                          </Badge>
+                        )}
+                        {goalDiff >= 15 && (
+                          <Badge className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/10 border-0 text-[9px] font-black uppercase">
+                            🎯 Striker
+                          </Badge>
+                        )}
+                        {player.stats.matchesPlayed >= 20 && (
+                          <Badge className="bg-purple-500/10 text-purple-500 hover:bg-purple-500/10 border-0 text-[9px] font-black uppercase">
+                            🛡️ Vet
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Achievements */}
-                  <div>
-                    <h4 className="font-semibold mb-3 flex items-center">
-                      <Star className="h-4 w-4 mr-2 text-yellow-500" />
-                      Achievements
-                    </h4>
-                    <div className="space-y-2">
-                      {player.stats.cupsWon > 0 && (
-                        <Badge className="bg-yellow-500 text-black mr-2 mb-2">
-                          <Trophy className="h-3 w-3 mr-1" />
-                          {player.stats.cupsWon} Tournament Winner{player.stats.cupsWon > 1 ? 's' : ''}
-                        </Badge>
-                      )}
-                      {winRate >= 70 && (
-                        <Badge className="bg-green-500 text-white mr-2 mb-2">
-                          <TrendingUp className="h-3 w-3 mr-1" />
-                          High Win Rate ({winRate}%)
-                        </Badge>
-                      )}
-                      {goalDiff >= 20 && (
-                        <Badge className="bg-blue-500 text-white mr-2 mb-2">
-                          <Target className="h-3 w-3 mr-1" />
-                          Goal Machine (+{goalDiff})
-                        </Badge>
-                      )}
-                      {player.stats.matchesPlayed >= 50 && (
-                        <Badge className="bg-purple-500 text-white mr-2 mb-2">
-                          <Award className="h-3 w-3 mr-1" />
-                          Veteran Player
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* View Profile Button */}
-                  <div className="mt-6 pt-4 border-t border-border">
-                    <Link to={`/player/${player.id}`}>
-                      <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
-                        <Eye className="h-4 w-4 mr-2" />
-                        View Full Profile
+                  <div className="mt-4 pt-3 border-t border-border/40">
+                    <Link to={`/player/${player.id}`} className="block">
+                      <Button className="w-full rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:opacity-95 text-white font-extrabold text-xs">
+                        <Eye className="h-3.5 w-3.5 mr-1.5" />
+                        Open Gamer Profile
                       </Button>
                     </Link>
                   </div>

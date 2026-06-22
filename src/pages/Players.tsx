@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Trophy } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlayerProfile from "@/components/PlayerProfile";
 import { initializeDefaultData } from "@/lib/storage";
+import { Trophy, Users } from "lucide-react";
 
 const Players = () => {
   useEffect(() => {
@@ -11,42 +11,36 @@ const Players = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#070b13] transition-colors duration-300">
       <Navbar />
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-12">
-          {/* FIFA-style header */}
-          <div className="mb-8 text-center">
-            <div className="inline-flex items-center justify-center mb-4">
-              <div className="animate-pulse">
-                <Trophy className="h-12 w-12 text-yellow-500 mr-3" />
-              </div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Player Profiles
-              </h1>
-              <div className="animate-pulse">
-                <Trophy className="h-12 w-12 text-yellow-500 ml-3" />
-              </div>
+        <div className="container mx-auto px-6 py-12 max-w-7xl">
+          
+          {/* FIFA-style Header Banner */}
+          <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
+            <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-2xl mb-2 animate-float">
+              <Users className="h-8 w-8 text-primary" />
             </div>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Meet the elite soccer gamers competing in Kawerify Tech World Cup
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+              Gamer <span className="bg-gradient-to-r from-primary via-emerald-500 to-teal-500 bg-clip-text text-transparent">Profiles</span>
+            </h1>
+            <p className="text-base md:text-lg text-slate-500 font-medium">
+              Meet the elite esports soccer competitors battling for championship glory in the Kawerify Tech Cup.
             </p>
             
-            {/* Animated soccer balls */}
-            <div className="flex justify-center space-x-8 mt-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="animate-bounce" style={{ animationDelay: `${i * 0.2}s` }}>
-                  <div className="h-6 w-6 rounded-full bg-white border-2 border-black relative">
-                    <div className="absolute inset-1 rounded-full border border-black"></div>
-                    <div className="absolute top-0.5 left-0.5 h-1 w-1 bg-black rounded-full"></div>
-                    <div className="absolute bottom-0.5 right-0.5 h-1 w-1 bg-black rounded-full"></div>
-                  </div>
-                </div>
-              ))}
+            {/* Soft decorative divider */}
+            <div className="flex justify-center items-center space-x-2 pt-2">
+              <div className="h-1 w-8 bg-primary/30 rounded-full" />
+              <Trophy className="h-4 w-4 text-amber-500 opacity-60" />
+              <div className="h-1 w-8 bg-primary/30 rounded-full" />
             </div>
           </div>
 
-          <PlayerProfile showAll={true} />
+          {/* FUT Grid */}
+          <div className="mt-8">
+            <PlayerProfile showAll={true} />
+          </div>
+
         </div>
       </main>
       <Footer />

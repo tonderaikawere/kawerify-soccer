@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Camera, Video, Upload, Download } from "lucide-react";
+import { ArrowLeft, Trophy, Target, Calendar, TrendingUp, Award, Star, History, Camera, Eye, Trash2, Edit2, Shield, Flame, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -31,7 +30,6 @@ const PlayerDetail = () => {
     if (foundPlayer) {
       setPlayer(foundPlayer);
       setEditForm(foundPlayer);
-      // Load player's media files from localStorage
       const playerMedia = localStorage.getItem(`player_media_${playerId}`);
       if (playerMedia) {
         setMediaFiles(JSON.parse(playerMedia));
@@ -43,13 +41,15 @@ const PlayerDetail = () => {
 
   if (!player) {
     return (
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#070b13]">
         <Navbar />
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Player Not Found</h1>
-            <Link to="/players">
-              <Button>Back to Players</Button>
+        <main className="flex-1 flex items-center justify-center py-20 px-4">
+          <div className="text-center space-y-4 max-w-md bg-white dark:bg-slate-900 p-8 rounded-2xl border shadow-lg">
+            <Trophy className="h-12 w-12 text-rose-500 mx-auto animate-float" />
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white">Player Profile Not Found</h1>
+            <p className="text-slate-500 text-sm">The gamer profile you are trying to view does not exist or has been removed.</p>
+            <Link to="/players" className="block pt-2">
+              <Button className="rounded-xl w-full">Back to Catalog</Button>
             </Link>
           </div>
         </main>
@@ -87,10 +87,10 @@ const PlayerDetail = () => {
 
   const getFormColor = (result: string) => {
     switch (result) {
-      case 'W': return 'bg-green-500';
-      case 'L': return 'bg-red-500';
-      case 'D': return 'bg-yellow-500';
-      default: return 'bg-gray-500';
+      case 'W': return 'bg-emerald-500 text-white';
+      case 'L': return 'bg-rose-500 text-white';
+      case 'D': return 'bg-amber-500 text-slate-950';
+      default: return 'bg-slate-500 text-white';
     }
   };
 
@@ -100,8 +100,8 @@ const PlayerDetail = () => {
       setPlayer({ ...player, ...editForm });
       setIsEditing(false);
       toast({
-        title: "Profile Updated",
-        description: "Player profile has been updated successfully",
+        title: "Profile Saved",
+        description: "Gamer profile details have been saved successfully.",
       });
     }
   };
@@ -117,8 +117,8 @@ const PlayerDetail = () => {
           setMediaFiles(newMediaFiles);
           localStorage.setItem(`player_media_${playerId}`, JSON.stringify(newMediaFiles));
           toast({
-            title: "Media Uploaded",
-            description: `${file.name} has been uploaded successfully`,
+            title: "File Uploaded",
+            description: `${file.name} successfully added to gamer gallery.`,
           });
         };
         reader.readAsDataURL(file);
@@ -129,236 +129,231 @@ const PlayerDetail = () => {
   const recentForm = getRecentForm();
   const winRate = getWinRate();
   const goalDiff = getGoalDifference();
+  const rank = allPlayers.sort((a, b) => b.stats.points - a.stats.points).findIndex(p => p.id === player.id) + 1;
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#070b13] transition-colors duration-300">
       <Navbar />
-      <main className="flex-1">
-        <div className="container mx-auto px-4 py-8">
-          {/* Back Button */}
+      <main className="flex-1 pb-16">
+        <div className="container mx-auto px-6 py-8 max-w-6xl">
+          
+          {/* Back Action */}
           <div className="mb-6">
             <Link to="/players">
-              <Button variant="outline" className="mb-4">
-                <ArrowLeft className="h-4 w-4 mr-2" />
+              <Button variant="ghost" className="rounded-full text-xs font-bold pl-2.5 pr-4 border border-border bg-background hover:bg-muted transition-colors">
+                <ArrowLeft className="h-4 w-4 mr-1.5" />
                 Back to Players
               </Button>
             </Link>
           </div>
 
-          {/* Player Header */}
-          <Card className="mb-8 overflow-hidden border-2 border-primary/20 shadow-xl">
-            <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white relative">
-              <div className="absolute inset-0 bg-black/20"></div>
-              <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center space-x-6">
-                  <div className="relative">
-                    <Avatar className="h-32 w-32 border-4 border-white shadow-2xl">
-                      <AvatarImage src={player.image} alt={player.name} />
-                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-4xl font-bold">
-                        {player.name.split(' ').map(n => n[0]).join('')}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full h-12 w-12 flex items-center justify-center text-lg font-bold shadow-lg">
-                      #{allPlayers.sort((a, b) => b.stats.points - a.stats.points).findIndex(p => p.id === player.id) + 1}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h1 className="text-4xl font-bold mb-2">{player.name}</h1>
-                    <p className="text-2xl text-blue-100 font-semibold mb-2">{player.currentTeam}</p>
-                    <div className="flex items-center space-x-4">
-                      <Badge className="bg-white/20 text-white border-white/30">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        Joined {new Date(player.joinDate).getFullYear()}
-                      </Badge>
-                      {player.stats.cupsWon > 0 && (
-                        <Badge className="bg-yellow-500 text-black">
-                          <Trophy className="h-4 w-4 mr-1" />
-                          {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
-                        </Badge>
-                      )}
-                    </div>
+          {/* Gamer Header Banner */}
+          <Card className="mb-8 overflow-hidden glass-panel border-white/20 dark:border-white/5 shadow-xl rounded-2xl relative">
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 h-40 w-40 rounded-full bg-secondary/10 blur-3xl" />
+            
+            <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+              <div className="flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
+                <div className="relative">
+                  <Avatar className="h-28 w-28 border-4 border-slate-900 dark:border-slate-800 shadow-2xl">
+                    <AvatarImage src={player.image} alt={player.name} />
+                    <AvatarFallback className="bg-gradient-to-br from-primary to-emerald-600 text-white text-3xl font-black">
+                      {player.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 font-black rounded-full h-10 w-10 flex items-center justify-center text-sm shadow-md border border-white/30">
+                    #{rank}
                   </div>
                 </div>
                 
-                <div className="text-right">
-                  <Button
-                    onClick={() => setIsEditing(!isEditing)}
-                    variant="secondary"
-                    className="bg-white/20 hover:bg-white/30"
-                  >
-                    {isEditing ? 'Cancel' : 'Edit Profile'}
-                  </Button>
+                <div className="space-y-1.5">
+                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{player.name}</h1>
+                  <p className="text-lg text-primary font-bold flex items-center justify-center md:justify-start">
+                    <Shield className="h-4 w-4 text-emerald-500 mr-1.5" />
+                    {player.currentTeam}
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1.5">
+                    <Badge variant="outline" className="text-xs bg-background/50 border-border text-muted-foreground">
+                      <Calendar className="h-3.5 w-3.5 mr-1" />
+                      Joined {new Date(player.joinDate).getFullYear()}
+                    </Badge>
+                    {player.stats.cupsWon > 0 && (
+                      <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-xs font-black border-0">
+                        <Trophy className="h-3.5 w-3.5 mr-1" />
+                        {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
               </div>
               
-              {/* Animated background */}
-              <div className="absolute top-4 right-4 animate-spin">
-                <div className="h-16 w-16 rounded-full bg-white border-4 border-black relative opacity-20">
-                  <div className="absolute inset-2 rounded-full border-2 border-black"></div>
-                </div>
+              <div className="flex space-x-2">
+                <Button
+                  onClick={() => setIsEditing(!isEditing)}
+                  variant="outline"
+                  className="rounded-xl font-bold text-xs"
+                >
+                  <Edit2 className="h-3.5 w-3.5 mr-1.5" />
+                  {isEditing ? 'Cancel' : 'Edit Profile'}
+                </Button>
               </div>
-            </CardHeader>
+            </div>
           </Card>
 
-          {/* Edit Form */}
+          {/* Edit Form Card */}
           {isEditing && (
-            <Card className="mb-8">
+            <Card className="mb-8 rounded-2xl glass-card">
               <CardHeader>
-                <CardTitle>Edit Profile</CardTitle>
+                <CardTitle className="text-lg font-black uppercase tracking-wider">Modify Gamer Info</CardTitle>
+                <CardDescription>Update your displayed name, current FIFA team, and avatar image details.</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label>Player Name</Label>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="player-name">Player Name</Label>
                     <Input
+                      id="player-name"
                       value={editForm.name || ''}
                       onChange={(e) => setEditForm({...editForm, name: e.target.value})}
+                      className="rounded-xl"
                     />
                   </div>
-                  <div>
-                    <Label>Current Team</Label>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="player-team">Current FIFA Team</Label>
                     <Input
+                      id="player-team"
                       value={editForm.currentTeam || ''}
                       onChange={(e) => setEditForm({...editForm, currentTeam: e.target.value})}
+                      className="rounded-xl"
                     />
                   </div>
-                  <div>
-                    <Label>Profile Image URL</Label>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="player-img">Profile Image URL</Label>
                     <Input
+                      id="player-img"
                       value={editForm.image || ''}
                       onChange={(e) => setEditForm({...editForm, image: e.target.value})}
-                      placeholder="Enter image URL or upload below"
-                    />
-                  </div>
-                  <div>
-                    <Label>Upload Profile Image</Label>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onload = (event) => {
-                            setEditForm({...editForm, image: event.target?.result as string});
-                          };
-                          reader.readAsDataURL(file);
-                        }
-                      }}
+                      placeholder="Optional URL link"
+                      className="rounded-xl"
                     />
                   </div>
                 </div>
-                <div className="mt-4 flex space-x-2">
-                  <Button onClick={handleSaveProfile}>Save Changes</Button>
-                  <Button variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
+                <div className="flex space-x-2 pt-2">
+                  <Button onClick={handleSaveProfile} className="rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600">
+                    <Check className="h-4 w-4 mr-1.5" />
+                    Save Settings
+                  </Button>
+                  <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl font-bold">
+                    Discard
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           )}
 
-          {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
-              <CardContent className="p-6 text-center">
-                <Trophy className="h-12 w-12 mx-auto mb-3 text-green-200" />
-                <p className="text-3xl font-bold">{player.stats.wins}</p>
-                <p className="text-green-100">Wins</p>
+          {/* Core Gamer Stats dashboard grids */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
+              <CardContent className="p-5 space-y-1">
+                <Trophy className="h-8 w-8 text-emerald-500 mx-auto" />
+                <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.wins}</p>
+                <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Wins</p>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-              <CardContent className="p-6 text-center">
-                <Target className="h-12 w-12 mx-auto mb-3 text-blue-200" />
-                <p className="text-3xl font-bold">{player.stats.points}</p>
-                <p className="text-blue-100">Points</p>
+            <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
+              <CardContent className="p-5 space-y-1">
+                <Target className="h-8 w-8 text-blue-500 mx-auto" />
+                <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.points}</p>
+                <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Points</p>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
-              <CardContent className="p-6 text-center">
-                <TrendingUp className="h-12 w-12 mx-auto mb-3 text-purple-200" />
-                <p className="text-3xl font-bold">{winRate}%</p>
-                <p className="text-purple-100">Win Rate</p>
+            <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
+              <CardContent className="p-5 space-y-1">
+                <TrendingUp className="h-8 w-8 text-indigo-500 mx-auto" />
+                <p className="text-3xl font-black text-slate-900 dark:text-white">{winRate}%</p>
+                <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Win Rate</p>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
-              <CardContent className="p-6 text-center">
-                <Award className="h-12 w-12 mx-auto mb-3 text-yellow-200" />
-                <p className={`text-3xl font-bold ${goalDiff >= 0 ? 'text-white' : 'text-yellow-200'}`}>
-                  {goalDiff >= 0 ? '+' : ''}{goalDiff}
+            <Card className="glass-card border-slate-200/50 dark:border-slate-800 text-center">
+              <CardContent className="p-5 space-y-1">
+                <Award className="h-8 w-8 text-amber-500 mx-auto" />
+                <p className={`text-3xl font-black ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                  {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                 </p>
-                <p className="text-yellow-100">Goal Diff</p>
+                <p className="text-xs text-muted-foreground uppercase font-black tracking-wider">Goal Diff</p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Detailed Tabs */}
+          {/* Detailed Statistics Tabs */}
           <Tabs defaultValue="stats" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="stats">Statistics</TabsTrigger>
-              <TabsTrigger value="matches">Match History</TabsTrigger>
-              <TabsTrigger value="form">Recent Form</TabsTrigger>
-              <TabsTrigger value="history">Team History</TabsTrigger>
-              <TabsTrigger value="media">Media Gallery</TabsTrigger>
+            <TabsList className="flex flex-wrap md:grid w-full grid-cols-5 bg-muted/60 p-1 rounded-2xl h-auto gap-1">
+              <TabsTrigger value="stats" className="rounded-xl text-xs font-black flex-1 py-2.5">Stats Dashboard</TabsTrigger>
+              <TabsTrigger value="matches" className="rounded-xl text-xs font-black flex-1 py-2.5">Matches History</TabsTrigger>
+              <TabsTrigger value="form" className="rounded-xl text-xs font-black flex-1 py-2.5">Form Tracker</TabsTrigger>
+              <TabsTrigger value="history" className="rounded-xl text-xs font-black flex-1 py-2.5">Club History</TabsTrigger>
+              <TabsTrigger value="media" className="rounded-xl text-xs font-black flex-1 py-2.5">Media Gallery</TabsTrigger>
             </TabsList>
 
+            {/* Stats Dashboard Content */}
             <TabsContent value="stats" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+                <Card className="glass-panel border-white/10 shadow-md">
                   <CardHeader>
-                    <CardTitle>Performance Metrics</CardTitle>
+                    <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">Tournament Record</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span>Matches Played</span>
-                      <span className="font-bold text-2xl">{player.stats.matchesPlayed}</span>
+                  <CardContent className="space-y-4 text-sm">
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Matches Played</span>
+                      <span className="font-extrabold text-lg text-slate-800 dark:text-slate-100">{player.stats.matchesPlayed}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Wins</span>
-                      <span className="font-bold text-2xl text-green-600">{player.stats.wins}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Matches Won</span>
+                      <span className="font-extrabold text-lg text-emerald-500">{player.stats.wins}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Losses</span>
-                      <span className="font-bold text-2xl text-red-600">{player.stats.losses}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Matches Lost</span>
+                      <span className="font-extrabold text-lg text-rose-500">{player.stats.losses}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Draws</span>
-                      <span className="font-bold text-2xl text-yellow-600">{player.stats.draws}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Matches Drawn</span>
+                      <span className="font-extrabold text-lg text-amber-500">{player.stats.draws}</span>
                     </div>
-                    <div className="pt-4 border-t">
-                      <div className="flex justify-between items-center mb-2">
-                        <span>Win Rate</span>
-                        <span className="font-bold text-primary">{winRate}%</span>
+                    <div className="pt-4">
+                      <div className="flex justify-between items-center mb-2 text-xs font-bold">
+                        <span className="text-slate-600 dark:text-slate-400 uppercase tracking-wider">Win Rate Percentage</span>
+                        <span className="text-primary font-black text-base">{winRate}%</span>
                       </div>
-                      <Progress value={winRate} className="h-3" />
+                      <Progress value={winRate} className="h-2.5 bg-muted" />
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="glass-panel border-white/10 shadow-md">
                   <CardHeader>
-                    <CardTitle>Goal Statistics</CardTitle>
+                    <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">Goal Statistics</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span>Goals For</span>
-                      <span className="font-bold text-2xl text-green-600">{player.stats.goalsFor}</span>
+                  <CardContent className="space-y-4 text-sm">
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Goals Scored (GF)</span>
+                      <span className="font-extrabold text-lg text-emerald-500">{player.stats.goalsFor}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Goals Against</span>
-                      <span className="font-bold text-2xl text-red-600">{player.stats.goalsAgainst}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Goals Conceded (GA)</span>
+                      <span className="font-extrabold text-lg text-rose-500">{player.stats.goalsAgainst}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Goal Difference</span>
-                      <span className={`font-bold text-2xl ${goalDiff >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {goalDiff >= 0 ? '+' : ''}{goalDiff}
+                    <div className="flex justify-between items-center py-2 border-b border-border/40">
+                      <span className="text-muted-foreground font-medium">Goal Difference (GD)</span>
+                      <span className={`font-black text-lg ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                        {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span>Avg Goals/Match</span>
-                      <span className="font-bold text-2xl">
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-muted-foreground font-medium">Avg Goals scored / match</span>
+                      <span className="font-extrabold text-lg text-slate-800 dark:text-slate-100">
                         {player.stats.matchesPlayed > 0 ? (player.stats.goalsFor / player.stats.matchesPlayed).toFixed(1) : '0.0'}
                       </span>
                     </div>
@@ -367,98 +362,105 @@ const PlayerDetail = () => {
               </div>
             </TabsContent>
 
+            {/* Matches List Content */}
             <TabsContent value="matches" className="space-y-4">
-              <Card>
+              <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle>Match History ({playerMatches.length} matches)</CardTitle>
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">Match History ({playerMatches.length} games)</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {playerMatches
-                      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                      .map((match) => {
-                        const isPlayer1 = match.player1Id === player.id;
-                        const opponent = allPlayers.find(p => p.id === (isPlayer1 ? match.player2Id : match.player1Id));
-                        const playerScore = isPlayer1 ? match.player1Score : match.player2Score;
-                        const opponentScore = isPlayer1 ? match.player2Score : match.player1Score;
-                        const result = playerScore > opponentScore ? 'W' : playerScore < opponentScore ? 'L' : 'D';
-                        
-                        return (
-                          <div key={match.id} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                            <div className="flex items-center space-x-4">
-                              <div className={`h-8 w-8 rounded-full ${getFormColor(result)} flex items-center justify-center text-white font-bold`}>
-                                {result}
+                <CardContent className="p-0">
+                  <div className="divide-y divide-border/60">
+                    {playerMatches.length === 0 ? (
+                      <div className="text-center py-8 text-slate-500 text-sm">No matches logged yet for this player.</div>
+                    ) : (
+                      playerMatches
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                        .map((match) => {
+                          const isPlayer1 = match.player1Id === player.id;
+                          const opponent = allPlayers.find(p => p.id === (isPlayer1 ? match.player2Id : match.player1Id));
+                          const playerScore = isPlayer1 ? match.player1Score : match.player2Score;
+                          const opponentScore = isPlayer1 ? match.player2Score : match.player1Score;
+                          const result = playerScore > opponentScore ? 'W' : playerScore < opponentScore ? 'L' : 'D';
+                          
+                          return (
+                            <div key={match.id} className="flex items-center justify-between p-4 px-6 transition-colors duration-200 hover:bg-slate-500/5 dark:hover:bg-slate-100/5">
+                              <div className="flex items-center space-x-4">
+                                <div className={`h-8 w-8 rounded-lg ${getFormColor(result)} flex items-center justify-center font-extrabold text-xs shadow-sm`}>
+                                  {result}
+                                </div>
+                                <div>
+                                  <p className="font-extrabold text-slate-900 dark:text-white">vs {opponent?.name || 'Unknown Opponent'}</p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {new Date(match.date).toLocaleDateString()} • {match.round}
+                                  </p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="font-semibold">vs {opponent?.name || 'Unknown'}</p>
-                                <p className="text-sm text-muted-foreground">
-                                  {new Date(match.date).toLocaleDateString()} • {match.round}
-                                </p>
+                              <div className="text-right">
+                                <p className="font-black text-lg text-slate-900 dark:text-white">{playerScore} - {opponentScore}</p>
+                                <Badge variant="outline" className="text-[10px] uppercase font-bold border-border/80 text-muted-foreground mt-0.5">
+                                  {match.matchType}
+                                </Badge>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className="font-bold text-lg">{playerScore} - {opponentScore}</p>
-                              <Badge variant="outline" className="text-xs">
-                                {match.matchType}
-                              </Badge>
-                            </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })
+                    )}
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
+            {/* Form Tracker Content */}
             <TabsContent value="form" className="space-y-6">
-              <Card>
+              <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle>Recent Form (Last 10 matches)</CardTitle>
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">Form Tracker (Last 10 Matches)</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex justify-center space-x-2 mb-6">
+                <CardContent className="p-6">
+                  <div className="flex flex-wrap justify-center gap-2 mb-6">
                     {recentForm.length > 0 ? recentForm.map((result, index) => (
                       <div
                         key={index}
-                        className={`h-12 w-12 rounded-full ${getFormColor(result)} flex items-center justify-center text-white font-bold text-lg`}
+                        className={`h-11 w-11 rounded-xl ${getFormColor(result)} flex items-center justify-center font-black text-sm shadow-md`}
                       >
                         {result}
                       </div>
                     )) : (
-                      <p className="text-muted-foreground">No recent matches</p>
+                      <p className="text-slate-500 text-sm py-4">No match forms logged recently</p>
                     )}
                   </div>
                   {recentForm.length > 0 && (
-                    <p className="text-center text-sm text-muted-foreground">
-                      Most recent on the right • W = Win, L = Loss, D = Draw
+                    <p className="text-center text-xs text-muted-foreground font-semibold">
+                      Latest logged match is on the right • W = Win, L = Loss, D = Draw
                     </p>
                   )}
                 </CardContent>
               </Card>
             </TabsContent>
 
+            {/* Club History Content */}
             <TabsContent value="history" className="space-y-6">
-              <Card>
+              <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <History className="h-5 w-5 mr-2" />
-                    Team History
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
+                    <History className="h-5 w-5 mr-2 text-indigo-400" />
+                    FIFA Club History
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-6">
                   <div className="space-y-3">
                     {player.teamHistory.map((team, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                        <span className="font-medium">{team}</span>
+                      <div key={index} className="flex items-center justify-between p-3.5 bg-muted/40 rounded-xl border border-border/40 text-sm">
+                        <span className="font-extrabold text-slate-800 dark:text-slate-200">{team}</span>
                         <div className="flex items-center space-x-2">
                           {index === 0 && (
-                            <Badge className="bg-green-500 text-white">
-                              Current Team
+                            <Badge className="bg-emerald-500 text-white font-bold border-0 text-[10px] uppercase">
+                              Active Team
                             </Badge>
                           )}
                           {index === player.teamHistory.length - 1 && index > 0 && (
-                            <Badge variant="outline">
-                              First Team
+                            <Badge variant="outline" className="text-[10px] uppercase font-semibold text-muted-foreground border-border/80">
+                              First Club
                             </Badge>
                           )}
                         </div>
@@ -469,57 +471,69 @@ const PlayerDetail = () => {
               </Card>
             </TabsContent>
 
+            {/* Media Gallery Content */}
             <TabsContent value="media" className="space-y-6">
-              <Card>
+              <Card className="glass-panel border-white/10 shadow-md">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Camera className="h-5 w-5 mr-2" />
-                    Media Gallery
+                  <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center">
+                    <Camera className="h-5 w-5 mr-2 text-indigo-400" />
+                    Gamer Media Showcase
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="mb-6">
-                    <Label htmlFor="media-upload" className="block mb-2">Upload Images/Videos</Label>
+                <CardContent className="p-6 space-y-6">
+                  {/* File Upload zone */}
+                  <div className="p-6 border-2 border-dashed border-border/80 rounded-2xl bg-muted/10 text-center hover:bg-muted/20 transition-colors">
+                    <Label htmlFor="media-upload" className="cursor-pointer space-y-2">
+                      <div className="h-10 w-10 bg-slate-200 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto text-muted-foreground">
+                        📷
+                      </div>
+                      <span className="block font-black text-sm text-slate-700 dark:text-slate-300">Upload Image / Video clips</span>
+                      <span className="block text-xs text-slate-500">Add highlight screenshots or goal replays here</span>
+                    </Label>
                     <Input
                       id="media-upload"
                       type="file"
                       multiple
                       accept="image/*,video/*"
                       onChange={handleFileUpload}
-                      className="mb-2"
+                      className="hidden"
                     />
-                    <p className="text-sm text-muted-foreground">
-                      Supports: JPG, PNG, GIF, MP4, WebM, and more
-                    </p>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Grid Showcase */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {mediaFiles.map((file, index) => (
-                      <div key={index} className="relative group">
+                      <div key={index} className="relative group overflow-hidden rounded-xl border bg-slate-950/80 shadow-md aspect-video flex items-center justify-center">
                         {file.startsWith('data:video') ? (
                           <video
                             src={file}
                             controls
-                            className="w-full h-48 object-cover rounded-lg"
+                            className="w-full h-full object-cover"
                           />
                         ) : (
                           <img
                             src={file}
-                            alt={`Media ${index + 1}`}
-                            className="w-full h-48 object-cover rounded-lg"
+                            alt={`Media highlight #${index + 1}`}
+                            className="w-full h-full object-cover"
                           />
                         )}
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <Button
                             size="sm"
-                            variant="secondary"
+                            variant="destructive"
                             onClick={() => {
                               const newFiles = mediaFiles.filter((_, i) => i !== index);
                               setMediaFiles(newFiles);
                               localStorage.setItem(`player_media_${playerId}`, JSON.stringify(newFiles));
+                              toast({
+                                title: "Item Removed",
+                                description: "The media file was removed from the gallery.",
+                              });
                             }}
+                            className="rounded-xl font-bold text-xs"
                           >
-                            Remove
+                            <Trash2 className="h-3.5 w-3.5 mr-1" />
+                            Delete
                           </Button>
                         </div>
                       </div>
@@ -528,14 +542,15 @@ const PlayerDetail = () => {
                   
                   {mediaFiles.length === 0 && (
                     <div className="text-center py-12">
-                      <Camera className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <p className="text-muted-foreground">No media files uploaded yet</p>
+                      <Camera className="h-12 w-12 mx-auto mb-3 text-muted-foreground animate-float" />
+                      <p className="text-slate-500 text-sm">No highlights uploaded for this gamer yet.</p>
                     </div>
                   )}
                 </CardContent>
               </Card>
             </TabsContent>
           </Tabs>
+
         </div>
       </main>
       <Footer />

@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AdminDashboard from "@/components/AdminDashboard";
 import { TournamentScheduler } from "@/lib/tournamentScheduler";
+import { Lock } from "lucide-react";
 import { 
   loadPlayers, 
   loadMatches, 
@@ -268,23 +269,23 @@ const Admin = () => {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen flex items-center justify-center bg-[#070b13] px-4 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center bg-[#070b13] bg-stadium-grid px-4 relative overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
           
-          <Card className="w-full max-w-md glass-panel border-white/10 shadow-2xl relative z-10">
+          <Card className="w-full max-w-md bg-slate-900/60 dark:bg-slate-950/45 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-2xl relative z-10 rounded-2xl">
             <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-black uppercase tracking-wider text-slate-900 dark:text-white flex items-center justify-center gap-2">
-                🔑 Control Room
+              <CardTitle className="text-2xl font-black uppercase tracking-wider text-white flex items-center justify-center gap-2">
+                <Lock className="h-5 w-5 text-primary animate-pulse" /> Control Room
               </CardTitle>
-              <CardDescription className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 mt-1">
+              <CardDescription className="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-1">
                 Kawerify Tech Cup Live Admin Panel
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-4">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="username">Username</Label>
+                  <Label htmlFor="username" className="text-slate-300">Username</Label>
                   <Input
                     id="username"
                     type="text"
@@ -296,7 +297,7 @@ const Admin = () => {
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="text-slate-300">Password</Label>
                   <Input
                     id="password"
                     type="password"
@@ -346,45 +347,45 @@ const Admin = () => {
       
       {/* Edit Player Modal */}
       {editingPlayer && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <Card className="glass-panel border-white/10 shadow-2xl max-w-md w-full mx-4">
-            <CardHeader>
-              <CardTitle className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50">
+          <Card className="w-full max-w-md bg-slate-900/95 dark:bg-slate-950/90 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-2xl relative z-10 rounded-2xl mx-4">
+            <CardHeader className="border-b border-white/5 pb-4">
+              <CardTitle className="text-lg font-black uppercase tracking-wider text-white">
                 Edit Player Information
               </CardTitle>
-              <CardDescription>Modify name or team assignment.</CardDescription>
+              <CardDescription className="text-slate-400 text-xs">Modify name or team assignment.</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-5">
               <form onSubmit={handleUpdatePlayer} className="space-y-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="editName">Player Name</Label>
+                  <Label htmlFor="editName" className="text-slate-300 text-xs font-bold uppercase tracking-wider">Player Name</Label>
                   <Input
                     id="editName"
                     value={editingPlayer.name}
                     onChange={(e) => setEditingPlayer({...editingPlayer, name: e.target.value})}
                     required
-                    className="rounded-xl"
+                    className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="editTeam">Current Team</Label>
+                  <Label htmlFor="editTeam" className="text-slate-300 text-xs font-bold uppercase tracking-wider">Current Team</Label>
                   <Input
                     id="editTeam"
                     value={editingPlayer.currentTeam}
                     onChange={(e) => setEditingPlayer({...editingPlayer, currentTeam: e.target.value})}
                     required
-                    className="rounded-xl"
+                    className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
-                <div className="flex space-x-2 pt-2">
-                  <Button type="submit" className="flex-1 rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600">
+                <div className="flex space-x-3 pt-3 border-t border-white/5">
+                  <Button type="submit" className="flex-1 rounded-xl font-bold bg-gradient-to-r from-primary to-emerald-600 text-white hover:opacity-95 shadow-md shadow-primary/20 transition-all hover:scale-[1.02] duration-200">
                     Save Changes
                   </Button>
                   <Button 
                     type="button" 
                     variant="outline" 
                     onClick={() => setEditingPlayer(null)}
-                    className="flex-1 rounded-xl font-bold"
+                    className="flex-1 rounded-xl font-bold border-white/10 bg-slate-950/30 text-slate-300 hover:bg-slate-800 hover:text-white"
                   >
                     Cancel
                   </Button>

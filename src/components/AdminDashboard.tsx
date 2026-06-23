@@ -32,8 +32,8 @@ interface AdminDashboardProps {
   players: Player[];
   matches: Match[];
   tournament: Tournament;
-  newPlayer: { name: string; currentTeam: string; image: string };
-  setNewPlayer: (player: { name: string; currentTeam: string; image: string }) => void;
+  newPlayer: { name: string; currentTeam: string; image: string; playstyle: string; excuse: string };
+  setNewPlayer: (player: { name: string; currentTeam: string; image: string; playstyle: string; excuse: string }) => void;
   newMatch: {
     player1Id: string;
     player2Id: string;
@@ -273,7 +273,7 @@ const AdminDashboard = ({
                         id="reg-name"
                         value={newPlayer.name}
                         onChange={(e) => setNewPlayer({...newPlayer, name: e.target.value})}
-                        placeholder="e.g. John Doe"
+                        placeholder="e.g. Tonde 'T-Rex' Kawere"
                         className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 placeholder:text-slate-500 focus-visible:ring-primary focus-visible:border-primary"
                         required
                       />
@@ -296,6 +296,32 @@ const AdminDashboard = ({
                         value={newPlayer.image}
                         onChange={(e) => setNewPlayer({...newPlayer, image: e.target.value})}
                         placeholder="Optional URL link"
+                        className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 placeholder:text-slate-500 focus-visible:ring-primary focus-visible:border-primary"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-slate-300 text-xs font-bold uppercase tracking-wider">Playstyle</Label>
+                      <Select value={newPlayer.playstyle} onValueChange={(value) => setNewPlayer({...newPlayer, playstyle: value})}>
+                        <SelectTrigger className="rounded-xl border-white/10 bg-slate-950/40 text-slate-200">
+                          <SelectValue placeholder="Select Playstyle" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900 border-white/10 text-slate-200">
+                          <SelectItem value="Tiki-Taka Master" className="focus:bg-slate-800 focus:text-white">Tiki-Taka Master</SelectItem>
+                          <SelectItem value="Counter-Attack Speedster" className="focus:bg-slate-800 focus:text-white">Counter-Attack Speedster</SelectItem>
+                          <SelectItem value="Park-The-Bus Defender" className="focus:bg-slate-800 focus:text-white">Park-The-Bus Defender</SelectItem>
+                          <SelectItem value="Skill-Move Spammer" className="focus:bg-slate-800 focus:text-white">Skill-Move Spammer</SelectItem>
+                          <SelectItem value="Cross-and-Header Specialist" className="focus:bg-slate-800 focus:text-white">Cross-and-Header Specialist</SelectItem>
+                          <SelectItem value="Standard Controller Masher" className="focus:bg-slate-800 focus:text-white">Standard Controller Masher</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-1.5 md:col-span-2">
+                      <Label htmlFor="reg-excuse" className="text-slate-300 text-xs font-bold uppercase tracking-wider">Excuse of Choice</Label>
+                      <Input
+                        id="reg-excuse"
+                        value={newPlayer.excuse}
+                        onChange={(e) => setNewPlayer({...newPlayer, excuse: e.target.value})}
+                        placeholder="e.g. 'Drifting stick' or 'My buttons got stuck'"
                         className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 placeholder:text-slate-500 focus-visible:ring-primary focus-visible:border-primary"
                       />
                     </div>
@@ -329,6 +355,10 @@ const AdminDashboard = ({
                           </Button>
                         </div>
                         <p className="text-xs text-primary font-bold">{player.currentTeam}</p>
+                        <div className="text-[10px] text-slate-400 space-y-0.5 mt-1 border-t border-white/5 pt-1">
+                          <p>Style: <span className="text-slate-200">{player.playstyle || "Standard Controller Masher"}</span></p>
+                          <p>Excuse: <span className="text-slate-300 italic">"{player.excuse || "Drifting stick"}"</span></p>
+                        </div>
                         <div className="flex justify-between items-center text-[10px] uppercase font-bold text-slate-400 pt-2.5 border-t border-white/5">
                           <span>Points: {player.stats.points}</span>
                           <span>{player.stats.wins}W - {player.stats.losses}L</span>

@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { loadPlayers, loadMatches, updatePlayer, type Player, type Match } from "@/lib/storage";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const PlayerDetail = () => {
   const { playerId } = useParams<{ playerId: string }>();
@@ -183,13 +184,19 @@ const PlayerDetail = () => {
                   </p>
                   <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1.5">
                     <Badge variant="outline" className="text-xs bg-slate-950/40 border-white/10 text-slate-300 uppercase font-black tracking-wider">
-                      Joined {new Date(player.joinDate).getFullYear()}
+                      Joined {player.teamHistory && player.teamHistory[0] ? new Date(player.teamHistory[0].startDate).getFullYear() : 2024}
                     </Badge>
                     {player.stats.cupsWon > 0 && (
                       <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 text-xs font-black border-0 uppercase">
                         🏆 {player.stats.cupsWon} Cup{player.stats.cupsWon > 1 ? 's' : ''}
                       </Badge>
                     )}
+                    <Badge className="bg-slate-950/40 border border-white/10 text-slate-300 text-xs font-black uppercase">
+                      🎮 Style: {player.playstyle || "Standard Controller Masher"}
+                    </Badge>
+                    <Badge className="bg-slate-950/40 border border-white/10 text-slate-300 text-xs font-black italic">
+                      💬 Excuse: "{player.excuse || "Drifting stick"}"
+                    </Badge>
                   </div>
                 </div>
               </div>
@@ -216,31 +223,57 @@ const PlayerDetail = () => {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-1.5">
-                    <Label htmlFor="player-name">Player Name</Label>
+                    <Label htmlFor="player-name" className="text-slate-300">Player Name</Label>
                     <Input
                       id="player-name"
                       value={editForm.name || ''}
                       onChange={(e) => setEditForm({...editForm, name: e.target.value})}
-                      className="rounded-xl"
+                      className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="player-team">Current FIFA Team</Label>
+                    <Label htmlFor="player-team" className="text-slate-300">Current FIFA Team</Label>
                     <Input
                       id="player-team"
                       value={editForm.currentTeam || ''}
                       onChange={(e) => setEditForm({...editForm, currentTeam: e.target.value})}
-                      className="rounded-xl"
+                      className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="player-img">Profile Image URL</Label>
+                    <Label htmlFor="player-img" className="text-slate-300">Profile Image URL</Label>
                     <Input
                       id="player-img"
                       value={editForm.image || ''}
                       onChange={(e) => setEditForm({...editForm, image: e.target.value})}
                       placeholder="Optional URL link"
-                      className="rounded-xl"
+                      className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-slate-300">Playstyle</Label>
+                    <Select value={editForm.playstyle || ""} onValueChange={(value) => setEditForm({...editForm, playstyle: value})}>
+                      <SelectTrigger className="rounded-xl border-white/10 bg-slate-950/40 text-slate-200">
+                        <SelectValue placeholder="Select Playstyle" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-slate-900 border-white/10 text-slate-200">
+                        <SelectItem value="Tiki-Taka Master" className="focus:bg-slate-800 focus:text-white">Tiki-Taka Master</SelectItem>
+                        <SelectItem value="Counter-Attack Speedster" className="focus:bg-slate-800 focus:text-white">Counter-Attack Speedster</SelectItem>
+                        <SelectItem value="Park-The-Bus Defender" className="focus:bg-slate-800 focus:text-white">Park-The-Bus Defender</SelectItem>
+                        <SelectItem value="Skill-Move Spammer" className="focus:bg-slate-800 focus:text-white">Skill-Move Spammer</SelectItem>
+                        <SelectItem value="Cross-and-Header Specialist" className="focus:bg-slate-800 focus:text-white">Cross-and-Header Specialist</SelectItem>
+                        <SelectItem value="Standard Controller Masher" className="focus:bg-slate-800 focus:text-white">Standard Controller Masher</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-1.5 md:col-span-2">
+                    <Label htmlFor="player-excuse" className="text-slate-300">Excuse of Choice</Label>
+                    <Input
+                      id="player-excuse"
+                      value={editForm.excuse || ''}
+                      onChange={(e) => setEditForm({...editForm, excuse: e.target.value})}
+                      placeholder="e.g. Drifting analog stick"
+                      className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100"
                     />
                   </div>
                 </div>

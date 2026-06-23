@@ -187,6 +187,18 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
             {/* Bottom Tabs Details */}
             <CardContent className="p-6">
+              {/* Playstyle & Excuse banner */}
+              <div className="mb-4 p-2.5 rounded-xl bg-slate-950/40 border border-white/5 text-[10px] text-slate-400 flex items-center justify-between">
+                <div>
+                  <span className="text-[8px] text-slate-500 font-black uppercase block tracking-wider leading-none mb-1">Playstyle</span>
+                  <span className="text-slate-200 font-extrabold">{player.playstyle || "Standard Controller Masher"}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[8px] text-slate-500 font-black uppercase block tracking-wider leading-none mb-1">Favorite Excuse</span>
+                  <span className="text-slate-300 italic">"{player.excuse || "Drifting stick"}"</span>
+                </div>
+              </div>
+
               <Tabs defaultValue="stats" className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-slate-950/60 p-1 rounded-xl">
                   <TabsTrigger value="stats" className="rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Stats</TabsTrigger>

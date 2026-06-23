@@ -38,6 +38,8 @@ export interface Player {
     groupPosition: number;
     groupMatchesPlayed: number;
   };
+  playstyle?: string;
+  excuse?: string;
 }
 
 export interface Match {

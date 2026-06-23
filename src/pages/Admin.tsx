@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import AdminDashboard from "@/components/AdminDashboard";
 import { TournamentScheduler } from "@/lib/tournamentScheduler";
 import { Lock } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   loadPlayers, 
   loadMatches, 
@@ -39,7 +40,9 @@ const Admin = () => {
   const [newPlayer, setNewPlayer] = useState({
     name: "",
     currentTeam: "",
-    image: ""
+    image: "",
+    playstyle: "",
+    excuse: ""
   });
 
   // New match form state
@@ -106,6 +109,8 @@ const Admin = () => {
       ],
       media: [],
       image: newPlayer.image,
+      playstyle: newPlayer.playstyle || "Standard Controller Masher",
+      excuse: newPlayer.excuse || "Drifting analog stick",
       stats: {
         matchesPlayed: 0,
         wins: 0,
@@ -119,7 +124,7 @@ const Admin = () => {
       }
     });
 
-    setNewPlayer({ name: "", currentTeam: "", image: "" });
+    setNewPlayer({ name: "", currentTeam: "", image: "", playstyle: "", excuse: "" });
     refreshData();
     
     toast({
@@ -374,6 +379,32 @@ const Admin = () => {
                     value={editingPlayer.currentTeam}
                     onChange={(e) => setEditingPlayer({...editingPlayer, currentTeam: e.target.value})}
                     required
+                    className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 focus-visible:ring-primary focus-visible:border-primary"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="editPlaystyle" className="text-slate-300 text-xs font-bold uppercase tracking-wider">Playstyle</Label>
+                  <Select value={editingPlayer.playstyle || ""} onValueChange={(value) => setEditingPlayer({...editingPlayer, playstyle: value})}>
+                    <SelectTrigger className="rounded-xl border-white/10 bg-slate-950/40 text-slate-200">
+                      <SelectValue placeholder="Select Playstyle" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-900 border-white/10 text-slate-200">
+                      <SelectItem value="Tiki-Taka Master" className="focus:bg-slate-800 focus:text-white">Tiki-Taka Master</SelectItem>
+                      <SelectItem value="Counter-Attack Speedster" className="focus:bg-slate-800 focus:text-white">Counter-Attack Speedster</SelectItem>
+                      <SelectItem value="Park-The-Bus Defender" className="focus:bg-slate-800 focus:text-white">Park-The-Bus Defender</SelectItem>
+                      <SelectItem value="Skill-Move Spammer" className="focus:bg-slate-800 focus:text-white">Skill-Move Spammer</SelectItem>
+                      <SelectItem value="Cross-and-Header Specialist" className="focus:bg-slate-800 focus:text-white">Cross-and-Header Specialist</SelectItem>
+                      <SelectItem value="Standard Controller Masher" className="focus:bg-slate-800 focus:text-white">Standard Controller Masher</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="editExcuse" className="text-slate-300 text-xs font-bold uppercase tracking-wider">Excuse of Choice</Label>
+                  <Input
+                    id="editExcuse"
+                    value={editingPlayer.excuse || ""}
+                    onChange={(e) => setEditingPlayer({...editingPlayer, excuse: e.target.value})}
+                    placeholder="e.g. Drifting analog stick"
                     className="rounded-xl border-white/10 bg-slate-950/40 text-slate-100 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>

@@ -23,31 +23,31 @@ const About = () => {
     {
       name: "Mr T Sibanda",
       role: "Founder & CEO",
-      description: "Visionary leader driving innovation in competitive gaming.",
+      description: "FIFA Style: Tiki-taka master. Built this platform so players would stop lying about their local win streaks.",
       avatar: "TS"
     },
     {
       name: "M D Mthombeni",
       role: "Director",
-      description: "Strategic director overseeing platform development and operations.",
+      description: "FIFA Style: 4-3-3 counter-attack. Keeps the server infrastructure running and the snack bar fully stocked.",
       avatar: "MM"
     },
     {
       name: "Mr Panashe",
       role: "Vice Director",
-      description: "Vice director managing technical excellence and user experience.",
+      description: "FIFA Style: Skill-move spammer. Oversees tournament fixtures and claims he's never lost a match fair-and-square.",
       avatar: "MP"
     },
     {
       name: "Matsi T",
       role: "Entertainment Director",
-      description: "Entertainment specialist creating engaging gaming experiences.",
+      description: "FIFA Style: Pure chaos. Manages the hype, plays the post-match tracks, and laughs at the rage-quits.",
       avatar: "MT"
     },
     {
       name: "Tsepo",
       role: "Game Tester",
-      description: "Quality assurance expert ensuring flawless gaming experience.",
+      description: "FIFA Style: Park the bus. Tests layout designs, audits statistics, and blames network lag for every loss.",
       avatar: "TP"
     }
   ];
@@ -73,41 +73,39 @@ const About = () => {
           <PageHeader
             title="About"
             highlightedTitle="Kawerify"
-            subtitle="Pioneering the future of competitive soccer gaming with professional tournament management solutions."
+            subtitle="Keeping the local FIFA and EA Sports scene alive in Bulawayo, one sweaty controller showdown at a time."
           />
 
           {/* Our Story */}
           <div className="mb-16">
-            <Card className="overflow-hidden bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl relative">
+            <Card className="overflow-hidden bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl relative">
               <div className="absolute top-0 right-0 -mr-16 -mt-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
               <CardHeader className="bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-955 p-6 md:p-8 text-white border-b border-white/5">
                 <CardTitle className="text-2xl font-black uppercase tracking-wider flex items-center gap-3">
-                  <Heart className="h-6 w-6 text-red-500 fill-red-500 animate-pulse" /> Our Story
+                  <Heart className="h-6 w-6 text-red-500 fill-red-500 animate-pulse" /> Our Story: Heart & Controllers
                 </CardTitle>
                 <CardDescription className="text-slate-400 text-xs font-semibold uppercase tracking-wider mt-1">
-                  From passion to professional platform
+                  From living room arguments to Bulawayo's ultimate tournament
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8 text-sm font-medium text-slate-300 leading-relaxed space-y-6">
                 <p>
-                  Kawerify Tech Tournaments was born from a simple passion: bringing the excitement and 
-                  professionalism of FIFA World Cup tournaments to the gaming community. Based in the 
-                  heart of Zimbabwe, we recognized the need for a comprehensive, user-friendly platform 
-                  that could manage complex tournament structures while maintaining the thrill of competitive gaming.
+                  Kawerify Soccer League started where all great rivalries begin: a crowded living room in Bulawayo, 
+                  slightly drifting controllers, and heated arguments about who actually plays the best FIFA. Located 
+                  at KoMthombeni (Plot 2 Grampsway, Rangemore), we were just a group of friends who spent our weekends 
+                  shouting at the TV screen, eating snacks, and disputing player ratings.
                 </p>
                 
                 <p>
-                  Our journey began with a vision to create more than just a tournament tracker. We wanted 
-                  to build a complete ecosystem where soccer gaming enthusiasts could compete, track their 
-                  progress, celebrate achievements, and be part of a vibrant community. Every feature, from 
-                  our FIFA-style animations to our comprehensive statistics system, has been crafted with 
-                  the user experience at its core.
+                  As the matches got more competitive and claims of being 'the pad king of Bulawayo' got louder, 
+                  we realized we needed a way to prove who the real champion was. Scribbling brackets on pieces of 
+                  paper wasn't cutting it anymore. So, we built Kawerify Soccer Cup—our custom digital tournament tracking system.
                 </p>
                 
                 <p>
-                  Today, Kawerify Tech Tournaments stands as a testament to innovation in sports gaming 
-                  technology. We continue to evolve, always listening to our community and pushing the 
-                  boundaries of what a tournament management platform can achieve.
+                  We wanted to capture the sheer hype of opening a fresh FUT pack, the heartbreak of a 90th-minute script goal, 
+                  and the glory of raising the cup. Today, it’s the official home of our local esports community. No corporate 
+                  fluff, no generic stats—just pure gaming, controller excuses, and proof of who is king of the console.
                 </p>
               </CardContent>
             </Card>
@@ -123,9 +121,9 @@ const About = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm font-medium text-slate-300 leading-relaxed">
-                  To revolutionize competitive soccer gaming by providing a professional, feature-rich 
-                  tournament management platform that brings players together, celebrates achievements, 
-                  and elevates the gaming experience to new heights.
+                  Through the controller, we unite. Our mission is to keep the local FIFA scene alive and kicking, 
+                  giving every player in the community a platform to compete, track their career stats, and settle 
+                  old scores once and for all.
                 </p>
               </CardContent>
             </Card>
@@ -138,9 +136,8 @@ const About = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm font-medium text-slate-300 leading-relaxed">
-                  To become the global standard for soccer gaming tournaments, fostering a worldwide 
-                  community of passionate players while continuously innovating to enhance competitive 
-                  gaming experiences.
+                  Bragging rights, officially documented. We envision a community where every weekend feels like a mini-stadium 
+                  showdown, and where every player can look at their card statistics and let their gameplay do the talking.
                 </p>
               </CardContent>
             </Card>

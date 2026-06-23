@@ -47,40 +47,40 @@ const Leaderboard = () => {
   const remainingPlayers = sortedPlayers.slice(3);
 
   return (
-    <div className="min-h-screen bg-[#070b13] bg-stadium-grid pb-16 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070b13] bg-stadium-grid pb-16 transition-colors duration-300 text-slate-900 dark:text-white">
       
-      {/* Immersive Sports Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#04070e] to-[#070b13] border-b border-white/5 py-20 px-6 mb-12">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent opacity-90 pointer-events-none" />
-        <div className="absolute top-12 left-10 w-96 h-96 bg-primary/5 rounded-full blur-[120px] animate-radial-pulse pointer-events-none" />
-        <div className="absolute bottom-6 right-20 w-96 h-96 bg-blue-500/5 rounded-full blur-[140px] pointer-events-none animate-radial-pulse" style={{ animationDelay: '2.5s' }} />
+      {/* Immersive Sports Hero Section - scaled up for a grander footprint */}
+      <div className="relative overflow-hidden bg-gradient-to-b from-slate-100 to-slate-200/50 dark:from-[#04070e] dark:to-[#070b13] border-b border-slate-200 dark:border-white/5 py-28 sm:py-36 md:py-44 px-6 mb-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 dark:from-primary/15 via-transparent to-transparent opacity-95 pointer-events-none" />
+        <div className="absolute top-12 left-10 w-96 h-96 bg-primary/10 dark:bg-primary/5 rounded-full blur-[120px] animate-radial-pulse pointer-events-none" />
+        <div className="absolute bottom-6 right-20 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[140px] pointer-events-none animate-radial-pulse" style={{ animationDelay: '2.5s' }} />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-slate-950/80 border border-primary/20 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-emerald-400 shadow-xl shadow-primary/5">
+        <div className="max-w-6xl mx-auto text-center relative z-10 space-y-8">
+          <div className="inline-flex items-center space-x-2 bg-slate-200/85 dark:bg-slate-950/80 border border-primary/30 dark:border-primary/20 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 shadow-xl shadow-primary/5">
             <span>⚽ Season Active</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping inline-block" />
           </div>
           
-          <h1 className="text-4xl sm:text-7xl font-black tracking-widest text-white uppercase leading-none">
-            KAWERIFY <span className="bg-gradient-to-r from-primary via-emerald-400 to-teal-400 bg-clip-text text-transparent">TECH CUP</span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-slate-950 dark:text-white uppercase leading-none filter drop-shadow-sm dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+            KAWERIFY <span className="bg-gradient-to-r from-primary via-emerald-555 to-teal-400 bg-clip-text text-transparent">TECH CUP</span>
           </h1>
           
-          <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto font-black uppercase tracking-widest leading-relaxed">
+          <p className="text-slate-655 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto font-black uppercase tracking-widest leading-relaxed">
             Welcome to the home of ultimate competitive soccer. Live standings, game analytics, match schedules, and player registries.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <div className="bg-slate-900/80 border border-white/10 px-6 py-3 rounded-xl text-center min-w-[120px] shadow-2xl backdrop-blur-md">
+            <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 px-6 py-3.5 rounded-xl text-center min-w-[140px] shadow-lg dark:shadow-2xl backdrop-blur-md">
               <span className="block text-[8px] text-slate-500 font-black uppercase tracking-widest">Season</span>
-              <span className="text-sm font-black text-white">{tournament.season}</span>
+              <span className="text-sm font-black text-slate-900 dark:text-white">{tournament.season}</span>
             </div>
-            <div className="bg-slate-900/80 border border-white/10 px-6 py-3 rounded-xl text-center min-w-[120px] shadow-2xl backdrop-blur-md">
+            <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 px-6 py-3.5 rounded-xl text-center min-w-[140px] shadow-lg dark:shadow-2xl backdrop-blur-md">
               <span className="block text-[8px] text-slate-500 font-black uppercase tracking-widest">Current Week</span>
-              <span className="text-sm font-black text-amber-400">Week {tournament.currentWeek}</span>
+              <span className="text-sm font-black text-amber-600 dark:text-amber-400">Week {tournament.currentWeek}</span>
             </div>
-            <div className="bg-slate-900/80 border border-white/10 px-6 py-3 rounded-xl text-center min-w-[120px] shadow-2xl backdrop-blur-md">
+            <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 px-6 py-3.5 rounded-xl text-center min-w-[140px] shadow-lg dark:shadow-2xl backdrop-blur-md">
               <span className="block text-[8px] text-slate-500 font-black uppercase tracking-widest">League Stage</span>
-              <span className="text-sm font-black text-emerald-400">{tournament.currentRound}</span>
+              <span className="text-sm font-black text-emerald-600 dark:text-emerald-400">{tournament.currentRound}</span>
             </div>
           </div>
         </div>
@@ -100,29 +100,29 @@ const Leaderboard = () => {
               {/* 2nd Place (Silver) */}
               {topThree[1] && (
                 <div className="w-full md:w-1/3 order-2 md:order-1 flex flex-col">
-                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-slate-800/10 via-slate-900/5 to-transparent border-2 border-slate-400/30 p-6 text-center hover:border-slate-350 shadow-2xl hover:shadow-[0_0_30px_rgba(148,163,184,0.15)] transition-all duration-350 hover:-translate-y-2 flex flex-col justify-between min-h-[300px]">
+                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-slate-200/40 via-slate-100/20 to-transparent dark:from-slate-800/10 dark:via-slate-900/5 dark:to-transparent border-2 border-slate-300 dark:border-slate-400/30 p-6 text-center hover:border-slate-400 dark:hover:border-slate-350 shadow-lg dark:shadow-2xl hover:shadow-[0_0_30px_rgba(148,163,184,0.15)] transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between min-h-[300px]">
                     <div className="absolute top-4 right-4 text-slate-400 font-black text-lg">{getRankIcon(2)}</div>
                     <div>
-                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-slate-450 shadow-md">
+                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-slate-300 dark:border-slate-450 shadow-md">
                         <AvatarImage src={topThree[1].image} />
                         <AvatarFallback className="bg-slate-500 text-white font-bold">{topThree[1].name[0]}</AvatarFallback>
                       </Avatar>
-                      <h3 className="font-black text-sm text-white truncate uppercase tracking-wider">{topThree[1].name}</h3>
+                      <h3 className="font-black text-sm text-slate-900 dark:text-white truncate uppercase tracking-wider">{topThree[1].name}</h3>
                       <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">{topThree[1].currentTeam}</p>
                     </div>
                     <div className="mt-4">
                       {getRankBadge(2)}
-                      <div className="mt-4 pt-3.5 border-t border-white/5 flex justify-around text-xs">
+                      <div className="mt-4 pt-3.5 border-t border-slate-200 dark:border-white/5 flex justify-around text-xs">
                         <div>
-                          <span className="block font-black text-slate-100">{topThree[1].stats.points}</span>
+                          <span className="block font-black text-slate-900 dark:text-slate-100">{topThree[1].stats.points}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">PTS</span>
                         </div>
                         <div>
-                          <span className="block font-black text-emerald-500">{getWinRate(topThree[1])}%</span>
+                          <span className="block font-black text-emerald-600 dark:text-emerald-500">{getWinRate(topThree[1])}%</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">WR</span>
                         </div>
                         <div>
-                          <span className="block font-black text-blue-500">{topThree[1].stats.goalsFor}</span>
+                          <span className="block font-black text-blue-600 dark:text-blue-500">{topThree[1].stats.goalsFor}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">GF</span>
                         </div>
                       </div>
@@ -135,30 +135,30 @@ const Leaderboard = () => {
               {/* 1st Place (Gold) */}
               {topThree[0] && (
                 <div className="w-full md:w-1/3 order-1 md:order-2 flex flex-col md:mb-4">
-                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-amber-500/25 via-amber-600/5 to-transparent border-2 border-amber-500/40 p-7 text-center shadow-2xl hover:shadow-[0_0_35px_rgba(245,158,11,0.2)] hover:border-amber-400 transition-all duration-350 hover:-translate-y-3 flex flex-col justify-between min-h-[340px]">
-                    <div className="absolute top-4 right-4 text-amber-500 font-black text-xl">{getRankIcon(1)}</div>
+                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-amber-500/15 via-amber-500/5 to-transparent dark:from-amber-500/25 dark:via-amber-600/5 dark:to-transparent border-2 border-amber-400/50 dark:border-amber-500/40 p-7 text-center shadow-xl dark:shadow-2xl hover:shadow-[0_0_35px_rgba(245,158,11,0.2)] hover:border-amber-500 dark:hover:border-amber-400 transition-all duration-300 hover:-translate-y-3 flex flex-col justify-between min-h-[340px]">
+                    <div className="absolute top-4 right-4 text-amber-550 dark:text-amber-500 font-black text-xl">{getRankIcon(1)}</div>
                     <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-2xl animate-float">👑</div>
                     <div className="pt-2">
-                      <Avatar className="h-20 w-20 mx-auto mb-4 border-4 border-amber-400 shadow-xl">
+                      <Avatar className="h-20 w-20 mx-auto mb-4 border-4 border-amber-450 dark:border-amber-400 shadow-xl">
                         <AvatarImage src={topThree[0].image} />
-                        <AvatarFallback className="bg-amber-500 text-slate-950 font-bold">{topThree[0].name[0]}</AvatarFallback>
+                        <AvatarFallback className="bg-amber-500 text-slate-955 font-bold">{topThree[0].name[0]}</AvatarFallback>
                       </Avatar>
-                      <h3 className="font-black text-base text-white truncate uppercase tracking-wider">{topThree[0].name}</h3>
+                      <h3 className="font-black text-base text-slate-900 dark:text-white truncate uppercase tracking-wider">{topThree[0].name}</h3>
                       <p className="text-xs text-primary font-black truncate mt-0.5 uppercase tracking-widest">{topThree[0].currentTeam}</p>
                     </div>
                     <div className="mt-4">
                       {getRankBadge(1)}
-                      <div className="mt-5 pt-3.5 border-t border-amber-500/25 flex justify-around text-xs">
+                      <div className="mt-5 pt-3.5 border-t border-amber-250 dark:border-amber-500/25 flex justify-around text-xs">
                         <div>
-                          <span className="block font-black text-slate-100">{topThree[0].stats.points}</span>
+                          <span className="block font-black text-slate-900 dark:text-slate-100">{topThree[0].stats.points}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">PTS</span>
                         </div>
                         <div>
-                          <span className="block font-black text-emerald-500">{getWinRate(topThree[0])}%</span>
+                          <span className="block font-black text-emerald-600 dark:text-emerald-500">{getWinRate(topThree[0])}%</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">WR</span>
                         </div>
                         <div>
-                          <span className="block font-black text-amber-500">{topThree[0].stats.goalsFor}</span>
+                          <span className="block font-black text-amber-600 dark:text-amber-500">{topThree[0].stats.goalsFor}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">GF</span>
                         </div>
                       </div>
@@ -171,29 +171,29 @@ const Leaderboard = () => {
               {/* 3rd Place (Bronze) */}
               {topThree[2] && (
                 <div className="w-full md:w-1/3 order-3 md:order-3 flex flex-col">
-                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-amber-900/10 via-amber-955/5 to-transparent border-2 border-amber-800/30 p-6 text-center hover:border-amber-700 shadow-2xl hover:shadow-[0_0_30px_rgba(146,64,14,0.15)] transition-all duration-350 hover:-translate-y-2 flex flex-col justify-between min-h-[280px]">
-                    <div className="absolute top-4 right-4 text-amber-750 font-black text-sm">{getRankIcon(3)}</div>
+                  <div className="relative group flex-1 rounded-2xl bg-gradient-to-b from-amber-900/5 via-amber-800/5 to-transparent dark:from-amber-900/10 dark:via-amber-955/5 dark:to-transparent border-2 border-amber-700/20 dark:border-amber-800/30 p-6 text-center hover:border-amber-600 dark:hover:border-amber-700 shadow-lg dark:shadow-2xl hover:shadow-[0_0_30px_rgba(146,64,14,0.15)] transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between min-h-[280px]">
+                    <div className="absolute top-4 right-4 text-amber-800 dark:text-amber-750 font-black text-sm">{getRankIcon(3)}</div>
                     <div>
-                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-amber-750 shadow-md">
+                      <Avatar className="h-16 w-16 mx-auto mb-3 border-2 border-amber-700 dark:border-amber-750 shadow-md">
                         <AvatarImage src={topThree[2].image} />
                         <AvatarFallback className="bg-amber-700 text-white font-bold">{topThree[2].name[0]}</AvatarFallback>
                       </Avatar>
-                      <h3 className="font-black text-sm text-white truncate uppercase tracking-wider">{topThree[2].name}</h3>
+                      <h3 className="font-black text-sm text-slate-900 dark:text-white truncate uppercase tracking-wider">{topThree[2].name}</h3>
                       <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">{topThree[2].currentTeam}</p>
                     </div>
                     <div className="mt-4">
                       {getRankBadge(3)}
-                      <div className="mt-4 pt-3.5 border-t border-white/5 flex justify-around text-xs">
+                      <div className="mt-4 pt-3.5 border-t border-slate-200 dark:border-white/5 flex justify-around text-xs">
                         <div>
-                          <span className="block font-black text-slate-100">{topThree[2].stats.points}</span>
+                          <span className="block font-black text-slate-900 dark:text-slate-100">{topThree[2].stats.points}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">PTS</span>
                         </div>
                         <div>
-                          <span className="block font-black text-emerald-500">{getWinRate(topThree[2])}%</span>
+                          <span className="block font-black text-emerald-600 dark:text-emerald-500">{getWinRate(topThree[2])}%</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">WR</span>
                         </div>
                         <div>
-                          <span className="block font-black text-amber-700">{topThree[2].stats.goalsFor}</span>
+                          <span className="block font-black text-amber-700 dark:text-amber-600">{topThree[2].stats.goalsFor}</span>
                           <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">GF</span>
                         </div>
                       </div>
@@ -207,28 +207,28 @@ const Leaderboard = () => {
         )}
 
         {/* Leaderboard Table List */}
-        <Card className="bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-2xl overflow-hidden rounded-2xl">
-          <CardHeader className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-6 md:p-8 text-white border-b border-white/5">
+        <Card className="bg-white dark:bg-slate-950/40 backdrop-blur-md border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden rounded-2xl">
+          <CardHeader className="bg-gradient-to-r from-slate-100 via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-955 p-6 md:p-8 text-slate-900 dark:text-white border-b border-slate-200 dark:border-white/5">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <CardTitle className="text-xl font-black uppercase tracking-wider">
+                <CardTitle className="text-xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
                   Standings Rankings
                 </CardTitle>
-                <CardDescription className="text-slate-400 mt-1 text-xs font-semibold uppercase tracking-wider">
+                <CardDescription className="text-slate-500 dark:text-slate-400 mt-1 text-xs font-semibold uppercase tracking-wider">
                   Live standings based on official scores • {sortedPlayers.length} elite gamers
                 </CardDescription>
               </div>
               <div className="flex items-center space-x-6">
-                <div className="bg-slate-900 border border-white/5 px-4 py-2 rounded-xl text-center">
-                  <span className="block text-[8px] text-slate-400 font-bold uppercase tracking-widest">League Stage</span>
-                  <span className="text-sm font-black text-emerald-400">{tournament.currentRound}</span>
+                <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 px-4 py-2 rounded-xl text-center">
+                  <span className="block text-[8px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">League Stage</span>
+                  <span className="text-sm font-black text-emerald-600 dark:text-emerald-400">{tournament.currentRound}</span>
                 </div>
               </div>
             </div>
           </CardHeader>
           <CardContent className="p-0">
             {/* Headers row (desktop) */}
-            <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 border-b border-white/5 bg-slate-950/20 text-[9px] font-black text-slate-400 uppercase tracking-widest text-center items-center">
+            <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 border-b border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-slate-950/20 text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest text-center items-center">
               <div className="col-span-1">Rank</div>
               <div className="col-span-4 text-left">Player / Team</div>
               <div className="col-span-1">Played</div>
@@ -240,7 +240,7 @@ const Leaderboard = () => {
               <div className="col-span-1 text-right pr-2">Points</div>
             </div>
 
-            <div className="divide-y divide-white/5">
+            <div className="divide-y divide-slate-200 dark:divide-white/5">
               {sortedPlayers.map((player, index) => {
                 const rank = index + 1;
                 const winRate = getWinRate(player);
@@ -250,58 +250,58 @@ const Leaderboard = () => {
                 return (
                   <div
                     key={player.id}
-                    className={`relative group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 md:px-8 py-5 items-center text-center transition-all duration-300 hover:bg-white/5 border-l-4 ${
+                    className={`relative group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 md:px-8 py-5 items-center text-center transition-all duration-300 hover:bg-slate-100/50 dark:hover:bg-white/5 border-l-4 ${
                       isKnockoutZone 
-                        ? 'border-l-emerald-500 bg-emerald-500/5 hover:bg-emerald-500/10' 
+                        ? 'border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-500/5 hover:bg-emerald-50/60 dark:hover:bg-emerald-500/10' 
                         : 'border-l-transparent'
                     }`}
                   >
                     {/* Rank */}
                     <div className="col-span-1 flex items-center justify-center space-x-2">
-                      <div className="w-8 h-8 rounded-full bg-slate-950/40 flex items-center justify-center font-black text-xs border border-white/5">
+                      <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-950/40 flex items-center justify-center font-black text-xs border border-slate-200 dark:border-white/5 text-slate-900 dark:text-white">
                         {getRankIcon(rank)}
                       </div>
                     </div>
 
                     {/* Player Info */}
                     <div className="col-span-4 text-left flex items-center space-x-4">
-                      <Avatar className="h-11 w-11 border border-white/10 shadow-sm group-hover:scale-105 transition-transform duration-200">
+                      <Avatar className="h-11 w-11 border border-slate-200 dark:border-white/10 shadow-sm group-hover:scale-105 transition-transform duration-200">
                         <AvatarImage src={player.image} />
                         <AvatarFallback className="bg-gradient-to-br from-primary to-emerald-600 text-white font-black text-sm">
                           {player.name.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
                       <div className="truncate">
-                        <h4 className="font-black text-white group-hover:text-primary transition-colors text-sm truncate uppercase tracking-wider">
+                        <h4 className="font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors text-sm truncate uppercase tracking-wider">
                           {player.name}
                         </h4>
-                        <p className="text-[10px] text-slate-400 font-bold mt-0.5 truncate uppercase tracking-widest">
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-bold mt-0.5 truncate uppercase tracking-widest">
                           {player.currentTeam}
                         </p>
                       </div>
                     </div>
 
                     {/* Stats Fields */}
-                    <div className="grid grid-cols-5 md:contents gap-2 mt-4 md:mt-0 text-slate-300">
+                    <div className="grid grid-cols-5 md:contents gap-2 mt-4 md:mt-0 text-slate-700 dark:text-slate-300">
                       <div className="flex flex-col md:block col-span-1">
                         <span className="md:hidden text-[8px] text-slate-500 uppercase font-black tracking-widest">Played</span>
                         <span className="font-bold text-sm">{player.stats.matchesPlayed}</span>
                       </div>
                       <div className="flex flex-col md:block col-span-1">
-                        <span className="md:hidden text-[8px] text-emerald-500 uppercase font-black tracking-widest">Wins</span>
-                        <span className="font-bold text-emerald-500 text-sm">{player.stats.wins}</span>
+                        <span className="md:hidden text-[8px] text-emerald-600 uppercase font-black tracking-widest">Wins</span>
+                        <span className="font-bold text-emerald-600 text-sm">{player.stats.wins}</span>
                       </div>
                       <div className="flex flex-col md:block col-span-1">
-                        <span className="md:hidden text-[8px] text-rose-500 uppercase font-black tracking-widest">Losses</span>
-                        <span className="font-bold text-rose-500 text-sm">{player.stats.losses}</span>
+                        <span className="md:hidden text-[8px] text-rose-600 uppercase font-black tracking-widest">Losses</span>
+                        <span className="font-bold text-rose-600 text-sm">{player.stats.losses}</span>
                       </div>
                       <div className="flex flex-col md:block col-span-1">
                         <span className="md:hidden text-[8px] text-slate-500 uppercase font-black tracking-widest">GF-GA</span>
-                        <span className="text-slate-400 font-bold text-xs">{player.stats.goalsFor}:{player.stats.goalsAgainst}</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-bold text-xs">{player.stats.goalsFor}:{player.stats.goalsAgainst}</span>
                       </div>
                       <div className="flex flex-col md:block col-span-1">
                         <span className="md:hidden text-[8px] text-slate-500 uppercase font-black tracking-widest">GD</span>
-                        <span className={`font-black text-sm ${gd >= 0 ? "text-emerald-500" : "text-rose-500"}`}>
+                        <span className={`font-black text-sm ${gd >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-rose-600 dark:text-rose-500"}`}>
                           {gd >= 0 ? `+${gd}` : gd}
                         </span>
                       </div>
@@ -311,8 +311,8 @@ const Leaderboard = () => {
                     <div className="col-span-1 flex flex-col items-center justify-center mt-3 md:mt-0">
                       <span className="md:hidden text-[8px] text-slate-500 uppercase font-black tracking-widest mb-1">Win Rate</span>
                       <div className="w-full max-w-[80px] text-center">
-                        <span className="text-[10px] font-black text-slate-350">{winRate}%</span>
-                        <Progress value={winRate} className="h-1 mt-1 bg-slate-800" />
+                        <span className="text-[10px] font-black text-slate-700 dark:text-slate-300">{winRate}%</span>
+                        <Progress value={winRate} className="h-1 mt-1 bg-slate-200 dark:bg-slate-800" />
                       </div>
                     </div>
 
@@ -334,36 +334,36 @@ const Leaderboard = () => {
 
         {/* Tournament Dashboard Stat Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
-          <Card className="bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border border-white/10 dark:border-white/5 overflow-hidden relative group rounded-2xl">
+          <Card className="bg-white dark:bg-slate-955/45 backdrop-blur-md border border-slate-200 dark:border-white/5 overflow-hidden relative group rounded-2xl shadow-md dark:shadow-2xl">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-amber-500" />
             <CardContent className="p-6">
               <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">Tournament Leader</span>
-              <h3 className="text-lg font-black text-white mt-1 uppercase">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1 uppercase">
                 {sortedPlayers.length > 0 ? sortedPlayers[0]?.name : "TBD"}
               </h3>
               <p className="text-xs text-primary font-bold mt-0.5 uppercase tracking-wider">{sortedPlayers[0]?.currentTeam}</p>
             </CardContent>
           </Card>
           
-          <Card className="bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border border-white/10 dark:border-white/5 overflow-hidden relative group rounded-2xl">
+          <Card className="bg-white dark:bg-slate-955/45 backdrop-blur-md border border-slate-200 dark:border-white/5 overflow-hidden relative group rounded-2xl shadow-md dark:shadow-2xl">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-500" />
             <CardContent className="p-6">
               <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">Golden Boot Leader</span>
-              <h3 className="text-lg font-black text-white mt-1">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">
                 {Math.max(...sortedPlayers.map(p => p.stats.goalsFor), 0)} goals
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5 font-bold uppercase tracking-wider text-[9px]">Highest scoring stats</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-bold uppercase tracking-wider text-[9px]">Highest scoring stats</p>
             </CardContent>
           </Card>
           
-          <Card className="bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border border-white/10 dark:border-white/5 overflow-hidden relative group rounded-2xl">
+          <Card className="bg-white dark:bg-slate-955/45 backdrop-blur-md border border-slate-200 dark:border-white/5 overflow-hidden relative group rounded-2xl shadow-md dark:shadow-2xl">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-500" />
             <CardContent className="p-6">
               <span className="text-[8px] text-slate-500 font-black uppercase tracking-widest">Matches Logged</span>
-              <h3 className="text-lg font-black text-white mt-1">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">
                 {sortedPlayers.reduce((sum, p) => sum + p.stats.matchesPlayed, 0) / 2} matches
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5 font-bold uppercase tracking-wider text-[9px]">Across all rounds</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-bold uppercase tracking-wider text-[9px]">Across all rounds</p>
             </CardContent>
           </Card>
         </div>

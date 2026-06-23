@@ -105,11 +105,11 @@ const FifaFixtures = () => {
       {/* Match Schedule */}
       <div className="grid gap-6">
         {weeklyMatches.length === 0 ? (
-          <Card className="text-center p-12 glass-panel border-dashed border-2 border-white/10">
+          <Card className="text-center p-12 bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border-dashed border-2 border-white/10 rounded-2xl">
             <CardContent className="space-y-4">
               <div className="text-4xl animate-float">⏳</div>
-              <h3 className="text-lg font-black uppercase tracking-wider text-slate-800 dark:text-white">No Matches Scheduled</h3>
-              <p className="text-slate-500 text-xs font-semibold max-w-sm mx-auto">
+              <h3 className="text-lg font-black uppercase tracking-wider text-white">No Matches Scheduled</h3>
+              <p className="text-slate-450 text-xs font-semibold max-w-sm mx-auto uppercase tracking-wider">
                 Week {selectedWeek} fixtures have not been loaded or scheduled yet. Check back soon!
               </p>
             </CardContent>
@@ -118,21 +118,23 @@ const FifaFixtures = () => {
           weeklyMatches.map((match) => {
             const player1 = getPlayerById(match.player1Id);
             const player2 = getPlayerById(match.player2Id);
+            const isLive = match.status === 'live';
+            const isCompleted = match.status === 'completed';
             
             return (
               <Card 
                 key={match.id} 
-                className={`overflow-hidden glass-card border-l-4 transition-all duration-300 ${
-                  match.status === 'live' ? 'border-l-rose-500 shadow-md shadow-rose-500/5' : 
-                  match.status === 'completed' ? 'border-l-emerald-500' : 'border-l-slate-400 dark:border-l-slate-800'
+                className={`overflow-hidden bg-slate-900/80 dark:bg-slate-950/60 backdrop-blur-md border border-white/5 border-l-4 transition-all duration-300 ${
+                  isLive ? 'border-l-rose-500 shadow-2xl shadow-rose-550/10 hover:shadow-rose-500/20' : 
+                  isCompleted ? 'border-l-emerald-500' : 'border-l-slate-700'
                 }`}
               >
                 {/* Card Top bar with match details */}
-                <CardHeader className={`${getMatchTypeColor(match.matchType)} text-white py-3 px-6 relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/10" />
+                <CardHeader className={`${getMatchTypeColor(match.matchType)} text-white py-3.5 px-6 relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-black/20" />
                   <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                    <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-widest">
-                      <span className="text-yellow-400">
+                    <div className="flex flex-wrap items-center gap-3 text-[9px] font-black uppercase tracking-widest">
+                      <span className="text-amber-400">
                         {match.round}
                       </span>
                       <span className="text-white/40">•</span>
@@ -147,13 +149,13 @@ const FifaFixtures = () => {
 
                     <div className="flex items-center self-start sm:self-auto">
                       <Badge 
-                        variant={match.status === 'completed' ? 'default' : match.status === 'live' ? 'destructive' : 'secondary'}
-                        className={`font-black text-[9px] tracking-widest uppercase border-0 rounded-lg px-2.5 py-0.5 ${
-                          match.status === 'live' ? 'bg-rose-600 text-white animate-pulse' :
-                          match.status === 'completed' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-200'
+                        variant={isCompleted ? 'default' : isLive ? 'destructive' : 'secondary'}
+                        className={`font-black text-[8px] tracking-widest uppercase border-0 rounded px-2.5 py-0.5 ${
+                          isLive ? 'bg-rose-600 text-white animate-pulse' :
+                          isCompleted ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-355'
                         }`}
                       >
-                        {match.status === 'live' && <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-white animate-ping inline-block" />}
+                        {isLive && <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-white animate-ping inline-block" />}
                         {match.status}
                       </Badge>
                     </div>
@@ -162,15 +164,15 @@ const FifaFixtures = () => {
                 
                 {/* Scoreboard display */}
                 <CardContent className="p-6 md:p-8">
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-2">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4">
                     
                     {/* Player 1 */}
-                    <div className="flex-1 w-full sm:w-auto text-center sm:text-right flex flex-row-reverse sm:flex-row items-center justify-end gap-4">
+                    <div className="flex-1 w-full sm:w-auto text-center sm:text-right flex flex-row-reverse sm:flex-row items-center justify-end gap-4 group">
                       <div className="flex-1 sm:flex-initial text-right">
-                        <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider truncate">
+                        <h3 className="text-base font-black text-white uppercase tracking-wider truncate">
                           {player1?.name || 'TBD'}
                         </h3>
-                        <p className="text-xs text-primary font-bold truncate mt-0.5">
+                        <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">
                           {match.player1Team}
                         </p>
                       </div>
@@ -178,40 +180,40 @@ const FifaFixtures = () => {
                     </div>
                     
                     {/* Versus / Live Scoreboard */}
-                    <div className="px-6 py-2 rounded-2xl bg-muted/40 border border-white/5 text-center min-w-[120px] shadow-sm">
-                      {match.status === 'completed' ? (
+                    <div className="px-6 py-3.5 rounded-2xl bg-slate-950/80 border border-white/5 text-center min-w-[130px] shadow-2xl backdrop-blur-md">
+                      {isCompleted ? (
                         <div className="flex flex-col items-center">
-                          <span className="text-2xl font-black tracking-wider text-slate-900 dark:text-white">
+                          <span className="text-2xl font-black tracking-widest text-white">
                             {match.player1Score} - {match.player2Score}
                           </span>
-                          <span className="text-[9px] text-slate-500 uppercase font-black tracking-widest mt-1">FT</span>
+                          <span className="text-[8px] text-slate-500 uppercase font-black tracking-widest mt-1.5 border-t border-white/5 pt-1.5 w-full">FINAL TIME</span>
                         </div>
-                      ) : match.status === 'live' ? (
+                      ) : isLive ? (
                         <div className="flex flex-col items-center">
-                          <span className="text-2xl font-black text-rose-500 animate-pulse">
+                          <span className="text-2xl font-black text-rose-500 animate-pulse tracking-widest">
                             {match.player1Score} - {match.player2Score}
                           </span>
-                          <span className="text-[9px] text-rose-500 uppercase font-black tracking-widest mt-1 flex items-center">
+                          <span className="text-[8px] text-rose-500 uppercase font-black tracking-widest mt-1.5 flex items-center justify-center border-t border-white/5 pt-1.5 w-full">
                             <span className="mr-1 h-1.5 w-1.5 rounded-full bg-rose-500 animate-ping inline-block" />
-                            LIVE
+                            LIVE SCORE
                           </span>
                         </div>
                       ) : (
-                        <div className="flex flex-col items-center">
-                          <span className="text-xs font-black text-muted-foreground uppercase tracking-widest">VS</span>
-                          <span className="text-[9px] text-muted-foreground uppercase font-black tracking-widest mt-1">SCHED</span>
+                        <div className="flex flex-col items-center py-0.5">
+                          <span className="text-sm font-black text-slate-500 uppercase tracking-widest">VS</span>
+                          <span className="text-[8px] text-slate-500 uppercase font-black tracking-widest mt-1">SCHEDULED</span>
                         </div>
                       )}
                     </div>
                     
                     {/* Player 2 */}
-                    <div className="flex-1 w-full sm:w-auto text-center sm:text-left flex flex-row items-center justify-start gap-4">
+                    <div className="flex-1 w-full sm:w-auto text-center sm:text-left flex flex-row items-center justify-start gap-4 group">
                       {getTeamBadge(match.player2Team)}
                       <div className="flex-1 sm:flex-initial text-left">
-                        <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider truncate">
+                        <h3 className="text-base font-black text-white uppercase tracking-wider truncate">
                           {player2?.name || 'TBD'}
                         </h3>
-                        <p className="text-xs text-primary font-bold truncate mt-0.5">
+                        <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">
                           {match.player2Team}
                         </p>
                       </div>
@@ -220,13 +222,13 @@ const FifaFixtures = () => {
                   </div>
                   
                   {/* Match Result Winner Overlay */}
-                  {match.status === 'completed' && (
+                  {isCompleted && (
                     <div className="mt-6 pt-4 border-t border-white/5 flex justify-center">
-                      <div className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                      <div className="flex items-center space-x-2 text-[9px] font-black uppercase tracking-widest text-slate-400">
                         <span>Winner:</span>
-                        <span className="text-primary font-black">
+                        <span className="text-primary font-black uppercase">
                           {match.player1Score > match.player2Score ? player1?.name :
-                           match.player2Score > match.player1Score ? player2?.name : 'Draw'}
+                           match.player2Score > match.player1Score ? player2?.name : 'Draw Game'}
                         </span>
                       </div>
                     </div>

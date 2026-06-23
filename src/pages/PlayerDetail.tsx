@@ -140,11 +140,10 @@ const PlayerDetail = () => {
   const sho = Math.min(Math.max(68 + Math.round((player.stats.goalsFor / maxGoals) * 31), 60), 99);
   const pas = Math.min(Math.max(65 + Math.round(winRate / 3), 60), 99);
   const dri = Math.min(Math.max(70 + Math.round(winRate / 3.5), 60), 99);
-  const def = Math.min(Math.max(60 - Math.round((player.stats.goalsAgainst / maxGoalsAgainst) * 15) + Math.round(winRate / 5), 50), 99);
   const phy = Math.min(Math.max(75 + Math.round(player.stats.matchesPlayed * 0.7), 60), 99);
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#070b13] transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-[#070b13] bg-stadium-grid transition-colors duration-300">
       <Navbar />
       <main className="flex-1 pb-16">
         <div className="container mx-auto px-6 py-8 max-w-5xl">
@@ -152,21 +151,21 @@ const PlayerDetail = () => {
           {/* Back Action */}
           <div className="mb-6">
             <Link to="/players">
-              <Button variant="ghost" className="rounded-xl text-xs font-black uppercase tracking-wider pl-3 pr-4 border border-white/10 bg-background hover:bg-muted transition-colors">
+              <Button variant="ghost" className="rounded-xl text-xs font-black uppercase tracking-wider pl-3 pr-4 border border-white/10 bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-colors">
                 ← Back to Players
               </Button>
             </Link>
           </div>
 
           {/* Gamer Header Banner */}
-          <Card className="mb-8 overflow-hidden glass-panel border-white/10 shadow-xl rounded-2xl relative">
-            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
-            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 h-40 w-40 rounded-full bg-secondary/10 blur-3xl" />
+          <Card className="mb-8 overflow-hidden bg-slate-900/60 dark:bg-slate-950/45 backdrop-blur-md border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl relative">
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 h-40 w-40 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
             
             <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
               <div className="flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
                 <div className="relative">
-                  <Avatar className="h-28 w-28 border-4 border-slate-900 dark:border-slate-800 shadow-2xl">
+                  <Avatar className="h-28 w-28 border-4 border-slate-900 dark:border-slate-850 shadow-2xl">
                     <AvatarImage src={player.image} alt={player.name} />
                     <AvatarFallback className="bg-gradient-to-br from-primary to-emerald-600 text-white text-3xl font-black">
                       {player.name.split(' ').map(n => n[0]).join('')}
@@ -178,12 +177,12 @@ const PlayerDetail = () => {
                 </div>
                 
                 <div className="space-y-1.5">
-                  <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">{player.name}</h1>
+                  <h1 className="text-3xl font-black text-white tracking-tight uppercase">{player.name}</h1>
                   <p className="text-lg text-primary font-black uppercase tracking-wide">
                     {player.currentTeam}
                   </p>
                   <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1.5">
-                    <Badge variant="outline" className="text-xs bg-background/50 border-white/10 text-muted-foreground uppercase font-black tracking-wider">
+                    <Badge variant="outline" className="text-xs bg-slate-950/40 border-white/10 text-slate-300 uppercase font-black tracking-wider">
                       Joined {new Date(player.joinDate).getFullYear()}
                     </Badge>
                     {player.stats.cupsWon > 0 && (
@@ -199,7 +198,7 @@ const PlayerDetail = () => {
                 <Button
                   onClick={() => setIsEditing(!isEditing)}
                   variant="outline"
-                  className="rounded-xl font-black text-xs uppercase tracking-wider"
+                  className="rounded-xl font-black text-xs uppercase tracking-wider border-white/15 bg-slate-900/60 hover:bg-slate-800 text-white"
                 >
                   {isEditing ? 'Cancel' : 'Edit Profile'}
                 </Button>
@@ -209,10 +208,10 @@ const PlayerDetail = () => {
 
           {/* Edit Form Card */}
           {isEditing && (
-            <Card className="mb-8 rounded-2xl glass-card border-white/10">
+            <Card className="mb-8 rounded-2xl bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 shadow-2xl">
               <CardHeader>
-                <CardTitle className="text-lg font-black uppercase tracking-wider">Modify Gamer Info</CardTitle>
-                <CardDescription>Update your displayed name, current FIFA team, and avatar image details.</CardDescription>
+                <CardTitle className="text-lg font-black uppercase tracking-wider text-white">Modify Gamer Info</CardTitle>
+                <CardDescription className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Update your displayed name, current FIFA team, and avatar image details.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -249,7 +248,7 @@ const PlayerDetail = () => {
                   <Button onClick={handleSaveProfile} className="rounded-xl font-black text-xs uppercase tracking-wider bg-gradient-to-r from-primary to-emerald-600">
                     Save Settings
                   </Button>
-                  <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl font-black text-xs uppercase tracking-wider">
+                  <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl font-black text-xs uppercase tracking-wider hover:bg-white/5">
                     Discard
                   </Button>
                 </div>
@@ -259,45 +258,45 @@ const PlayerDetail = () => {
 
           {/* Core Gamer Stats dashboard grids */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <Card className="glass-card border-white/5 text-center">
+            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 text-center shadow-xl">
               <CardContent className="p-5 space-y-1">
-                <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.wins}</p>
-                <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Wins</p>
+                <p className="text-3xl font-black text-white">{player.stats.wins}</p>
+                <p className="text-[9px] text-slate-500 uppercase font-black tracking-wider">Wins</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-card border-white/5 text-center">
+            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 text-center shadow-xl">
               <CardContent className="p-5 space-y-1">
-                <p className="text-3xl font-black text-slate-900 dark:text-white">{player.stats.points}</p>
-                <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Points</p>
+                <p className="text-3xl font-black text-white">{player.stats.points}</p>
+                <p className="text-[9px] text-slate-500 uppercase font-black tracking-wider">Points</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-card border-white/5 text-center">
+            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 text-center shadow-xl">
               <CardContent className="p-5 space-y-1">
-                <p className="text-3xl font-black text-slate-900 dark:text-white">{winRate}%</p>
-                <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Win Rate</p>
+                <p className="text-3xl font-black text-white">{winRate}%</p>
+                <p className="text-[9px] text-slate-500 uppercase font-black tracking-wider">Win Rate</p>
               </CardContent>
             </Card>
             
-            <Card className="glass-card border-white/5 text-center">
+            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 text-center shadow-xl">
               <CardContent className="p-5 space-y-1">
-                <p className={`text-3xl font-black ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                <p className={`text-3xl font-black ${goalDiff >= 0 ? 'text-emerald-450' : 'text-rose-450'}`}>
                   {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                 </p>
-                <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Goal Diff</p>
+                <p className="text-[9px] text-slate-500 uppercase font-black tracking-wider">Goal Diff</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Detailed Statistics Tabs */}
           <Tabs defaultValue="stats" className="space-y-6">
-            <TabsList className="flex flex-wrap md:grid w-full grid-cols-5 bg-muted/60 p-1 rounded-2xl h-auto gap-1">
-              <TabsTrigger value="stats" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5">Dashboard</TabsTrigger>
-              <TabsTrigger value="matches" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5">Matches</TabsTrigger>
-              <TabsTrigger value="form" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5">Form</TabsTrigger>
-              <TabsTrigger value="history" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5">History</TabsTrigger>
-              <TabsTrigger value="media" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5">Media</TabsTrigger>
+            <TabsList className="flex flex-wrap md:grid w-full grid-cols-5 bg-slate-950/60 p-1 rounded-2xl h-auto gap-1">
+              <TabsTrigger value="stats" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5 text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Dashboard</TabsTrigger>
+              <TabsTrigger value="matches" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5 text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Matches</TabsTrigger>
+              <TabsTrigger value="form" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5 text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Form</TabsTrigger>
+              <TabsTrigger value="history" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5 text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">History</TabsTrigger>
+              <TabsTrigger value="media" className="rounded-xl text-[10px] font-black uppercase tracking-wider flex-1 py-2.5 text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Media</TabsTrigger>
             </TabsList>
 
             {/* Stats Dashboard Content */}
@@ -305,82 +304,82 @@ const PlayerDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 {/* Left Card: Tournament Record */}
-                <Card className="glass-panel border-white/10 shadow-md">
+                <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                   <CardHeader>
-                    <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">Tournament Record</CardTitle>
+                    <CardTitle className="text-sm font-black uppercase tracking-widest text-white">Tournament Record</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 text-xs font-semibold text-slate-400">
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span>Matches Played</span>
-                      <span className="font-black text-base text-slate-800 dark:text-white">{player.stats.matchesPlayed}</span>
+                      <span className="font-black text-base text-white">{player.stats.matchesPlayed}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span>Matches Won</span>
-                      <span className="font-black text-base text-emerald-500">{player.stats.wins}</span>
+                      <span className="font-black text-base text-emerald-400">{player.stats.wins}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span>Matches Lost</span>
-                      <span className="font-black text-base text-rose-500">{player.stats.losses}</span>
+                      <span className="font-black text-base text-rose-455">{player.stats.losses}</span>
                     </div>
                     <div className="flex justify-between items-center py-2 border-b border-white/5">
                       <span>Matches Drawn</span>
-                      <span className="font-black text-base text-amber-500">{player.stats.draws}</span>
+                      <span className="font-black text-base text-amber-400">{player.stats.draws}</span>
                     </div>
                     <div className="pt-4">
-                      <div className="flex justify-between items-center mb-2 text-[10px] font-black uppercase tracking-wider">
+                      <div className="flex justify-between items-center mb-2 text-[8px] font-black uppercase tracking-widest">
                         <span>Win Percentage</span>
-                        <span className="text-primary font-black text-base">{winRate}%</span>
+                        <span className="text-primary font-black text-sm">{winRate}%</span>
                       </div>
-                      <Progress value={winRate} className="h-2 bg-muted" />
+                      <Progress value={winRate} className="h-2 bg-slate-955" />
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Right Card: FUT attributes gauge display */}
-                <Card className="glass-panel border-white/10 shadow-md">
+                {/* Right Card: FUT attributes display */}
+                <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                   <CardHeader>
-                    <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">FUT Gamer Attributes</CardTitle>
+                    <CardTitle className="text-sm font-black uppercase tracking-widest text-white">FUT Gamer Attributes</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 text-xs font-semibold text-slate-400">
                     <div className="flex justify-between items-center py-1.5">
                       <span>Pace (PAC)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={pac} className="h-2 bg-muted flex-1" />
+                        <Progress value={pac} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{pac}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center py-1.5">
                       <span>Shooting (SHO)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={sho} className="h-2 bg-muted flex-1" />
+                        <Progress value={sho} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{sho}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center py-1.5">
                       <span>Passing (PAS)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={pas} className="h-2 bg-muted flex-1" />
+                        <Progress value={pas} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{pas}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center py-1.5">
                       <span>Dribbling (DRI)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={dri} className="h-2 bg-muted flex-1" />
+                        <Progress value={dri} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{dri}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center py-1.5">
                       <span>Defending (DEF)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={def} className="h-2 bg-muted flex-1" />
+                        <Progress value={def} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{def}</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center py-1.5">
                       <span>Physicality (PHY)</span>
                       <div className="flex items-center space-x-3 w-1/2">
-                        <Progress value={phy} className="h-2 bg-muted flex-1" />
+                        <Progress value={phy} className="h-2 bg-slate-955 flex-1" />
                         <span className="font-black text-white w-6 text-right">{phy}</span>
                       </div>
                     </div>
@@ -391,14 +390,14 @@ const PlayerDetail = () => {
 
             {/* Matches List Content */}
             <TabsContent value="matches" className="space-y-4">
-              <Card className="glass-panel border-white/10 shadow-md">
+              <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">Match History ({playerMatches.length} games)</CardTitle>
+                  <CardTitle className="text-sm font-black uppercase tracking-widest text-white">Match History ({playerMatches.length} games)</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="divide-y divide-white/5">
                     {playerMatches.length === 0 ? (
-                      <div className="text-center py-10 text-slate-500 text-xs font-semibold">No matches logged yet for this player.</div>
+                      <div className="text-center py-10 text-slate-500 text-xs font-semibold uppercase tracking-wider">No matches logged yet for this player.</div>
                     ) : (
                       playerMatches
                         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -410,21 +409,21 @@ const PlayerDetail = () => {
                           const result = playerScore > opponentScore ? 'W' : playerScore < opponentScore ? 'L' : 'D';
                           
                           return (
-                            <div key={match.id} className="flex items-center justify-between p-4 px-6 transition-colors duration-200 hover:bg-slate-500/5">
+                            <div key={match.id} className="flex items-center justify-between p-4 px-6 transition-colors duration-200 hover:bg-white/5">
                               <div className="flex items-center space-x-4">
                                 <div className={`h-8 w-8 rounded-lg ${getFormColor(result)} flex items-center justify-center font-black text-xs shadow-sm`}>
                                   {result}
                                 </div>
                                 <div>
-                                  <p className="font-black text-xs text-slate-900 dark:text-white uppercase tracking-wider">vs {opponent?.name || 'Unknown Opponent'}</p>
-                                  <p className="text-[10px] text-muted-foreground font-semibold">
+                                  <p className="font-black text-xs text-white uppercase tracking-wider">vs {opponent?.name || 'Unknown Opponent'}</p>
+                                  <p className="text-[10px] text-slate-500 font-semibold">
                                     {new Date(match.date).toLocaleDateString()} • {match.round}
                                   </p>
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="font-black text-base text-slate-900 dark:text-white">{playerScore} - {opponentScore}</p>
-                                <Badge variant="outline" className="text-[9px] uppercase font-black border-white/10 text-muted-foreground mt-0.5 tracking-widest">
+                                <p className="font-black text-base text-white">{playerScore} - {opponentScore}</p>
+                                <Badge variant="outline" className="text-[8px] uppercase font-black border-white/10 text-slate-400 mt-0.5 tracking-widest">
                                   {match.matchType}
                                 </Badge>
                               </div>
@@ -439,9 +438,9 @@ const PlayerDetail = () => {
 
             {/* Form Tracker Content */}
             <TabsContent value="form" className="space-y-6">
-              <Card className="glass-panel border-white/10 shadow-md">
+              <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">Form Tracker (Last 10 Matches)</CardTitle>
+                  <CardTitle className="text-sm font-black uppercase tracking-widest text-white">Form Tracker (Last 10 Matches)</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap justify-center gap-2 mb-6">
@@ -453,11 +452,11 @@ const PlayerDetail = () => {
                         {result}
                       </div>
                     )) : (
-                      <p className="text-slate-500 text-xs py-4 font-semibold uppercase tracking-wider">No match forms logged recently</p>
+                      <p className="text-slate-550 text-xs py-4 font-black uppercase tracking-wider">No match forms logged recently</p>
                     )}
                   </div>
                   {recentForm.length > 0 && (
-                    <p className="text-center text-[10px] text-muted-foreground font-black uppercase tracking-widest">
+                    <p className="text-center text-[9px] text-slate-500 font-black uppercase tracking-widest">
                       Latest logged match is on the right • W = Win, L = Loss, D = Draw
                     </p>
                   )}
@@ -467,25 +466,25 @@ const PlayerDetail = () => {
 
             {/* Club History Content */}
             <TabsContent value="history" className="space-y-6">
-              <Card className="glass-panel border-white/10 shadow-md">
+              <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">
+                  <CardTitle className="text-sm font-black uppercase tracking-widest text-white">
                     FIFA Club History
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="space-y-3">
                     {player.teamHistory.map((historyEntry, index) => (
-                      <div key={index} className="flex items-center justify-between p-3.5 bg-muted/40 rounded-xl border border-white/5 text-xs font-bold text-slate-400">
-                        <span className="truncate text-slate-800 dark:text-slate-200">{historyEntry.team}</span>
+                      <div key={index} className="flex items-center justify-between p-3.5 bg-slate-950/30 rounded-xl border border-white/5 text-xs font-bold text-slate-400">
+                        <span className="truncate text-white">{historyEntry.team}</span>
                         <div className="flex items-center space-x-2">
                           {index === 0 && (
-                            <Badge className="bg-emerald-500 text-white font-black border-0 text-[9px] uppercase tracking-wider rounded">
+                            <Badge className="bg-emerald-500/10 text-emerald-450 font-black border-0 text-[8px] uppercase tracking-wider rounded">
                               Active Team
                             </Badge>
                           )}
                           {index === player.teamHistory.length - 1 && index > 0 && (
-                            <Badge variant="outline" className="text-[9px] uppercase font-black text-muted-foreground border-white/10 tracking-wider rounded">
+                            <Badge variant="outline" className="text-[8px] uppercase font-black text-slate-450 border-white/10 tracking-wider rounded">
                               First Club
                             </Badge>
                           )}
@@ -499,20 +498,20 @@ const PlayerDetail = () => {
 
             {/* Media Gallery Content */}
             <TabsContent value="media" className="space-y-6">
-              <Card className="glass-panel border-white/10 shadow-md">
+              <Card className="bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">
+                  <CardTitle className="text-sm font-black uppercase tracking-widest text-white">
                     Gamer Media Showcase
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   {/* File Upload zone */}
-                  <div className="p-6 border-2 border-dashed border-white/10 rounded-2xl bg-muted/10 text-center hover:bg-muted/20 transition-colors">
+                  <div className="p-6 border-2 border-dashed border-white/10 rounded-2xl bg-slate-950/40 text-center hover:bg-slate-950/60 transition-colors">
                     <Label htmlFor="media-upload" className="cursor-pointer space-y-2">
-                      <div className="h-10 w-10 bg-slate-200 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto text-muted-foreground text-lg">
+                      <div className="h-10 w-10 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-400 text-lg">
                         📷
                       </div>
-                      <span className="block font-black text-xs text-slate-700 dark:text-slate-355 uppercase tracking-wider">Upload Image / Video clips</span>
+                      <span className="block font-black text-xs text-white uppercase tracking-wider">Upload Image / Video clips</span>
                       <span className="block text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Add highlight screenshots or goal replays here</span>
                     </Label>
                     <Input
@@ -566,7 +565,7 @@ const PlayerDetail = () => {
                   
                   {mediaFiles.length === 0 && (
                     <div className="text-center py-12">
-                      <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">No highlights uploaded for this gamer yet.</p>
+                      <p className="text-slate-550 text-xs font-semibold uppercase tracking-wider">No highlights uploaded for this gamer yet.</p>
                     </div>
                   )}
                 </CardContent>

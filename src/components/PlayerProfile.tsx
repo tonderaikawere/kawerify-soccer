@@ -114,10 +114,10 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
         return (
           <Card 
             key={player.id} 
-            className="overflow-hidden glass-card rounded-2xl border border-white/10 dark:border-white/5 transition-all duration-300 hover:-translate-y-2 group"
+            className="overflow-hidden bg-slate-900/60 dark:bg-slate-950/45 backdrop-blur-md rounded-2xl border border-white/10 dark:border-white/5 transition-all duration-300 hover:-translate-y-2 group shadow-2xl"
           >
             {/* FUT-style Card Render */}
-            <div className="p-4 bg-slate-950/20 dark:bg-slate-950/40 border-b border-white/5 flex justify-center">
+            <div className="p-4 bg-slate-950/40 border-b border-white/5 flex justify-center">
               <div className="fut-card-wrapper max-w-[200px]">
                 <div className={`fut-card-body ${futClass} flex flex-col justify-between p-3 relative`}>
                   <div className="fut-shine-overlay" />
@@ -149,7 +149,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     <h4 className="text-xs font-black tracking-wider text-white uppercase truncate">
                       {player.name.split(' ')[0]}
                     </h4>
-                    <p className="text-[8px] text-emerald-400 font-bold uppercase tracking-widest leading-none mt-0.5 truncate">
+                    <p className="text-[8px] text-emerald-450 font-bold uppercase tracking-widest leading-none mt-0.5 truncate">
                       {player.currentTeam}
                     </p>
                   </div>
@@ -188,54 +188,54 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
             {/* Bottom Tabs Details */}
             <CardContent className="p-6">
               <Tabs defaultValue="stats" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 rounded-xl">
-                  <TabsTrigger value="stats" className="rounded-lg text-[10px] font-black uppercase tracking-wider">Stats</TabsTrigger>
-                  <TabsTrigger value="form" className="rounded-lg text-[10px] font-black uppercase tracking-wider">Form</TabsTrigger>
-                  <TabsTrigger value="history" className="rounded-lg text-[10px] font-black uppercase tracking-wider">Career</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-slate-950/60 p-1 rounded-xl">
+                  <TabsTrigger value="stats" className="rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Stats</TabsTrigger>
+                  <TabsTrigger value="form" className="rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Form</TabsTrigger>
+                  <TabsTrigger value="history" className="rounded-lg text-[10px] font-black uppercase tracking-wider text-slate-400 data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Career</TabsTrigger>
                 </TabsList>
 
                 {/* Statistics Tab */}
                 <TabsContent value="stats" className="space-y-4 mt-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-emerald-550/5 dark:bg-emerald-550/10 border border-emerald-500/10 rounded-xl">
-                      <p className="text-lg font-black text-emerald-600 dark:text-emerald-400">{player.stats.wins}</p>
-                      <p className="text-[9px] text-emerald-600/80 font-bold uppercase tracking-wider">Wins</p>
+                    <div className="text-center p-3 bg-emerald-500/5 border border-emerald-500/10 rounded-xl">
+                      <p className="text-lg font-black text-emerald-400">{player.stats.wins}</p>
+                      <p className="text-[8px] text-emerald-400/80 font-black uppercase tracking-wider">Wins</p>
                     </div>
                     
-                    <div className="text-center p-3 bg-blue-550/5 dark:bg-blue-550/10 border border-blue-500/10 rounded-xl">
-                      <p className="text-lg font-black text-blue-600 dark:text-blue-400">{player.stats.points}</p>
-                      <p className="text-[9px] text-blue-600/80 font-bold uppercase tracking-wider">Points</p>
+                    <div className="text-center p-3 bg-blue-500/5 border border-blue-500/10 rounded-xl">
+                      <p className="text-lg font-black text-blue-400">{player.stats.points}</p>
+                      <p className="text-[8px] text-blue-400/80 font-black uppercase tracking-wider">Points</p>
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
-                      <span className="text-slate-500">Win Ratio</span>
+                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest">
+                      <span className="text-slate-550">Win Ratio</span>
                       <span className="text-primary font-black">{winRate}%</span>
                     </div>
-                    <Progress value={winRate} className="h-1.5 bg-muted" />
+                    <Progress value={winRate} className="h-1.5 bg-slate-950" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs border-t border-white/5 pt-3 font-semibold text-slate-400">
                     <div className="flex justify-between">
                       <span>Matches:</span>
-                      <span className="font-extrabold text-slate-800 dark:text-slate-200">{player.stats.matchesPlayed}</span>
+                      <span className="font-extrabold text-slate-200">{player.stats.matchesPlayed}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Losses:</span>
-                      <span className="font-extrabold text-slate-800 dark:text-slate-200">{player.stats.losses}</span>
+                      <span className="font-extrabold text-slate-200">{player.stats.losses}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Goals For:</span>
-                      <span className="font-extrabold text-emerald-500">{player.stats.goalsFor}</span>
+                      <span className="font-extrabold text-emerald-400">{player.stats.goalsFor}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Goals Against:</span>
-                      <span className="font-extrabold text-rose-500">{player.stats.goalsAgainst}</span>
+                      <span className="font-extrabold text-rose-455">{player.stats.goalsAgainst}</span>
                     </div>
-                    <div className="flex justify-between col-span-2 pt-2 border-t border-white/5 mt-1 font-bold text-slate-300">
+                    <div className="flex justify-between col-span-2 pt-2 border-t border-white/5 mt-1 font-black text-[10px] uppercase tracking-widest text-slate-400">
                       <span>Goal Difference:</span>
-                      <span className={`font-black ${goalDiff >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                      <span className={`font-black ${goalDiff >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                         {goalDiff >= 0 ? `+${goalDiff}` : goalDiff}
                       </span>
                     </div>
@@ -244,19 +244,19 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
                 {/* Form Tab */}
                 <TabsContent value="form" className="space-y-4 mt-4">
-                  <div className="text-center bg-muted/20 p-4 rounded-xl border border-white/5">
-                    <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">Recent Matches</h4>
+                  <div className="text-center bg-slate-950/40 p-4 rounded-xl border border-white/5">
+                    <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-3">Recent Matches</h4>
                     <div className="flex justify-center space-x-1.5">
                       {recentForm.length > 0 ? recentForm.map((result, index) => (
                         <div
                           key={index}
-                          className={`h-7 w-7 rounded-lg ${getFormColor(result)} flex items-center justify-center font-extrabold text-xs shadow-sm`}
+                          className={`h-7 w-7 rounded-lg ${getFormColor(result)} flex items-center justify-center font-black text-xs shadow-sm`}
                           title={result === 'W' ? 'Win' : result === 'L' ? 'Loss' : 'Draw'}
                         >
                           {result}
                         </div>
                       )) : (
-                        <p className="text-muted-foreground text-xs py-2">No matches logged yet</p>
+                        <p className="text-slate-500 text-xs py-2 uppercase font-black tracking-widest">No matches logged yet</p>
                       )}
                     </div>
                   </div>
@@ -264,7 +264,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                   <div className="space-y-2 text-xs font-semibold text-slate-400">
                     <div className="flex items-center justify-between py-1 border-b border-white/5">
                       <span>Avg Goals / Match</span>
-                      <span className="font-bold text-slate-800 dark:text-slate-200">
+                      <span className="font-bold text-white">
                         {player.stats.matchesPlayed > 0 ? 
                           (player.stats.goalsFor / player.stats.matchesPlayed).toFixed(1) : '0.0'}
                       </span>
@@ -272,7 +272,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     
                     <div className="flex items-center justify-between py-1">
                       <span>Avg Points / Match</span>
-                      <span className="font-bold text-slate-800 dark:text-slate-200">
+                      <span className="font-bold text-white">
                         {player.stats.matchesPlayed > 0 ? 
                           (player.stats.points / player.stats.matchesPlayed).toFixed(1) : '0.0'}
                       </span>
@@ -284,13 +284,13 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                 <TabsContent value="history" className="space-y-4 mt-4">
                   <div className="space-y-3">
                     <div>
-                      <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Clubs</h4>
+                      <h4 className="text-[8px] font-black text-slate-500 uppercase tracking-widest mb-2">Clubs</h4>
                       <div className="space-y-1.5">
                         {player.teamHistory.slice(0, 2).map((historyEntry, index) => (
-                          <div key={index} className="flex items-center justify-between p-2 bg-muted/40 rounded-xl text-xs font-bold text-slate-400">
-                            <span className="truncate text-slate-800 dark:text-slate-200">{historyEntry.team}</span>
+                          <div key={index} className="flex items-center justify-between p-2 bg-slate-950/30 rounded-xl text-xs font-bold text-slate-400">
+                            <span className="truncate text-white">{historyEntry.team}</span>
                             {index === 0 && (
-                              <Badge className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/10 border-0 text-[9px] font-black uppercase">
+                              <Badge className="bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/10 border-0 text-[8px] font-black uppercase">
                                 Current
                               </Badge>
                             )}
@@ -300,25 +300,25 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
                     </div>
 
                     <div>
-                      <h4 className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Badges</h4>
+                      <h4 className="text-[8px] font-black text-slate-500 uppercase tracking-widest mb-2">Badges</h4>
                       <div className="flex flex-wrap gap-1.5">
                         {player.stats.cupsWon > 0 && (
-                          <Badge className="bg-amber-500/10 text-amber-500 hover:bg-amber-500/10 border-0 text-[9px] font-black uppercase">
+                          <Badge className="bg-amber-500/10 text-amber-400 hover:bg-amber-500/10 border-0 text-[8px] font-black uppercase">
                             🏆 Champ
                           </Badge>
                         )}
                         {winRate >= 65 && (
-                          <Badge className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/10 border-0 text-[9px] font-black uppercase">
+                          <Badge className="bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/10 border-0 text-[8px] font-black uppercase">
                             🔥 Elite
                           </Badge>
                         )}
                         {goalDiff >= 15 && (
-                          <Badge className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/10 border-0 text-[9px] font-black uppercase">
+                          <Badge className="bg-blue-500/10 text-blue-400 hover:bg-blue-500/10 border-0 text-[8px] font-black uppercase">
                             🎯 Striker
                           </Badge>
                         )}
                         {player.stats.matchesPlayed >= 20 && (
-                          <Badge className="bg-purple-500/10 text-purple-500 hover:bg-purple-500/10 border-0 text-[9px] font-black uppercase">
+                          <Badge className="bg-purple-500/10 text-purple-400 hover:bg-purple-500/10 border-0 text-[8px] font-black uppercase">
                             🛡️ Vet
                           </Badge>
                         )}
@@ -328,7 +328,7 @@ const PlayerProfile = ({ playerId, showAll = true }: PlayerProfileProps) => {
 
                   <div className="mt-4 pt-3 border-t border-white/5">
                     <Link to={`/player/${player.id}`} className="block">
-                      <Button className="w-full rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:opacity-95 text-white font-black text-xs uppercase tracking-wider py-3.5">
+                      <Button className="w-full rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:opacity-95 text-white font-black text-xs uppercase tracking-wider py-3.5 shadow-md shadow-primary/10">
                         Open Gamer Profile
                       </Button>
                     </Link>

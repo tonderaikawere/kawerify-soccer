@@ -21,7 +21,7 @@ const PageHeader = ({
   actions
 }: PageHeaderProps) => {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-slate-950/80 dark:bg-slate-950/40 backdrop-blur-md border border-white/10 dark:border-white/5 p-8 md:p-12 text-white shadow-2xl mb-12">
+    <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-slate-955/40 backdrop-blur-md border border-slate-200 dark:border-white/5 p-8 md:p-12 text-slate-900 dark:text-white shadow-lg dark:shadow-2xl mb-12">
       {/* Premium ambient glows */}
       <div className="absolute top-0 right-1/4 -mt-24 h-48 w-96 rounded-full bg-gradient-to-r from-primary/20 to-emerald-500/20 blur-3xl opacity-60 pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 -mb-24 h-48 w-96 rounded-full bg-gradient-to-r from-teal-500/10 to-blue-500/10 blur-3xl opacity-40 pointer-events-none" />
@@ -32,7 +32,7 @@ const PageHeader = ({
           {(season !== undefined || week !== undefined || round !== undefined) && (
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
               {season !== undefined && (
-                <Badge variant="outline" className="text-xs px-3.5 py-1 bg-slate-900/60 border-white/10 text-slate-300 font-extrabold uppercase tracking-wider">
+                <Badge variant="outline" className="text-xs px-3.5 py-1 bg-slate-100 dark:bg-slate-900/60 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 font-extrabold uppercase tracking-wider">
                   Season {season}
                 </Badge>
               )}
@@ -42,14 +42,14 @@ const PageHeader = ({
                 </Badge>
               )}
               {round && (
-                <Badge className="text-xs px-3.5 py-1 bg-slate-900 border-amber-500/30 text-amber-400 font-extrabold uppercase tracking-wider">
+                <Badge className="text-xs px-3.5 py-1 bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-amber-500/30 text-amber-600 dark:text-amber-400 font-extrabold uppercase tracking-wider">
                   {round}
                 </Badge>
               )}
             </div>
           )}
 
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
             {title} {highlightedTitle && (
               <span className="bg-gradient-to-r from-primary via-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 {highlightedTitle}
@@ -57,7 +57,7 @@ const PageHeader = ({
             )}
           </h1>
           
-          <p className="text-sm md:text-base text-slate-400 font-medium max-w-2xl leading-relaxed">
+          <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium max-w-2xl leading-relaxed">
             {subtitle}
           </p>
         </div>

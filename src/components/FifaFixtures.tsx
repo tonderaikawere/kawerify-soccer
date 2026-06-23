@@ -75,7 +75,7 @@ const FifaFixtures = () => {
       />
 
       {/* Week Selector */}
-      <div className="flex justify-start sm:justify-center space-x-1.5 overflow-x-auto pb-3 pt-1 px-2 border-b border-white/5">
+      <div className="flex justify-start sm:justify-center space-x-1.5 overflow-x-auto pb-3 pt-1 px-2 border-b border-slate-200 dark:border-white/5">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((week) => {
           const isCurrent = tournament.currentWeek === week;
           const isSelected = selectedWeek === week;
@@ -87,7 +87,7 @@ const FifaFixtures = () => {
               className={`min-w-[90px] rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 relative ${
                 isSelected 
                   ? 'bg-gradient-to-r from-primary to-emerald-600 text-white hover:opacity-95 shadow-lg shadow-primary/20 border-0' 
-                  : 'hover:bg-muted border-white/10 dark:border-white/5 text-muted-foreground hover:text-foreground'
+                  : 'hover:bg-slate-100 dark:hover:bg-slate-800 border-slate-200 dark:border-white/5 text-slate-500 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-white bg-white dark:bg-transparent'
               }`}
             >
               Week {week}
@@ -105,11 +105,11 @@ const FifaFixtures = () => {
       {/* Match Schedule */}
       <div className="grid gap-6">
         {weeklyMatches.length === 0 ? (
-          <Card className="text-center p-12 bg-slate-900/60 dark:bg-slate-950/40 backdrop-blur-md border-dashed border-2 border-white/10 rounded-2xl">
+          <Card className="text-center p-12 bg-white dark:bg-slate-955/40 backdrop-blur-md border-dashed border-2 border-slate-200 dark:border-white/10 rounded-2xl shadow-sm">
             <CardContent className="space-y-4">
               <div className="text-4xl animate-float">⏳</div>
-              <h3 className="text-lg font-black uppercase tracking-wider text-white">No Matches Scheduled</h3>
-              <p className="text-slate-450 text-xs font-semibold max-w-sm mx-auto uppercase tracking-wider">
+              <h3 className="text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">No Matches Scheduled</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-xs font-semibold max-w-sm mx-auto uppercase tracking-wider">
                 Week {selectedWeek} fixtures have not been loaded or scheduled yet. Check back soon!
               </p>
             </CardContent>
@@ -124,9 +124,9 @@ const FifaFixtures = () => {
             return (
               <Card 
                 key={match.id} 
-                className={`overflow-hidden bg-slate-900/80 dark:bg-slate-950/60 backdrop-blur-md border border-white/5 border-l-4 transition-all duration-300 ${
+                className={`overflow-hidden bg-white dark:bg-slate-950/60 backdrop-blur-md border border-slate-200 dark:border-white/5 border-l-4 transition-all duration-300 shadow-sm dark:shadow-none ${
                   isLive ? 'border-l-rose-500 shadow-2xl shadow-rose-550/10 hover:shadow-rose-500/20' : 
-                  isCompleted ? 'border-l-emerald-500' : 'border-l-slate-700'
+                  isCompleted ? 'border-l-emerald-500' : 'border-l-slate-300 dark:border-l-slate-700'
                 }`}
               >
                 {/* Card Top bar with match details */}
@@ -169,7 +169,7 @@ const FifaFixtures = () => {
                     {/* Player 1 */}
                     <div className="flex-1 w-full sm:w-auto text-center sm:text-right flex flex-row-reverse sm:flex-row items-center justify-end gap-4 group">
                       <div className="flex-1 sm:flex-initial text-right">
-                        <h3 className="text-base font-black text-white uppercase tracking-wider truncate">
+                        <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider truncate">
                           {player1?.name || 'TBD'}
                         </h3>
                         <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">
@@ -180,20 +180,20 @@ const FifaFixtures = () => {
                     </div>
                     
                     {/* Versus / Live Scoreboard */}
-                    <div className="px-6 py-3.5 rounded-2xl bg-slate-950/80 border border-white/5 text-center min-w-[130px] shadow-2xl backdrop-blur-md">
+                    <div className="px-6 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-white/5 text-center min-w-[130px] shadow-md dark:shadow-2xl backdrop-blur-md">
                       {isCompleted ? (
                         <div className="flex flex-col items-center">
-                          <span className="text-2xl font-black tracking-widest text-white">
+                          <span className="text-2xl font-black tracking-widest text-slate-900 dark:text-white">
                             {match.player1Score} - {match.player2Score}
                           </span>
-                          <span className="text-[8px] text-slate-500 uppercase font-black tracking-widest mt-1.5 border-t border-white/5 pt-1.5 w-full">FINAL TIME</span>
+                          <span className="text-[8px] text-slate-500 dark:text-slate-400 uppercase font-black tracking-widest mt-1.5 border-t border-slate-200 dark:border-white/5 pt-1.5 w-full">FINAL TIME</span>
                         </div>
                       ) : isLive ? (
                         <div className="flex flex-col items-center">
-                          <span className="text-2xl font-black text-rose-500 animate-pulse tracking-widest">
+                          <span className="text-2xl font-black text-rose-600 dark:text-rose-500 animate-pulse tracking-widest">
                             {match.player1Score} - {match.player2Score}
                           </span>
-                          <span className="text-[8px] text-rose-500 uppercase font-black tracking-widest mt-1.5 flex items-center justify-center border-t border-white/5 pt-1.5 w-full">
+                          <span className="text-[8px] text-rose-600 dark:text-rose-500 uppercase font-black tracking-widest mt-1.5 flex items-center justify-center border-t border-slate-200 dark:border-white/5 pt-1.5 w-full">
                             <span className="mr-1 h-1.5 w-1.5 rounded-full bg-rose-500 animate-ping inline-block" />
                             LIVE SCORE
                           </span>
@@ -210,7 +210,7 @@ const FifaFixtures = () => {
                     <div className="flex-1 w-full sm:w-auto text-center sm:text-left flex flex-row items-center justify-start gap-4 group">
                       {getTeamBadge(match.player2Team)}
                       <div className="flex-1 sm:flex-initial text-left">
-                        <h3 className="text-base font-black text-white uppercase tracking-wider truncate">
+                        <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider truncate">
                           {player2?.name || 'TBD'}
                         </h3>
                         <p className="text-xs text-primary font-bold truncate mt-0.5 uppercase tracking-widest">
@@ -223,8 +223,8 @@ const FifaFixtures = () => {
                   
                   {/* Match Result Winner Overlay */}
                   {isCompleted && (
-                    <div className="mt-6 pt-4 border-t border-white/5 flex justify-center">
-                      <div className="flex items-center space-x-2 text-[9px] font-black uppercase tracking-widest text-slate-400">
+                    <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/5 flex justify-center">
+                      <div className="flex items-center space-x-2 text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
                         <span>Winner:</span>
                         <span className="text-primary font-black uppercase">
                           {match.player1Score > match.player2Score ? player1?.name :
@@ -241,19 +241,19 @@ const FifaFixtures = () => {
       </div>
       
       {/* Tournament Info */}
-      <Card className="glass-panel border-white/10 shadow-xl max-w-4xl mx-auto rounded-2xl">
+      <Card className="bg-white dark:bg-slate-955/45 border-slate-200 dark:border-white/10 shadow-xl max-w-4xl mx-auto rounded-2xl">
         <CardContent className="p-6">
           <div className="text-center space-y-4">
             <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-widest">
               Schedule Overview
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-4 bg-muted/20 rounded-xl border border-white/5 text-slate-400 font-semibold">
-                <p className="font-black text-slate-800 dark:text-white uppercase tracking-wider mb-1">Saturdays</p>
+              <div className="p-4 bg-slate-50 dark:bg-muted/20 rounded-xl border border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-400 font-semibold">
+                <p className="font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Saturdays</p>
                 <span>Regular Season Fixtures & League Stages</span>
               </div>
-              <div className="p-4 bg-muted/20 rounded-xl border border-white/5 text-slate-400 font-semibold">
-                <p className="font-black text-slate-800 dark:text-white uppercase tracking-wider mb-1">Sundays</p>
+              <div className="p-4 bg-slate-50 dark:bg-muted/20 rounded-xl border border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-400 font-semibold">
+                <p className="font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">Sundays</p>
                 <span>Knockout Rounds (Quarter-finals, Semis, Grand Final)</span>
               </div>
             </div>

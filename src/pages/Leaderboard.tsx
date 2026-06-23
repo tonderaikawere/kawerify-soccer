@@ -366,9 +366,7 @@ const Leaderboard = () => {
               <p className="text-xs text-slate-400 mt-0.5 font-bold uppercase tracking-wider text-[9px]">Across all rounds</p>
             </CardContent>
           </Card>
-        </div>>
         </div>
-
       </div>
     </div>
   );

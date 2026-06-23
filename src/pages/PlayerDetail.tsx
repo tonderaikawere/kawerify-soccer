@@ -141,6 +141,7 @@ const PlayerDetail = () => {
   const sho = Math.min(Math.max(68 + Math.round((player.stats.goalsFor / maxGoals) * 31), 60), 99);
   const pas = Math.min(Math.max(65 + Math.round(winRate / 3), 60), 99);
   const dri = Math.min(Math.max(70 + Math.round(winRate / 3.5), 60), 99);
+  const def = Math.min(Math.max(60 - Math.round((player.stats.goalsAgainst / maxGoalsAgainst) * 15) + Math.round(winRate / 5), 50), 99);
   const phy = Math.min(Math.max(75 + Math.round(player.stats.matchesPlayed * 0.7), 60), 99);
 
   return (
@@ -152,7 +153,7 @@ const PlayerDetail = () => {
           {/* Back Action */}
           <div className="mb-6">
             <Link to="/players">
-              <Button variant="ghost" className="rounded-xl text-xs font-black uppercase tracking-wider pl-3 pr-4 border border-white/10 bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-colors">
+              <Button variant="outline" className="rounded-xl text-xs font-black uppercase tracking-wider pl-3 pr-4 border border-white/10 bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-colors">
                 ← Back to Players
               </Button>
             </Link>
@@ -281,7 +282,7 @@ const PlayerDetail = () => {
                   <Button onClick={handleSaveProfile} className="rounded-xl font-black text-xs uppercase tracking-wider bg-gradient-to-r from-primary to-emerald-600">
                     Save Settings
                   </Button>
-                  <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl font-black text-xs uppercase tracking-wider hover:bg-white/5">
+                  <Button variant="outline" onClick={() => setIsEditing(false)} className="rounded-xl font-black text-xs uppercase tracking-wider border-white/10 bg-slate-950/30 text-slate-300 hover:bg-slate-800 hover:text-white">
                     Discard
                   </Button>
                 </div>

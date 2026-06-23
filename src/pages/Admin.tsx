@@ -175,6 +175,8 @@ const Admin = () => {
       player2Id: newMatch.player2Id,
       player1Team: player1?.currentTeam || "",
       player2Team: player2?.currentTeam || "",
+      player1Score: 0,
+      player2Score: 0,
       date: newMatch.date,
       time: newMatch.time,
       status: "scheduled",

@@ -347,7 +347,7 @@ const AdminDashboard = ({
                           <h3 className="font-extrabold text-white truncate pr-2">{player.name}</h3>
                           <Button
                             size="sm"
-                            variant="ghost"
+                            variant="outline"
                             onClick={() => setEditingPlayer(player)}
                             className="rounded-xl font-bold text-xs hover:bg-white/5 text-slate-400 hover:text-white"
                           >
@@ -386,8 +386,7 @@ const AdminDashboard = ({
                     <div className="space-y-1.5">
                       <Label className="text-slate-300 text-xs font-bold uppercase tracking-wider">Competitor 1 (Player 1)</Label>
                       <Select value={newMatch.player1Id} onValueChange={(value) => {
-                        const player = players.find(p => p.id === value);
-                        setNewMatch({...newMatch, player1Id: value, player1Team: player?.currentTeam || ""});
+                        setNewMatch({...newMatch, player1Id: value});
                       }}>
                         <SelectTrigger className="rounded-xl border-white/10 bg-slate-950/40 text-slate-200">
                           <SelectValue placeholder="Select Competitor 1" />
@@ -405,8 +404,7 @@ const AdminDashboard = ({
                     <div className="space-y-1.5">
                       <Label className="text-slate-300 text-xs font-bold uppercase tracking-wider">Competitor 2 (Player 2)</Label>
                       <Select value={newMatch.player2Id} onValueChange={(value) => {
-                        const player = players.find(p => p.id === value);
-                        setNewMatch({...newMatch, player2Id: value, player2Team: player?.currentTeam || ""});
+                        setNewMatch({...newMatch, player2Id: value});
                       }}>
                         <SelectTrigger className="rounded-xl border-white/10 bg-slate-950/40 text-slate-200">
                           <SelectValue placeholder="Select Competitor 2" />

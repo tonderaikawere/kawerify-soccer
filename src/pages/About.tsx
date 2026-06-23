@@ -60,10 +60,10 @@ const About = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070b13] bg-stadium-grid text-white relative overflow-hidden transition-all duration-300">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#070b13] bg-stadium-grid text-slate-900 dark:text-white relative overflow-hidden transition-all duration-300">
       {/* Ambient background glows */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-radial-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-555/10 rounded-full blur-[120px] pointer-events-none animate-radial-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none animate-radial-pulse" />
 
       <Navbar />
       <main className="flex-1 pb-16 relative z-10">
@@ -78,7 +78,7 @@ const About = () => {
 
           {/* Our Story */}
           <div className="mb-16">
-            <Card className="overflow-hidden bg-slate-900/60 dark:bg-slate-955/45 border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl relative">
+            <Card className="overflow-hidden bg-white dark:bg-slate-955/45 border border-slate-200 dark:border-white/5 shadow-2xl rounded-2xl relative">
               <div className="absolute top-0 right-0 -mr-16 -mt-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
               <CardHeader className="bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-955 p-6 md:p-8 text-white border-b border-white/5">
                 <CardTitle className="text-2xl font-black uppercase tracking-wider flex items-center gap-3">
@@ -88,7 +88,7 @@ const About = () => {
                   From living room arguments to Bulawayo's ultimate tournament
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-8 text-sm font-medium text-slate-300 leading-relaxed space-y-6">
+              <CardContent className="p-8 text-sm font-medium text-slate-650 dark:text-slate-300 leading-relaxed space-y-6">
                 <p>
                   Kawerify Soccer League started where all great rivalries begin: a crowded living room in Bulawayo, 
                   slightly drifting controllers, and heated arguments about who actually plays the best FIFA. Located 
@@ -113,14 +113,14 @@ const About = () => {
 
           {/* Our Mission & Vision */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 rounded-2xl hover:border-primary/20 transition-all duration-300">
+            <Card className="bg-white dark:bg-slate-950/45 border border-slate-200 dark:border-white/5 rounded-2xl hover:border-primary/20 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center text-lg font-black uppercase tracking-wider gap-3 text-white">
+                <CardTitle className="flex items-center text-lg font-black uppercase tracking-wider gap-3 text-slate-900 dark:text-white">
                   <Target className="h-5 w-5 text-primary" /> Our Mission
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
                   Through the controller, we unite. Our mission is to keep the local FIFA scene alive and kicking, 
                   giving every player in the community a platform to compete, track their career stats, and settle 
                   old scores once and for all.
@@ -128,14 +128,14 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/60 dark:bg-slate-950/45 border border-white/10 dark:border-white/5 rounded-2xl hover:border-secondary/20 transition-all duration-300">
+            <Card className="bg-white dark:bg-slate-955/45 border border-slate-200 dark:border-white/5 rounded-2xl hover:border-secondary/20 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center text-lg font-black uppercase tracking-wider gap-3 text-white">
+                <CardTitle className="flex items-center text-lg font-black uppercase tracking-wider gap-3 text-slate-900 dark:text-white">
                   <Eye className="h-5 w-5 text-secondary" /> Our Vision
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                <p className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
                   Bragging rights, officially documented. We envision a community where every weekend feels like a mini-stadium 
                   showdown, and where every player can look at their card statistics and let their gameplay do the talking.
                 </p>
@@ -145,18 +145,18 @@ const About = () => {
 
           {/* What We Offer */}
           <div className="mb-16 space-y-8">
-            <h2 className="text-2xl font-black text-center uppercase tracking-widest text-white">
+            <h2 className="text-2xl font-black text-center uppercase tracking-widest text-slate-900 dark:text-white">
               What We Offer
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {offers.map((offer, index) => (
-                <Card key={index} className="text-center bg-slate-900/40 border border-white/5 hover:-translate-y-1.5 hover:border-primary/45 transition-all duration-300 rounded-2xl">
+                <Card key={index} className="text-center bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/5 hover:-translate-y-1.5 hover:border-primary/45 transition-all duration-300 rounded-2xl shadow-sm dark:shadow-none">
                   <CardContent className="p-6 space-y-4">
                     <div className="flex justify-center">
                       {offer.icon}
                     </div>
-                    <h3 className="text-sm font-extrabold uppercase tracking-wider text-white">{offer.title}</h3>
-                    <p className="text-xs text-slate-400 font-semibold">{offer.description}</p>
+                    <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-900 dark:text-white">{offer.title}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">{offer.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -215,12 +215,12 @@ const About = () => {
 
           {/* Our Team */}
           <div className="mb-16 space-y-8">
-            <h2 className="text-2xl font-black text-center uppercase tracking-widest text-white">
+            <h2 className="text-2xl font-black text-center uppercase tracking-widest text-slate-900 dark:text-white">
               Executive Roster
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {teamMembers.map((member, index) => (
-                <Card key={index} className="text-center bg-slate-900/50 border border-white/5 hover:-translate-y-1.5 hover:border-primary/45 transition-all duration-300 rounded-2xl overflow-hidden relative group">
+                <Card key={index} className="text-center bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 hover:-translate-y-1.5 hover:border-primary/45 transition-all duration-300 rounded-2xl overflow-hidden relative group shadow-sm dark:shadow-none">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-emerald-600 opacity-50 group-hover:opacity-100 transition-opacity" />
                   <CardContent className="p-8 space-y-4">
                     <div className="relative w-20 h-20 mx-auto group">
@@ -233,10 +233,10 @@ const About = () => {
                       </Avatar>
                     </div>
                     <div>
-                      <h3 className="text-sm font-black uppercase tracking-wider text-white">{member.name}</h3>
-                      <Badge className="mt-2 rounded-lg text-[9px] font-black uppercase tracking-wider bg-slate-955/60 text-emerald-400 border border-white/5 px-2.5 py-0.5">{member.role}</Badge>
+                      <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">{member.name}</h3>
+                      <Badge className="mt-2 rounded-lg text-[9px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-955/60 text-emerald-600 dark:text-emerald-400 border border-slate-200 dark:border-white/5 px-2.5 py-0.5">{member.role}</Badge>
                     </div>
-                    <p className="text-xs text-slate-400 font-semibold leading-relaxed">{member.description}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold leading-relaxed">{member.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -245,49 +245,49 @@ const About = () => {
 
           {/* Contact Information */}
           <div className="mb-16">
-            <Card className="bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-955 border-white/10 dark:border-white/5 text-white rounded-2xl shadow-2xl relative overflow-hidden">
+            <Card className="bg-white dark:bg-gradient-to-r dark:from-slate-955 dark:via-slate-900/90 dark:to-slate-955 border border-slate-200 dark:border-white/5 text-slate-900 dark:text-white rounded-2xl shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 left-0 p-4 opacity-5 pointer-events-none">
-                <Mail className="w-48 h-48 animate-pulse" />
+                <Mail className="w-48 h-48 animate-pulse text-slate-250 dark:text-white" />
               </div>
-              <CardHeader className="border-b border-white/5">
+              <CardHeader className="border-b border-slate-100 dark:border-white/5">
                 <CardTitle className="text-xl font-black uppercase tracking-wider text-center">Get In Touch</CardTitle>
-                <CardDescription className="text-center text-slate-400 text-xs font-semibold uppercase tracking-wider mt-1">
+                <CardDescription className="text-center text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider mt-1">
                   We'd love to hear from you and answer any questions
                 </CardDescription>
               </CardHeader>
               <CardContent className="pt-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-xs font-semibold text-slate-400">
-                  <div className="flex flex-col items-center space-y-3 bg-slate-955/45 p-6 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                    <div className="p-3 bg-slate-900 rounded-xl border border-white/5 text-primary animate-float">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  <div className="flex flex-col items-center space-y-3 bg-slate-50 dark:bg-slate-955/45 p-6 rounded-xl border border-slate-100 dark:border-white/5 hover:border-slate-200 dark:hover:border-white/10 transition-colors">
+                    <div className="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/5 text-primary animate-float">
                       <MapPin className="h-6 w-6" />
                     </div>
-                    <h3 className="text-sm font-black uppercase tracking-wider text-white">Location</h3>
-                    <p className="leading-relaxed text-slate-350">
+                    <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Location</h3>
+                    <p className="leading-relaxed text-slate-600 dark:text-slate-350">
                       KoMthombeni, Plot 2 Grampsway<br />
                       Rangemore, Bulawayo<br />
                       Zimbabwe
                     </p>
                   </div>
                   
-                  <div className="flex flex-col items-center space-y-3 bg-slate-955/45 p-6 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                    <div className="p-3 bg-slate-900 rounded-xl border border-white/5 text-emerald-400 animate-float" style={{ animationDelay: '0.4s' }}>
+                  <div className="flex flex-col items-center space-y-3 bg-slate-50 dark:bg-slate-955/45 p-6 rounded-xl border border-slate-100 dark:border-white/5 hover:border-slate-200 dark:hover:border-white/10 transition-colors">
+                    <div className="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/5 text-emerald-600 dark:text-emerald-400 animate-float" style={{ animationDelay: '0.4s' }}>
                       <Phone className="h-6 w-6" />
                     </div>
-                    <h3 className="text-sm font-black uppercase tracking-wider text-white">Phone</h3>
+                    <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Phone</h3>
                     <p>
-                      <a href="tel:+263716264988" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      <a href="tel:+263716264988" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200">
                         +263 71 626 4988
                       </a>
                     </p>
                   </div>
                   
-                  <div className="flex flex-col items-center space-y-3 bg-slate-955/45 p-6 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                    <div className="p-3 bg-slate-900 rounded-xl border border-white/5 text-secondary animate-float" style={{ animationDelay: '0.8s' }}>
+                  <div className="flex flex-col items-center space-y-3 bg-slate-50 dark:bg-slate-955/45 p-6 rounded-xl border border-slate-100 dark:border-white/5 hover:border-slate-200 dark:hover:border-white/10 transition-colors">
+                    <div className="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/5 text-secondary animate-float" style={{ animationDelay: '0.8s' }}>
                       <Mail className="h-6 w-6" />
                     </div>
-                    <h3 className="text-sm font-black uppercase tracking-wider text-white">Email</h3>
+                    <h3 className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">Email</h3>
                     <p>
-                      <a href="mailto:info@kawerifytech.com" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      <a href="mailto:info@kawerifytech.com" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200">
                         info@kawerifytech.com
                       </a>
                     </p>

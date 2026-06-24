@@ -74,6 +74,8 @@ export interface Tournament {
     pointsPerDraw: number;
     regularMatchDay: string; // 'saturday'
     knockoutMatchDay: string; // 'sunday'
+    maxPlayersPerGroup?: number;
+    minMatchesForKnockout?: number;
   };
 }
 

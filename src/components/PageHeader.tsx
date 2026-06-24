@@ -5,7 +5,7 @@ interface PageHeaderProps {
   title: string;
   highlightedTitle?: string;
   subtitle: string;
-  season?: number;
+  season?: string | number;
   week?: number;
   round?: string;
   actions?: React.ReactNode;
